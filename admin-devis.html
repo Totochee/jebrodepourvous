@@ -37,9 +37,9 @@
     .dash-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px}.dash-head p{color:var(--muted);margin:10px 0 0}.head-actions{display:flex;gap:10px}
     .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-bottom:23px}.stat{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:21px 23px;position:relative;overflow:hidden}.stat:after{content:"";position:absolute;right:-20px;bottom:-30px;width:90px;height:90px;border-radius:50%;border:18px solid rgba(239,125,44,.08)}.stat span{color:var(--muted);font-size:13px}.stat strong{display:block;font-family:Manrope,sans-serif;font-size:32px;margin-top:3px}.stat:first-child strong{color:var(--orange2)}
     .toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}.search{position:relative;width:min(430px,100%)}.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted)}.search input{width:100%;height:48px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:white;padding:0 16px 0 45px;outline:none}.search input:focus{border-color:var(--orange)}.count{color:var(--muted);font-size:13px}
-    .table-wrap{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
-    table{border-collapse:collapse;width:100%;min-width:1050px}th{text-align:left;color:#8f949b;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:15px 17px;background:#25282b;border-bottom:1px solid var(--line)}td{padding:18px 17px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;font-size:14px}tbody tr{transition:.18s background}tbody tr:hover{background:rgba(255,255,255,.025)}tbody tr:last-child td{border-bottom:0}
-    .date{white-space:nowrap;color:var(--muted);font-size:12px}.person strong{font-size:15px}.person small,.contact small{display:block;color:var(--muted);margin-top:4px}.contact a{color:#fff;text-decoration:none}.contact a:hover{color:var(--orange2)}.details{max-width:310px;color:#d8d8d5;line-height:1.45}.details button{border:0;background:none;padding:0;color:var(--orange2);font-weight:600;margin-top:7px}.estimate{white-space:nowrap;font-weight:700;color:var(--orange2)}
+    .table-wrap{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow-x:auto;box-shadow:var(--shadow)}
+    table{border-collapse:collapse;width:100%;min-width:1180px;table-layout:fixed}th{text-align:left;color:#8f949b;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:15px 14px;background:#25282b;border-bottom:1px solid var(--line)}td{padding:18px 14px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;font-size:14px;overflow-wrap:anywhere}th:nth-child(1){width:135px}th:nth-child(2){width:130px}th:nth-child(3){width:165px}th:nth-child(4){width:285px}th:nth-child(5){width:205px}th:nth-child(6){width:220px}th:nth-child(7){width:130px}tbody tr{transition:.18s background}tbody tr:hover{background:rgba(255,255,255,.025)}tbody tr:last-child td{border-bottom:0}
+    .date{color:var(--muted);font-size:12px}.person strong{font-size:15px}.person small,.contact small{display:block;color:var(--muted);margin-top:4px}.contact a{color:#fff;text-decoration:none}.contact a:hover{color:var(--orange2)}.details{color:#d8d8d5;line-height:1.45}.details button{border:0;background:none;padding:0;color:var(--orange2);font-weight:600;margin-top:7px}.estimate{font-weight:700;color:var(--orange2);line-height:1.45}
     .download{border:0;background:linear-gradient(135deg,var(--orange2),var(--orange));color:#fff;border-radius:11px;padding:10px 12px;font-weight:700;width:175px;display:grid;grid-template-columns:26px minmax(0,1fr);grid-template-areas:"icon action" "icon name";column-gap:8px;align-items:center;text-align:left;box-shadow:0 8px 20px rgba(239,125,44,.18)}.download:hover{filter:brightness(1.07);transform:translateY(-1px)}.download:disabled{opacity:.55;cursor:wait}.download-icon{grid-area:icon;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:17px}.download-action{grid-area:action;font-size:13px;line-height:1.15}.download-name{grid-area:name;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;line-height:1.35;opacity:.82;font-weight:500}
     .status{border:1px solid var(--line);color:#fff;background:#242629;border-radius:10px;padding:9px 30px 9px 10px;outline:none}.status:focus{border-color:var(--orange)}
     .state{padding:70px 25px;text-align:center;color:var(--muted)}.spinner{width:31px;height:31px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 13px}@keyframes spin{to{transform:rotate(360deg)}}
@@ -212,7 +212,7 @@
         const table = document.createElement("table");
         const thead = document.createElement("thead");
         const hr = document.createElement("tr");
-        ["Date","Client","Contact","Demande","Estimation","Logo","Statut"].forEach(label => hr.appendChild(el("th", "", label)));
+        ["Date","Client","Contact","Demande","Pièce jointe","Estimation","Statut"].forEach(label => hr.appendChild(el("th", "", label)));
         thead.appendChild(hr);
         const tbody = document.createElement("tbody");
         filtered.forEach(row => tbody.appendChild(buildRow(row)));
@@ -232,7 +232,7 @@
         const extra = [row.configuration, row.source_url ? "Source : " + row.source_url : ""].filter(Boolean).join(" · ");
         details.appendChild(summary); if (extra) details.appendChild(el("small", "", extra));
         const estimate = labeledCell("Estimation", "estimate"); estimate.textContent = row.estimation || "À étudier";
-        const logo = labeledCell("Logo", "");
+        const logo = labeledCell("Pièce jointe", "");
         const download = el("button", "download"); download.type = "button"; download.title = "Télécharger " + row.logo_name;
         download.append(el("span", "download-icon", "↓"), el("span", "download-action", "Télécharger"), el("span", "download-name", row.logo_name || "Logo client"));
         download.addEventListener("click", () => downloadLogo(row, download)); logo.appendChild(download);
@@ -240,7 +240,7 @@
         const select = el("select", "status"); select.setAttribute("aria-label", "Statut de la demande de " + row.nom);
         Object.entries(statuses).forEach(([value,label]) => { const option = el("option", "", label); option.value = value; option.selected = value === row.statut; select.appendChild(option); });
         select.addEventListener("change", () => updateStatus(row, select)); statusCell.appendChild(select);
-        tr.append(date,person,contact,details,estimate,logo,statusCell);
+        tr.append(date,person,contact,details,logo,estimate,statusCell);
         return tr;
       }
 
