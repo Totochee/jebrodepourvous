@@ -101,6 +101,17 @@ section{padding:76px 0}
 .sw input{position:absolute;opacity:0;width:0;height:0}
 .sw i{display:block;width:30px;height:30px;border-radius:50%;border:1px solid var(--trait);cursor:pointer}
 .sw input:checked + i{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--anthracite)}
+.hint{font-size:.74rem;color:var(--gris);margin:7px 0 0;line-height:1.4}
+.hint.warn{color:var(--orange);font-weight:500}
+select{width:100%;padding:11px 12px;border:1px solid var(--trait);border-radius:var(--radius);
+  background:#fff;font:500 .88rem "Inter",sans-serif;color:var(--encre)}
+select:focus{outline:2px solid var(--ardoise);border-color:var(--ardoise)}
+.opt input[type=checkbox]:checked + span{border-color:var(--anthracite);background:var(--anthracite);color:#fff}
+.opt input[type=checkbox]:checked + span small{color:#E8D3BC}
+.opt input:disabled + span{opacity:.4;cursor:not-allowed}
+.viewsw{position:absolute;top:14px;right:14px;display:flex;border:1px solid var(--trait);border-radius:3px;overflow:hidden;background:#fff}
+.viewsw button{border:0;background:#fff;padding:5px 11px;font:600 .7rem "Inter";cursor:pointer;color:var(--gris)}
+.viewsw button.on{background:var(--anthracite);color:#fff}
 .qty{display:flex;align-items:center;gap:0}
 .qty button{width:40px;height:42px;border:1px solid var(--trait);background:#fff;font-size:1.1rem;cursor:pointer}
 .qty input{width:100%;height:42px;border:1px solid var(--trait);border-left:0;border-right:0;text-align:center;font:600 1rem "Inter";}
@@ -109,6 +120,24 @@ section{padding:76px 0}
 
 .stage{background:var(--papier);border:1px solid var(--trait);border-radius:var(--radius);padding:8px;position:relative}
 .stage svg{width:100%;height:auto;display:block;max-height:560px}
+.photo-wrap{position:relative;width:100%;line-height:0}
+.photo-wrap img.garment{width:100%;height:auto;display:block}
+.mk{position:absolute;transform-origin:center center;pointer-events:none}
+.mk .box{position:relative;width:100%;padding-bottom:62%;
+  border:2px dashed var(--orange);border-radius:2px;background:rgba(255,255,255,.10);
+  filter:drop-shadow(0 0 2px rgba(0,0,0,.45))}
+.mk .box img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.mk .cm{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:5px;
+  font-family:"IBM Plex Mono",monospace;font-size:10px;color:#fff;background:rgba(0,0,0,.55);
+  padding:1px 5px;border-radius:2px;white-space:nowrap;line-height:1.5}
+.calage .mk{pointer-events:auto;cursor:grab}
+.calage .mk.drag{cursor:grabbing}
+.calpanel{position:fixed;right:18px;bottom:18px;z-index:99;background:#fff;border:2px solid var(--orange);
+  border-radius:4px;padding:14px;width:330px;box-shadow:0 8px 30px rgba(0,0,0,.22);font-size:.8rem}
+.calpanel h4{margin:0 0 8px;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:1rem}
+.calpanel textarea{width:100%;height:120px;font:500 .7rem/1.45 "IBM Plex Mono",monospace;margin-top:8px}
+.calpanel label{display:block;margin:8px 0 2px;font-size:.72rem;color:var(--gris)}
+.calpanel input[type=range]{width:100%}
 .stage .view-tag{
   position:absolute;top:16px;left:16px;font-family:"IBM Plex Mono",monospace;font-size:.66rem;
   letter-spacing:.14em;text-transform:uppercase;color:var(--gris);background:#fff;border:1px solid var(--trait);
@@ -209,7 +238,7 @@ footer a:hover{color:#fff}
     <div>
       <p class="eyebrow">Broderie &amp; transfert — Saint-Affrique, Aveyron</p>
       <h1>Votre logo<span>sur vos vêtements</span></h1>
-      <p class="lead">Vêtements de travail, polos d'équipe, vestes de chantier, tenues d'accueil. Vous choisissez le vêtement et l'emplacement, vous voyez le rendu tout de suite, vous recevez un devis chiffré.</p>
+      <p class="lead">Vêtements de travail, polos d'équipe, softshells de chantier, casquettes. Vous choisissez l'article et l'emplacement, vous voyez le rendu et le prix tout de suite, vous recevez un devis chiffré.</p>
       <div class="hero-actions">
         <a class="btn" href="#simulateur">Ouvrir le simulateur</a>
         <a class="btn ghost" href="#devis">Demander un devis</a>
@@ -218,7 +247,7 @@ footer a:hover{color:#fff}
         <div class="k">Ce qu'il faut pour démarrer</div>
         <ul>
           <li>Votre logo en PDF vectoriel ou SVG</li>
-          <li>La quantité et les tailles souhaitées</li>
+          <li>La quantité et la répartition des tailles</li>
           <li>Les emplacements de marquage</li>
         </ul>
       </div>
@@ -247,16 +276,16 @@ footer a:hover{color:#fff}
     </div>
     <div class="cards">
       <div class="card">
-        <h3>Broderie</h3>
-        <p>Fil cousu dans la matière. Résistante au lavage industriel, rendu haut de gamme. Idéale sur polo, pull, veste et casquette. Une numérisation du logo est réalisée une fois pour toutes.</p>
+        <h3>Brodage</h3>
+        <p>Fil cousu dans la matière. Résiste au lavage industriel, rendu haut de gamme. Idéal sur polo, sweat, softshell et casquette. 3 € par pièce au cœur, 7 € au cœur et dans le dos.</p>
       </div>
       <div class="card rouge">
-        <h3>Transfert</h3>
-        <p>Marquage pressé à chaud. Restitue les dégradés et les logos très détaillés, permet les grands formats dans le dos. Plus économique sur les petites séries et les t-shirts.</p>
+        <h3>Flocage</h3>
+        <p>Marquage pressé à chaud. Restitue les logos très détaillés et les grands formats dans le dos. Plus économique, et seule technique sur les t-shirts de sport polyester. 2 € au cœur, 4,50 € cœur et dos.</p>
       </div>
       <div class="card">
-        <h3>Fourniture du textile</h3>
-        <p>Nous marquons notre textile ou le vôtre. Les tarifs affichés dans le simulateur comprennent le vêtement ; si vous fournissez le vôtre, précisez-le dans votre demande.</p>
+        <h3>Atelier intégré</h3>
+        <p>Le marquage est réalisé dans notre atelier de Saint-Affrique. C'est ce qui permet de tenir un délai court quand vous en avez besoin, et de vous montrer un essai avant lancement.</p>
       </div>
     </div>
   </div>
@@ -268,45 +297,50 @@ footer a:hover{color:#fff}
     <div class="sec-head">
       <p class="eyebrow">Simulateur</p>
       <h2>Composez votre marquage</h2>
-      <p style="color:var(--gris)">Le rendu et le prix se mettent à jour à chaque choix. Déposez votre logo SVG plus bas : il apparaît directement sur le vêtement.</p>
+      <p style="color:var(--gris)">Prix issus de notre grille Sélection gamme courte. Le rendu et le montant se mettent à jour à chaque choix. Déposez votre logo SVG plus bas : il apparaît directement sur l'article.</p>
     </div>
 
     <div class="sim">
       <!-- colonne réglages -->
       <div class="panel">
         <div class="field">
-          <label>Vêtement</label>
-          <div class="opts two" id="g-garment"></div>
+          <label for="g-produit">Produit</label>
+          <select id="g-produit"></select>
+          <p class="hint" id="p-info"></p>
         </div>
         <div class="field">
-          <label>Couleur du vêtement</label>
+          <label>Coloris</label>
           <div class="swatches" id="g-color"></div>
+          <p class="hint" id="c-info"></p>
         </div>
         <div class="field">
           <label>Technique</label>
           <div class="opts two" id="g-tech"></div>
         </div>
         <div class="field">
-          <label>Emplacement</label>
+          <label>Emplacements</label>
           <div class="opts" id="g-pos"></div>
-        </div>
-        <div class="field">
-          <label>Taille du marquage</label>
-          <div class="opts" id="g-size"></div>
+          <p class="hint" id="pos-info"></p>
         </div>
         <div class="field">
           <label for="qty">Quantité</label>
           <div class="qty">
             <button type="button" id="minus" aria-label="Retirer une pièce">−</button>
-            <input id="qty" type="number" min="1" max="5000" step="1" value="25" inputmode="numeric">
+            <input id="qty" type="number" min="1" max="5000" step="1" value="50" inputmode="numeric">
             <button type="button" id="plus" aria-label="Ajouter une pièce">+</button>
           </div>
+          <p class="hint" id="q-info"></p>
+        </div>
+        <div class="field">
+          <label>Délai</label>
+          <div class="opts" id="g-delai"></div>
         </div>
       </div>
 
       <!-- colonne aperçu -->
       <div class="stage">
         <span class="view-tag" id="viewTag">Vue de face</span>
+        <div class="viewsw" id="viewsw"><button type="button" data-v="face" class="on">Face</button><button type="button" data-v="dos">Dos</button></div>
         <div id="canvas"></div>
         <span class="zoom-tag" id="zoomTag"></span>
       </div>
@@ -314,18 +348,20 @@ footer a:hover{color:#fff}
       <!-- colonne prix -->
       <div class="recap">
         <h3>Estimation</h3>
-        <div class="line"><span>Vêtement</span><b id="r-garment">—</b></div>
-        <div class="line"><span>Marquage</span><b id="r-mark">—</b></div>
-        <div class="line"><span>Emplacement</span><b id="r-pos">—</b></div>
-        <div class="line"><span>Quantité</span><b id="r-qty">—</b></div>
+        <div class="line"><span>Textile</span><b id="r-produit">—</b></div>
+        <div class="line"><span>Coloris</span><b id="r-color">—</b></div>
+        <div class="line"><span id="r-pv-l">PV textile / pièce</span><b id="r-pv">—</b></div>
+        <div class="line"><span id="r-mark-l">Marquage / pièce</span><b id="r-mark">—</b></div>
         <div class="line"><span>Prix unitaire HT</span><b id="r-unit">—</b></div>
-        <div class="line"><span id="r-setup-l">Frais de préparation</span><b id="r-setup">—</b></div>
+        <div class="line"><span>Quantité</span><b id="r-qty">—</b></div>
+        <div class="line"><span>Forfait technique</span><b id="r-forfait">—</b></div>
+        <div class="line" id="r-exp-line"><span>Supplément express</span><b id="r-exp">—</b></div>
         <div class="total">
           <div class="u">Total HT</div>
           <div class="big" id="r-ht">—</div>
           <div class="u" id="r-ttc">—</div>
         </div>
-        <p class="note">Estimation indicative calculée sur nos grilles courantes. Le devis définitif tient compte du logo, du nombre de couleurs et des tailles.</p>
+        <p class="note">Estimation indicative issue de la grille Sélection gamme courte, hors remises et frais de port. Le devis définitif tient compte du logo, du nombre de couleurs et de la répartition des tailles.</p>
         <a class="btn" href="#devis" id="toDevis">Demander ce devis</a>
       </div>
     </div>
@@ -341,16 +377,16 @@ footer a:hover{color:#fff}
     </div>
     <div class="cards">
       <div class="card">
-        <h3>Le vêtement</h3>
-        <p>T-shirt à partir de 7,90 € HT, polo 14,50 €, pull 23,00 €, pantalon 26,00 €, veste 38,00 €. Textile professionnel, tailles XS à 4XL.</p>
+        <h3>Le textile</h3>
+        <p>T-shirt bio dès 2,75 € HT, polo dès 5,93 €, sweat à capuche dès 15,34 €, softshell dès 28,83 €, casquette dès 2,07 €. Le blanc est moins cher que la couleur sur la plupart des articles.</p>
       </div>
       <div class="card rouge">
         <h3>Le marquage</h3>
-        <p>Facturé par emplacement, selon la technique et la taille. La broderie coûte plus cher au petit format mais ne se dégrade pas ; le transfert devient intéressant sur les grands formats.</p>
+        <p>Facturé par pièce et par emplacement. Flocage : 2 € au cœur, 4,50 € cœur et dos. Brodage : 3 € au cœur, 7 € cœur et dos. Un forfait technique de 30 € HT s'ajoute une seule fois par commande.</p>
       </div>
       <div class="card">
-        <h3>La quantité</h3>
-        <p>Dégressif dès 10 pièces, puis 25, 50 et 100. Les frais de préparation (numérisation broderie ou calage transfert) ne sont facturés qu'une seule fois par logo.</p>
+        <h3>La quantité et le délai</h3>
+        <p>Trois paliers : 50, 100 et 200 pièces. En dessous de 50, le prix est établi sur devis. Besoin du tout en moins de 10 jours ? L'option express est chiffrée directement dans le simulateur.</p>
       </div>
     </div>
   </div>
@@ -396,7 +432,7 @@ footer a:hover{color:#fff}
 
         <div class="full">
           <label class="lbl" for="f-ind">Indications <em>*</em></label>
-          <textarea id="f-ind" name="Indications" required placeholder="Tailles et répartition, couleurs du logo, plusieurs emplacements, délai souhaité, textile fourni par vos soins…"></textarea>
+          <textarea id="f-ind" name="Indications" required placeholder="Répartition des tailles, coloris exact souhaité, nombre de couleurs du logo, date de livraison impérative…"></textarea>
         </div>
 
         <div class="full">
@@ -454,227 +490,446 @@ footer a:hover{color:#fff}
     </div>
     <div class="foot-bot">
       <span>© <span id="year"></span> Je brode pour vous</span>
-      <span>Les prix du simulateur sont indicatifs et ne valent pas offre commerciale.</span>
+      <span>Prix HT indicatifs, grille Sélection gamme courte. Ne vaut pas offre commerciale.</span>
     </div>
   </div>
 </footer>
 
 <script>
-/* ============ DONNÉES ============ */
-const GARMENTS = {
-  tshirt:   {label:"T-shirt",  base:7.90},
-  polo:     {label:"Polo",     base:14.50},
-  pull:     {label:"Pull",     base:23.00},
-  pantalon: {label:"Pantalon", base:26.00},
-  veste:    {label:"Veste",    base:38.00}
+/* ====================================================================
+   1. CATALOGUE — Sélection gamme courte Liquière Hygiène
+   pv = prix de vente textile HT par pièce, dans l'ordre [50, 100, 200].
+   Classes de coloris : blanc / couleur / heather / tous.
+   Une classe absente retombe sur "couleur", puis sur "tous".
+==================================================================== */
+const PRODUITS = {
+  K3025IC:{ref:"K3025IC", nom:"T-shirt bio 150 g col rond — homme", fam:"T-shirts", forme:"tshirt",
+    tailles:"S à 5XL", tech:["flocage","brodage"],
+    pv:{blanc:[3.22,2.90,2.75], couleur:[4.02,3.62,3.44]}},
+  K3026IC:{ref:"K3026IC", nom:"T-shirt bio 150 g col rond — femme", fam:"T-shirts", forme:"tshirt",
+    tailles:"XS à 3XL", tech:["flocage","brodage"],
+    pv:{blanc:[4.46,4.01,3.81], couleur:[5.88,5.29,5.03]}},
+  PA438:{ref:"PA438", nom:"T-shirt de sport manches courtes — homme", fam:"T-shirts", forme:"tshirt",
+    tailles:"XS à 3XL", tech:["flocage"],
+    pv:{blanc:[5.40,4.86,4.62], couleur:[5.56,5.00,4.75]}},
+  PA439:{ref:"PA439", nom:"T-shirt de sport manches courtes — femme", fam:"T-shirts", forme:"tshirt",
+    tailles:"XS à XXL", tech:["flocage"],
+    pv:{blanc:[4.92,4.43,4.21], couleur:[5.20,4.68,4.45]}},
+  PA445:{ref:"PA445", nom:"T-shirt de sport manches courtes — enfant", fam:"T-shirts", forme:"tshirt",
+    tailles:"6/8 à 12/14 ans", tech:["flocage"],
+    /* Le tableau indique 2,21 € en 200 pièces / blanc. Toutes les autres lignes
+       baissent d'environ 5 % entre 100 et 200 pièces, ce qui donnerait 4,21 €.
+       Valeur retenue ici : 4,21 € — à confirmer. */
+    pv:{blanc:[4.92,4.43,4.21], couleur:[5.08,4.57,4.34]}},
+
+  K254:{ref:"K254 / K255", nom:"Polo piqué manches courtes", fam:"Polos", forme:"polo",
+    tailles:"XS à 4XL", tech:["flocage","brodage"], pv:{tous:[11.46,10.31,9.80]}},
+  IB296:{ref:"IB296 / IB295", nom:"Polo piqué", fam:"Polos", forme:"polo",
+    tailles:"XS à 5XL", tech:["flocage","brodage"],
+    pv:{blanc:[6.94,6.25,5.93], couleur:[8.30,7.47,7.10]}},
+
+  K446:{ref:"K446", nom:"Sweat-shirt à capuche contrastée", fam:"Sweats et polaires", forme:"pull",
+    tailles:"XS à 4XL", tech:["flocage","brodage"], pv:{tous:[22.08,20.77,19.73]}},
+  K4041:{ref:"K4041", nom:"Sweat-shirt recyclé à capuche", fam:"Sweats et polaires", forme:"pull",
+    tailles:"XS à 5XL", tech:["flocage","brodage"],
+    /* Noté K4010 dans le tableau de prix, K4041 au catalogue — à confirmer. */
+    pv:{blanc:[17.94,16.15,15.34], couleur:[19.24,17.32,16.45]}},
+  K912:{ref:"K912", nom:"Enzo — micropolaire col zippé", fam:"Sweats et polaires", forme:"pull",
+    tailles:"XS à 5XL", tech:["flocage","brodage"],
+    pv:{blanc:[18.94,17.05,16.91], couleur:[25.18,22.66,21.53]}},
+  K907:{ref:"K907 / K911", nom:"Veste micropolaire zippée", fam:"Sweats et polaires", forme:"veste",
+    tailles:"XS à 5XL", tech:["flocage","brodage"],
+    pv:{couleur:[18.94,17.05,16.19], heather:[23.74,21.37,20.30]}},
+
+  K400:{ref:"K400 / K401", nom:"Veste softshell 3 couches", fam:"Vestes et parkas", forme:"veste",
+    tailles:"S à 4XL", tech:["flocage","brodage"], pv:{tous:[33.72,30.35,28.83]}},
+  K6108:{ref:"K6108 / K677", nom:"Parka doublure matelassée", fam:"Vestes et parkas", forme:"veste",
+    tailles:"XS à 4XL", tech:["flocage","brodage"], pv:{tous:[45.66,41.09,39.04]}},
+
+  K6113:{ref:"K6113 / K6114", nom:"Doudoune légère sans manches", fam:"Sans manches", forme:"gilet",
+    tailles:"XS à 4XL", tech:["flocage","brodage"], pv:{tous:[35.52,31.97,30.37]}},
+  IB6172:{ref:"IB6172 / IB6173", nom:"Bodywarmer matelassé", fam:"Sans manches", forme:"gilet",
+    tailles:"XS à 4XL", tech:["flocage","brodage"], pv:{tous:[25.84,23.26,22.09]}},
+  K404:{ref:"K404 / K403", nom:"Bodywarmer softshell 3 couches", fam:"Sans manches", forme:"gilet",
+    tailles:"S à 4XL", tech:["flocage","brodage"], pv:{tous:[32.58,29.32,27.86]}},
+
+  KP137:{ref:"KP137", nom:"Casquette trucker 5 panneaux", fam:"Casquettes et bandanas", forme:"casquette",
+    tailles:"Taille unique", tech:["flocage","brodage"], pv:{tous:[3.64,3.28,3.11]}},
+  KP130:{ref:"KP130", nom:"Casquette sandwich contrasté 5 panneaux", fam:"Casquettes et bandanas", forme:"casquette",
+    tailles:"Taille unique", tech:["flocage","brodage"], pv:{tous:[2.42,2.18,2.07]}},
+  B15C:{ref:"B15C", nom:"Casquette ultimate 5 panneaux sandwich", fam:"Casquettes et bandanas", forme:"casquette",
+    tailles:"Taille unique", tech:["flocage","brodage"], pv:{tous:[4.96,4.46,4.24]}},
+  KP064:{ref:"KP064", nom:"Fiesta — bandana", fam:"Casquettes et bandanas", forme:"bandana",
+    tailles:"Taille unique", tech:["flocage","brodage"], pv:{tous:[1.28,1.15,1.09]}},
+
+  PANTALON:{ref:"—", nom:"Pantalon de travail (hors sélection)", fam:"Sur devis", forme:"pantalon",
+    tailles:"Nous consulter", tech:["flocage","brodage"], pv:null}
 };
+
+/* 2. Coloris courants. La gamme complète figure au catalogue.
+      classe = ce qui détermine le prix du textile. */
 const COLORS = [
-  {id:"blanc", label:"Blanc",       fill:"#FFFFFF", line:"#C6CDD5", dark:false},
-  {id:"marine",label:"Marine",      fill:"#12294A", line:"#0A1A31", dark:true},
-  {id:"gris",  label:"Gris chiné",  fill:"#A9B1BA", line:"#7E868F", dark:false},
-  {id:"noir",  label:"Noir",        fill:"#1B1F24", line:"#000000", dark:true},
-  {id:"rouge", label:"Rouge",       fill:"#C0182F", line:"#8C0E20", dark:true},
-  {id:"vert",  label:"Vert",        fill:"#2E6B4F", line:"#1D4834", dark:true},
-  {id:"jaune", label:"Jaune HV",    fill:"#E9E12B", line:"#B7B015", dark:false},
-  {id:"orange",label:"Orange HV",   fill:"#F07E00", line:"#B45E00", dark:false}
+  {id:"blanc",           label:"White",            fill:"#FFFFFF", line:"#C6CDD5", classe:"blanc",   dark:false},
+  {id:"noir",            label:"Black",            fill:"#1B1F24", line:"#000000", classe:"couleur", dark:true},
+  {id:"marine",          label:"Navy",             fill:"#1F2A44", line:"#111A2E", classe:"couleur", dark:true},
+  {id:"french_navy",     label:"French Navy",      fill:"#2A3348", line:"#1A2132", classe:"couleur", dark:true},
+  {id:"dark_grey",       label:"Dark Grey",        fill:"#4A4F55", line:"#33373C", classe:"couleur", dark:true},
+  {id:"oxford_grey",     label:"Oxford Grey",      fill:"#6E747C", line:"#4F545A", classe:"couleur", dark:true},
+  {id:"ash_heather",     label:"Ash Heather",      fill:"#C9CCCF", line:"#9BA0A5", classe:"heather", dark:false},
+  {id:"grey_heather",    label:"Grey Heather",     fill:"#A9AEB4", line:"#82878D", classe:"heather", dark:false},
+  {id:"red",             label:"Red",              fill:"#C8102E", line:"#8E0B20", classe:"couleur", dark:true},
+  {id:"wine",            label:"Wine",             fill:"#6B2237", line:"#481624", classe:"couleur", dark:true},
+  {id:"royal_blue",      label:"Royal Blue",       fill:"#12448F", line:"#0B2F66", classe:"couleur", dark:true},
+  {id:"light_royal_blue",label:"Light Royal Blue", fill:"#2A5DB0", line:"#1D4180", classe:"couleur", dark:true},
+  {id:"sky_blue",        label:"Sky Blue",         fill:"#7FB2DC", line:"#5A8AB2", classe:"couleur", dark:false},
+  {id:"aqua_blue",       label:"Aqua Blue",        fill:"#0E7FA8", line:"#095A78", classe:"couleur", dark:true},
+  {id:"kelly_green",     label:"Kelly Green",      fill:"#007A45", line:"#00542F", classe:"couleur", dark:true},
+  {id:"forest_green",    label:"Forest Green",     fill:"#12402C", line:"#0A2A1C", classe:"couleur", dark:true},
+  {id:"lime",            label:"Lime",             fill:"#A4C63A", line:"#7B9628", classe:"couleur", dark:false},
+  {id:"orange",          label:"Orange",           fill:"#F07E00", line:"#B45E00", classe:"couleur", dark:false},
+  {id:"yellow",          label:"Yellow",           fill:"#F2C21B", line:"#BC9410", classe:"couleur", dark:false},
+  {id:"fuchsia",         label:"Fuchsia",          fill:"#C6197D", line:"#8E1159", classe:"couleur", dark:true},
+  {id:"pale_pink",       label:"Pale Pink",        fill:"#F2CFD2", line:"#C7A4A8", classe:"couleur", dark:false},
+  {id:"chocolate",       label:"Chocolate",        fill:"#4B3226", line:"#301F16", classe:"couleur", dark:true},
+  {id:"light_sand",      label:"Light Sand",       fill:"#D9C9A8", line:"#AB9C7C", classe:"couleur", dark:false},
+  {id:"sage",            label:"Sage",             fill:"#9CAE94", line:"#75846E", classe:"couleur", dark:false}
 ];
-const TECHS = {
-  broderie: {label:"Broderie", setup:45, hint:"Fil cousu, durable", price:{S:6.20, M:11.40, L:14.90}},
-  transfert:{label:"Transfert",setup:25, hint:"Pressé à chaud",     price:{S:3.40, M:6.20, L:8.30}}
+
+/* 3. Marquage — grille Liquière Hygiène.
+      1 emplacement = base ; chaque emplacement supplémentaire = extra.
+      Flocage : cœur 2 €, cœur + dos 4,50 €.  Brodage : cœur 3 €, cœur + dos 7 €. */
+const MARQ = {
+  flocage:{label:"Flocage", hint:"Pressé à chaud", base:2, extra:2.5},
+  brodage:{label:"Brodage", hint:"Fil cousu",      base:3, extra:4}
 };
-const SIZES = {
-  S:{label:"Petit format", cm:8,  hint:"≈ 8 cm — logo poitrine"},
-  M:{label:"Moyen format", cm:20, hint:"≈ 20 cm — dos ou grand côté"},
-  L:{label:"Grand format", cm:28, hint:"≈ 28 cm — dos pleine largeur"}
-};
-const POSITIONS = {
-  coeur:     {label:"Cœur",              hint:"Poitrine gauche du porteur", view:"face", extra:0,    sizes:["S"]},
-  anticoeur: {label:"Anti-cœur",         hint:"Poitrine droite du porteur", view:"face", extra:0,    sizes:["S"]},
-  manche:    {label:"Côté de la manche", hint:"Bras gauche",                view:"face", extra:1.10, sizes:["S"]},
-  dos:       {label:"Dos",               hint:"Haut du dos",                view:"dos",  extra:0,    sizes:["S","M","L"]}
-};
-const TIERS = [
-  {min:100,coef:0.82,label:"100 pièces et +"},
-  {min:50, coef:0.90,label:"50 à 99 pièces"},
-  {min:25, coef:1.00,label:"25 à 49 pièces"},
-  {min:10, coef:1.15,label:"10 à 24 pièces"},
-  {min:1,  coef:1.35,label:"1 à 9 pièces"}
-];
+const FORFAIT = 30;      // forfait technique HT, une fois par commande
 const TVA = 0.20;
 
-/* Silhouettes : chemin principal + détails, par vue.
-   Ancres de marquage : {x,y,rot} dans le repère 0 0 400 480 */
-const SHAPES = {
-  tshirt:{
-    face:{body:"M150 62 L104 78 L52 116 L88 178 L118 158 L118 430 L282 430 L282 158 L312 178 L348 116 L296 78 L250 62 C238 96 162 96 150 62 Z",
-          det:["M150 62 C162 100 238 100 250 62","M118 158 L118 430","M282 158 L282 430"]},
-    dos:{body:"M150 62 L104 78 L52 116 L88 178 L118 158 L118 430 L282 430 L282 158 L312 178 L348 116 L296 78 L250 62 C240 76 160 76 150 62 Z",
-         det:["M150 62 C160 78 240 78 250 62"]},
-    anchors:{coeur:{x:246,y:176,rot:0},anticoeur:{x:154,y:176,rot:0},manche:{x:74,y:132,rot:-38},dos:{x:200,y:180,rot:0}}
-  },
-  polo:{
-    face:{body:"M152 66 L106 80 L56 118 L90 180 L120 160 L120 430 L280 430 L280 160 L310 180 L344 118 L294 80 L248 66 C238 96 162 96 152 66 Z",
-          det:["M152 66 L200 104 L248 66","M186 100 L186 152 M214 100 L214 152","M170 66 L152 96 L200 106 M230 66 L248 96 L200 106"]},
-    dos:{body:"M152 66 L106 80 L56 118 L90 180 L120 160 L120 430 L280 430 L280 160 L310 180 L344 118 L294 80 L248 66 C240 78 160 78 152 66 Z",
-         det:["M152 66 C160 84 240 84 248 66 L248 78 C240 92 160 92 152 78 Z"]},
-    anchors:{coeur:{x:246,y:180,rot:0},anticoeur:{x:154,y:180,rot:0},manche:{x:78,y:136,rot:-38},dos:{x:200,y:186,rot:0}}
-  },
-  pull:{
-    face:{body:"M150 62 L96 78 L44 124 L22 236 L62 254 L88 194 L88 424 L312 424 L312 194 L338 254 L378 236 L356 124 L304 78 L250 62 C238 96 162 96 150 62 Z",
-          det:["M150 62 C162 100 238 100 250 62 L250 74 C238 108 162 108 150 74 Z","M88 404 L312 404","M40 232 L74 246","M326 246 L360 232"]},
-    dos:{body:"M150 62 L96 78 L44 124 L22 236 L62 254 L88 194 L88 424 L312 424 L312 194 L338 254 L378 236 L356 124 L304 78 L250 62 C240 76 160 76 150 62 Z",
-         det:["M150 62 C160 80 240 80 250 62","M88 404 L312 404"]},
-    anchors:{coeur:{x:248,y:178,rot:0},anticoeur:{x:152,y:178,rot:0},manche:{x:60,y:150,rot:-52},dos:{x:200,y:182,rot:0}}
-  },
-  veste:{
-    face:{body:"M150 60 L96 76 L44 122 L24 240 L64 258 L88 198 L88 428 L312 428 L312 198 L336 258 L376 240 L356 122 L304 76 L250 60 C238 92 162 92 150 60 Z",
-          det:["M200 92 L200 428","M150 60 L188 96 L200 92 L212 96 L250 60","M162 250 L188 250 M212 250 L238 250","M88 410 L312 410"]},
-    dos:{body:"M150 60 L96 76 L44 122 L24 240 L64 258 L88 198 L88 428 L312 428 L312 198 L336 258 L376 240 L356 122 L304 76 L250 60 C240 74 160 74 150 60 Z",
-         det:["M150 60 C160 78 240 78 250 60","M88 410 L312 410"]},
-    anchors:{coeur:{x:252,y:176,rot:0},anticoeur:{x:148,y:176,rot:0},manche:{x:62,y:152,rot:-52},dos:{x:200,y:180,rot:0}}
-  },
-  pantalon:{
-    face:{body:"M112 58 L288 58 L300 176 L288 446 L224 446 L200 246 L176 446 L112 446 L100 176 Z",
-          det:["M112 58 L288 58 L290 84 L110 84 Z","M200 84 L200 246","M118 108 L154 108 L150 150 L118 138 Z","M282 108 L246 108 L250 150 L282 138 Z"]},
-    dos:{body:"M112 58 L288 58 L300 176 L288 446 L224 446 L200 246 L176 446 L112 446 L100 176 Z",
-         det:["M112 58 L288 58 L290 84 L110 84 Z","M200 84 L200 246","M124 108 L172 108 L172 142 L124 142 Z","M276 108 L228 108 L228 142 L276 142 Z"]},
-    anchors:{coeur:{x:250,y:190,rot:0},anticoeur:{x:150,y:190,rot:0},manche:{x:146,y:330,rot:0},dos:{x:200,y:150,rot:0}}
-  }
-};
-/* Étiquettes d'emplacement adaptées au pantalon */
-const POS_LABEL_PANTALON = {coeur:"Cuisse droite",anticoeur:"Cuisse gauche",manche:"Bas de jambe",dos:"Haut du dos"};
+/* 4. Quantité — la grille est donnée pour 50, 100 et 200 pièces. */
+const TIERS = [
+  {min:200, i:2, label:"200 pièces et plus"},
+  {min:100, i:1, label:"100 à 199 pièces"},
+  {min:50,  i:0, label:"50 à 99 pièces"},
+  {min:1,   i:0, label:"moins de 50 pièces", horsGrille:true}
+];
 
-const PX_PER_CM = 3.2;
+/* 5. Délai. Le supplément express est un réglage maison : ajustez-le ici. */
+const DELAIS = {
+  standard:{label:"Standard", hint:"3 à 4 semaines",    pct:0,    mini:0},
+  express: {label:"Express",  hint:"moins de 10 jours", pct:0.15, mini:25}
+};
+
+/* 6. Emplacements par forme de vêtement */
+const EMPL = {
+  tshirt:["coeur","anticoeur","manche","dos"], polo:["coeur","anticoeur","manche","dos"],
+  pull:["coeur","anticoeur","manche","dos"],   veste:["coeur","anticoeur","manche","dos"],
+  pantalon:["coeur","anticoeur","manche","dos"],
+  gilet:["coeur","anticoeur","dos"],
+  casquette:["coeur","manche","dos"],
+  bandana:["coeur"]
+};
+const MAX_EMPL = {casquette:1, bandana:1};   // la grille ne chiffre qu'un emplacement
+const POS_DEF = {
+  coeur:    {label:"Cœur",              hint:"Poitrine gauche du porteur", view:"face", cm:8},
+  anticoeur:{label:"Anti-cœur",         hint:"Poitrine droite du porteur", view:"face", cm:8},
+  manche:   {label:"Côté de la manche", hint:"Bras gauche",                view:"face", cm:7},
+  dos:      {label:"Dos",               hint:"Haut du dos",                view:"dos",  cm:25}
+};
+const POS_LABELS = {
+  pantalon: {coeur:"Cuisse droite", anticoeur:"Cuisse gauche", manche:"Bas de jambe", dos:"Haut du dos"},
+  casquette:{coeur:"Panneau avant", manche:"Côté", dos:"Arrière"},
+  bandana:  {coeur:"Coin visible"}
+};
+const POS_CM = {casquette:{coeur:9, manche:6, dos:7}, bandana:{coeur:8}};
+const POS_HINTS = {
+  pantalon: {coeur:"Haut de cuisse droite", anticoeur:"Haut de cuisse gauche", manche:"Bas de jambe gauche"},
+  casquette:{coeur:"Devant, centré", manche:"Côté gauche", dos:"Arrière, au-dessus du réglage"},
+  bandana:  {coeur:"Coin avant, visible une fois noué"}
+};
+
+/* ====================================================================
+   PHOTOS RÉELLES — voir le README, section 6. Clé = "produit:coloris".
+==================================================================== */
+const PHOTOS = {
+  // "K3025IC:blanc": {face:"photos/k3025ic-blanc-face.jpg", dos:"photos/k3025ic-blanc-dos.jpg"},
+};
+const PHOTO_GEO = {
+  tshirt:   {largeurCm:82, face:{coeur:{x:61,y:37,rot:0}, anticoeur:{x:39,y:37,rot:0}, manche:{x:23,y:32,rot:-46}}, dos:{dos:{x:50,y:39,rot:0}}},
+  polo:     {largeurCm:82, face:{coeur:{x:61,y:37,rot:0}, anticoeur:{x:39,y:37,rot:0}, manche:{x:24,y:33,rot:-46}}, dos:{dos:{x:50,y:40,rot:0}}},
+  pull:     {largeurCm:98, face:{coeur:{x:61,y:39,rot:0}, anticoeur:{x:39,y:39,rot:0}, manche:{x:21,y:43,rot:-70}}, dos:{dos:{x:50,y:41,rot:0}}},
+  veste:    {largeurCm:98, face:{coeur:{x:63,y:39,rot:0}, anticoeur:{x:37,y:39,rot:0}, manche:{x:21,y:43,rot:-70}}, dos:{dos:{x:50,y:41,rot:0}}},
+  gilet:    {largeurCm:88, face:{coeur:{x:62,y:39,rot:0}, anticoeur:{x:38,y:39,rot:0}}, dos:{dos:{x:50,y:42,rot:0}}},
+  casquette:{largeurCm:34, face:{coeur:{x:50,y:48,rot:0}, manche:{x:32,y:52,rot:0}}, dos:{dos:{x:50,y:44,rot:0}}},
+  bandana:  {largeurCm:56, face:{coeur:{x:50,y:46,rot:0}}, dos:{dos:{x:50,y:46,rot:0}}},
+  pantalon: {largeurCm:58, face:{coeur:{x:62,y:41,rot:0}, anticoeur:{x:38,y:41,rot:0}, manche:{x:35,y:73,rot:0}}, dos:{dos:{x:50,y:35,rot:0}}}
+};
+const PHOTO_KO = new Set();
+const CALAGE = new URLSearchParams(location.search).has("calage");
+
+const SHAPES = {
+  tshirt:{ppcm:4.0,
+    face:{body:"M172 100 C156 101 132 104 112 112 C96 126 74 148 58 166 C51 175 54 185 64 193 L96 222 C93 265 93 312 100 352 C140 363 260 363 300 352 C307 312 307 265 304 222 L336 193 C346 185 349 175 342 166 C326 148 304 126 288 112 C268 104 244 101 228 100 C225 130 175 130 172 100 Z",det:["M170 102 C176 134 224 134 230 102","M96 222 C93 265 93 312 100 352","M304 222 C307 265 307 312 300 352","M64 193 L96 222","M336 193 L304 222","M100 352 C140 363 260 363 300 352"]},
+    dos:{body:"M172 100 C156 101 132 104 112 112 C96 126 74 148 58 166 C51 175 54 185 64 193 L96 222 C93 265 93 312 100 352 C140 363 260 363 300 352 C307 312 307 265 304 222 L336 193 C346 185 349 175 342 166 C326 148 304 126 288 112 C268 104 244 101 228 100 C225 113 175 113 172 100 Z",det:["M170 102 C176 118 224 118 230 102","M96 222 C93 265 93 312 100 352","M304 222 C307 265 307 312 300 352","M64 193 L96 222","M336 193 L304 222"]},
+    anchors:{coeur:{x:244,y:172,rot:0},anticoeur:{x:156,y:172,rot:0},manche:{x:92,y:152,rot:-46},dos:{x:200,y:188,rot:0}}},
+  polo:{ppcm:4.0,
+    face:{body:"M174 104 C158 105 134 108 114 116 C98 130 78 150 64 168 C57 177 60 187 70 194 L100 222 C97 265 97 312 104 352 C142 363 258 363 296 352 C303 312 303 265 300 222 L330 194 C340 187 343 177 336 168 C322 150 302 130 286 116 C266 108 242 105 226 104 C223 126 177 126 174 104 Z",det:["M174 104 C180 128 190 142 200 150 C210 142 220 128 226 104 C218 116 210 122 200 122 C190 122 182 116 174 104 Z","M200 150 L200 124","M188 148 L188 200 M212 148 L212 200","M100 222 C97 265 97 312 104 352","M300 222 C303 265 303 312 296 352","M70 194 L100 222","M330 194 L300 222"]},
+    dos:{body:"M174 104 C158 105 134 108 114 116 C98 130 78 150 64 168 C57 177 60 187 70 194 L100 222 C97 265 97 312 104 352 C142 363 258 363 296 352 C303 312 303 265 300 222 L330 194 C340 187 343 177 336 168 C322 150 302 130 286 116 C266 108 242 105 226 104 C223 115 177 115 174 104 Z",det:["M174 104 C180 118 220 118 226 104 C218 112 210 116 200 116 C190 116 182 112 174 104 Z","M100 222 C97 265 97 312 104 352","M300 222 C303 265 303 312 296 352","M70 194 L100 222","M330 194 L300 222"]},
+    anchors:{coeur:{x:246,y:178,rot:0},anticoeur:{x:154,y:178,rot:0},manche:{x:96,y:156,rot:-46},dos:{x:200,y:190,rot:0}}},
+  pull:{ppcm:3.4,
+    face:{body:"M172 110 C154 112 132 117 116 126 C96 154 66 216 44 288 C40 298 45 309 56 312 L88 306 C96 268 104 240 112 222 C109 278 109 320 112 358 C146 368 254 368 288 358 C291 320 291 278 288 222 C296 240 304 268 312 306 L344 312 C355 309 360 298 356 288 C334 216 304 154 284 126 C268 117 246 112 228 110 C225 140 175 140 172 110 Z",det:["M170 112 C176 144 224 144 230 112","M166 104 C172 134 228 134 234 104","M112 338 L288 338","M50 296 L82 290 M350 296 L318 290","M112 222 C109 278 109 320 112 358","M288 222 C291 278 291 320 288 358"]},
+    dos:{body:"M172 110 C154 112 132 117 116 126 C96 154 66 216 44 288 C40 298 45 309 56 312 L88 306 C96 268 104 240 112 222 C109 278 109 320 112 358 C146 368 254 368 288 358 C291 320 291 278 288 222 C296 240 304 268 312 306 L344 312 C355 309 360 298 356 288 C334 216 304 154 284 126 C268 117 246 112 228 110 C225 122 175 122 172 110 Z",det:["M170 112 C176 128 224 128 230 112","M112 338 L288 338","M50 296 L82 290 M350 296 L318 290"]},
+    anchors:{coeur:{x:246,y:186,rot:0},anticoeur:{x:154,y:186,rot:0},manche:{x:84,y:204,rot:-70},dos:{x:200,y:198,rot:0}}},
+  veste:{ppcm:3.4,
+    face:{body:"M172 110 C154 112 132 117 116 126 C96 154 66 216 44 288 C40 298 45 309 56 312 L88 306 C96 268 104 240 112 222 C109 278 109 320 112 358 C146 368 254 368 288 358 C291 320 291 278 288 222 C296 240 304 268 312 306 L344 312 C355 309 360 298 356 288 C334 216 304 154 284 126 C268 117 246 112 228 110 C225 130 175 130 172 110 Z",det:["M200 126 L200 362","M196 126 L196 362 M204 126 L204 362","M172 110 C176 122 188 130 200 126 C212 130 224 122 228 110 L230 94 C226 114 214 122 200 122 C186 122 174 114 170 94 Z","M152 252 L184 252 M216 252 L248 252","M112 344 L288 344","M50 296 L82 290 M350 296 L318 290","M112 222 C109 278 109 320 112 358","M288 222 C291 278 291 320 288 358"]},
+    dos:{body:"M172 110 C154 112 132 117 116 126 C96 154 66 216 44 288 C40 298 45 309 56 312 L88 306 C96 268 104 240 112 222 C109 278 109 320 112 358 C146 368 254 368 288 358 C291 320 291 278 288 222 C296 240 304 268 312 306 L344 312 C355 309 360 298 356 288 C334 216 304 154 284 126 C268 117 246 112 228 110 C225 122 175 122 172 110 Z",det:["M170 112 C176 128 224 128 230 112","M112 344 L288 344","M50 296 L82 290 M350 296 L318 290"]},
+    anchors:{coeur:{x:250,y:186,rot:0},anticoeur:{x:150,y:186,rot:0},manche:{x:84,y:204,rot:-70},dos:{x:200,y:198,rot:0}}},
+  pantalon:{ppcm:3.6,
+    face:{body:"M124 74 C122 90 120 100 119 112 L106 210 C100 300 99 380 101 434 C102 441 106 444 113 444 L167 444 C174 444 178 441 179 434 C186 376 194 310 200 262 C206 310 214 376 221 434 C222 441 226 444 233 444 L287 444 C294 444 298 441 299 434 C301 380 300 300 294 210 L281 112 C280 100 278 90 276 74 Z",det:["M124 74 L276 74 L277 104 L123 104 Z","M123 88 L277 88","M200 106 L200 262","M126 126 C142 130 156 138 164 150 L152 176 C142 160 134 148 124 138 Z","M274 126 C258 130 244 138 236 150 L248 176 C258 160 266 148 276 138 Z","M140 74 L140 104 M260 74 L260 104"]},
+    dos:{body:"M124 74 C122 90 120 100 119 112 L106 210 C100 300 99 380 101 434 C102 441 106 444 113 444 L167 444 C174 444 178 441 179 434 C186 376 194 310 200 262 C206 310 214 376 221 434 C222 441 226 444 233 444 L287 444 C294 444 298 441 299 434 C301 380 300 300 294 210 L281 112 C280 100 278 90 276 74 Z",det:["M124 74 L276 74 L277 104 L123 104 Z","M123 88 L277 88","M200 106 L200 262","M132 128 L178 128 L178 158 L132 158 Z","M268 128 L222 128 L222 158 L268 158 Z"]},
+    anchors:{coeur:{x:248,y:196,rot:0},anticoeur:{x:152,y:196,rot:0},manche:{x:140,y:350,rot:0},dos:{x:200,y:170,rot:0}}},
+  gilet:{ppcm:3.4,
+    face:{body:"M170 110 C154 112 134 117 118 126 C104 148 98 172 96 200 C92 258 92 320 96 358 C136 368 264 368 304 358 C308 320 308 258 304 200 C302 172 296 148 282 126 C266 117 246 112 230 110 C225 140 175 140 170 110 Z",det:["M118 126 C130 160 134 190 132 216","M282 126 C270 160 266 190 268 216","M200 126 L200 362","M196 126 L196 362 M204 126 L204 362","M170 110 C176 122 188 130 200 126 C212 130 224 122 228 110 L230 96 C226 114 214 122 200 122 C186 122 174 114 170 96 Z","M150 258 L182 258 M218 258 L250 258","M96 200 C92 258 92 320 96 358","M304 200 C308 258 308 320 304 358","M110 180 L110 300 M290 180 L290 300"]},
+    dos:{body:"M170 110 C154 112 134 117 118 126 C104 148 98 172 96 200 C92 258 92 320 96 358 C136 368 264 368 304 358 C308 320 308 258 304 200 C302 172 296 148 282 126 C266 117 246 112 230 110 C225 122 175 122 170 110 Z",det:["M118 126 C130 160 134 190 132 216","M282 126 C270 160 266 190 268 216","M170 110 C176 126 224 126 230 110","M110 180 L110 300 M290 180 L290 300"]},
+    anchors:{coeur:{x:248,y:186,rot:0},anticoeur:{x:152,y:186,rot:0},dos:{x:200,y:200,rot:0}}},
+  casquette:{ppcm:5.6,
+    face:{body:"M96 296 C96 192 142 128 200 128 C258 128 304 192 304 296 Z",det:["M96 296 C124 332 276 332 304 296 C298 320 258 340 200 340 C142 340 102 320 96 296 Z","M200 128 L200 296","M148 140 C138 190 134 244 134 296","M252 140 C262 190 266 244 266 296","M200 130 m-7 0 a7 7 0 1 0 14 0 a7 7 0 1 0 -14 0"]},
+    dos:{body:"M96 296 C96 192 142 128 200 128 C258 128 304 192 304 296 Z",det:["M96 296 C130 306 270 306 304 296","M200 128 L200 240","M148 140 C138 190 134 244 134 296","M252 140 C262 190 266 244 266 296","M170 250 L230 250 L230 296 L170 296 Z","M186 250 L186 296 M214 250 L214 296"]},
+    anchors:{coeur:{x:200,y:232,rot:0},anticoeur:{x:200,y:232,rot:0},manche:{x:128,y:248,rot:0},dos:{x:200,y:210,rot:0}}},
+  bandana:{ppcm:4.6,
+    face:{body:"M52 148 L348 148 L200 384 Z",det:["M64 158 L336 158 L200 372 Z","M52 148 L348 148"]},
+    dos:{body:"M52 148 L348 148 L200 384 Z",det:["M64 158 L336 158 L200 372 Z"]},
+    anchors:{coeur:{x:200,y:220,rot:0},anticoeur:{x:200,y:220,rot:0},dos:{x:200,y:220,rot:0}}}
+};
 
 /* ============ ÉTAT ============ */
-const state = {garment:"tshirt", color:"marine", tech:"broderie", pos:"coeur", size:"S", qty:25, logo:null};
+const state = {produit:"K3025IC", color:"marine", tech:"flocage",
+               pos:new Set(["coeur"]), vue:"face", qty:50, delai:"standard", logo:null};
+
+const el = id => document.getElementById(id);
+const eur = n => n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €";
+const prod  = () => PRODUITS[state.produit];
+const forme = () => prod().forme;
+const posLabel = k => (POS_LABELS[forme()] && POS_LABELS[forme()][k]) || POS_DEF[k].label;
+const posCm    = k => (POS_CM[forme()] && POS_CM[forme()][k]) || POS_DEF[k].cm;
+const posHint  = k => (POS_HINTS[forme()] && POS_HINTS[forme()][k]) || POS_DEF[k].hint;
+const couleur  = () => COLORS.find(c => c.id === state.color);
+
+function classePrix(){
+  const pv = prod().pv; if(!pv) return null;
+  const c = couleur().classe;
+  return pv[c] ? c : (pv.couleur ? "couleur" : "tous");
+}
 
 /* ============ CONSTRUCTION DES CHOIX ============ */
-const el = id => document.getElementById(id);
-function radio(group,value,label,hint,checked){
-  return `<label class="opt"><input type="radio" name="${group}" value="${value}" ${checked?"checked":""}>
-  <span>${label}${hint?`<small>${hint}</small>`:""}</span></label>`;
+function opt(group, value, label, hint, checked, type, disabled){
+  return `<label class="opt"><input type="${type||"radio"}" name="${group}" value="${value}"
+    ${checked?"checked":""} ${disabled?"disabled":""}>
+    <span>${label}${hint?`<small>${hint}</small>`:""}</span></label>`;
 }
-el("g-garment").innerHTML = Object.entries(GARMENTS)
-  .map(([k,v])=>radio("garment",k,v.label,`dès ${v.base.toFixed(2).replace(".",",")} €`,k===state.garment)).join("");
-el("g-tech").innerHTML = Object.entries(TECHS)
-  .map(([k,v])=>radio("tech",k,v.label,v.hint,k===state.tech)).join("");
-el("g-color").innerHTML = COLORS.map(c=>
-  `<label class="sw" title="${c.label}"><input type="radio" name="color" value="${c.id}" ${c.id===state.color?"checked":""} aria-label="${c.label}"><i style="background:${c.fill}"></i></label>`).join("");
-
-function renderPositions(){
-  el("g-pos").innerHTML = Object.entries(POSITIONS).map(([k,v])=>{
-    const lbl = state.garment==="pantalon" ? POS_LABEL_PANTALON[k] : v.label;
-    return radio("pos",k,lbl,v.hint,k===state.pos);
+function renderProduits(){
+  const fams = [...new Set(Object.values(PRODUITS).map(p=>p.fam))];
+  el("g-produit").innerHTML = fams.map(f=>
+    `<optgroup label="${f}">` + Object.entries(PRODUITS).filter(([,p])=>p.fam===f)
+      .map(([k,p])=>`<option value="${k}" ${k===state.produit?"selected":""}>${p.nom} — ${p.ref}</option>`).join("")
+    + `</optgroup>`).join("");
+}
+function renderColors(){
+  el("g-color").innerHTML = COLORS.map(c=>
+    `<label class="sw" title="${c.label}"><input type="radio" name="color" value="${c.id}"
+      ${c.id===state.color?"checked":""} aria-label="${c.label}"><i style="background:${c.fill}"></i></label>`).join("");
+}
+function renderTech(){
+  const dispo = prod().tech;
+  if(!dispo.includes(state.tech)) state.tech = dispo[0];
+  el("g-tech").innerHTML = Object.entries(MARQ).map(([k,v])=>
+    opt("tech", k, v.label, dispo.includes(k) ? v.hint : "non proposé", k===state.tech, "radio", !dispo.includes(k))).join("");
+}
+function renderPos(){
+  const liste = EMPL[forme()];
+  [...state.pos].forEach(p=>{ if(!liste.includes(p)) state.pos.delete(p); });
+  const max = MAX_EMPL[forme()] || 4;
+  while(state.pos.size > max) state.pos.delete([...state.pos].pop());
+  if(state.pos.size === 0) state.pos.add(liste[0]);
+  el("g-pos").innerHTML = liste.map(k=>{
+    const bloque = !state.pos.has(k) && state.pos.size >= max;
+    return opt("pos", k, posLabel(k), posHint(k) + " · " + posCm(k) + " cm",
+               state.pos.has(k), "checkbox", bloque);
   }).join("");
+  el("pos-info").textContent = max === 1
+    ? "Un seul emplacement est chiffré sur cet article. Pour en marquer plusieurs, précisez-le dans votre demande."
+    : "Cochez tous les emplacements voulus. Chaque emplacement supplémentaire est facturé.";
 }
-function renderSizes(){
-  const allowed = POSITIONS[state.pos].sizes;
-  if(!allowed.includes(state.size)) state.size = allowed[0];
-  el("g-size").innerHTML = allowed.map(k=>radio("size",k,SIZES[k].label,SIZES[k].hint,k===state.size)).join("");
+function renderDelai(){
+  el("g-delai").innerHTML = Object.entries(DELAIS).map(([k,v])=>
+    opt("delai", k, v.label, v.hint, k===state.delai)).join("");
 }
-renderPositions(); renderSizes();
 
 /* ============ APERÇU ============ */
+function marquesDeLaVue(){ return [...state.pos].filter(k => POS_DEF[k].view === state.vue); }
+function contenuMarque(){
+  if(state.logo) return `<img src="${state.logo}" alt="">`;
+  const tirets = state.tech === "brodage" ? `stroke-dasharray="9 6"` : "";
+  return `<svg viewBox="0 0 100 62" style="position:absolute;inset:0;width:100%;height:100%">
+    <path d="M22 42 C38 8, 56 54, 80 12" fill="none" stroke="#F07E00" stroke-width="7"
+      stroke-linecap="round" ${tirets}/></svg>`;
+}
+function markHtml(){
+  const geo = PHOTO_GEO[forme()];
+  return marquesDeLaVue().map(k=>{
+    const a = (geo[state.vue]||{})[k] || {x:50,y:40,rot:0};
+    const cm = posCm(k);
+    const w = Math.min(96, cm / geo.largeurCm * 100);
+    return `<div class="mk" data-pos="${k}" style="left:${a.x}%;top:${a.y}%;width:${w}%;
+      transform:translate(-50%,-50%) rotate(${a.rot}deg)">
+      <div class="box">${contenuMarque()}</div><span class="cm">${cm} cm</span></div>`;
+  }).join("");
+}
 function markSvg(){
-  const cm = SIZES[state.size].cm;
-  const w = cm*PX_PER_CM, h = w*0.62;
-  const a = SHAPES[state.garment].anchors[state.pos];
-  const col = COLORS.find(c=>c.id===state.color);
-  const accent = col.dark ? "#FFFFFF" : "#F07E00";
-  const soft   = col.dark ? "#FFB259" : "#2B2F33";
-
-  let content;
-  if(state.logo){
-    content = `<image href="${state.logo}" x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet"/>`;
-  }else if(state.tech==="broderie"){
-    content = `
-      <rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="none" stroke="${accent}" stroke-width="2.2" stroke-dasharray="4 3" rx="2"/>
-      <path d="M${-w*0.32} ${h*0.16} C${-w*0.12} ${-h*0.3}, ${w*0.06} ${h*0.3}, ${w*0.3} ${-h*0.26}" fill="none"
-            stroke="${accent}" stroke-width="${Math.max(2.4,w*0.06)}" stroke-linecap="round" stroke-dasharray="${w*0.07} ${w*0.05}"/>`;
-  }else{
-    content = `
-      <rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="${soft}" opacity=".14" rx="2"/>
-      <rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="none" stroke="${accent}" stroke-width="1.6" rx="2"/>
-      <path d="M${-w*0.32} ${h*0.16} C${-w*0.12} ${-h*0.3}, ${w*0.06} ${h*0.3}, ${w*0.3} ${-h*0.26}" fill="none"
-            stroke="${accent}" stroke-width="${Math.max(2.4,w*0.06)}" stroke-linecap="round"/>`;
-  }
-  return `<g transform="translate(${a.x},${a.y}) rotate(${a.rot})">
-    ${content}
-    <text y="${h/2+16}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="${accent}" opacity=".85">${cm} cm</text>
-  </g>`;
+  const g = SHAPES[forme()];
+  return marquesDeLaVue().map(k=>{
+    const a = g.anchors[k]; if(!a) return "";
+    const cm = posCm(k), w = cm*g.ppcm, h = w*0.62;
+    const acc = couleur().dark ? "#FFFFFF" : "#F07E00";
+    let inner;
+    if(state.logo){
+      inner = `<image href="${state.logo}" x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet"/>`;
+    } else {
+      const tirets = state.tech === "brodage" ? `stroke-dasharray="${w*0.07} ${w*0.05}"` : "";
+      inner = `<rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="none" stroke="${acc}"
+                 stroke-width="2" stroke-dasharray="4 3" rx="2"/>
+        <path d="M${-w*0.32} ${h*0.16} C${-w*0.12} ${-h*0.3}, ${w*0.06} ${h*0.3}, ${w*0.3} ${-h*0.26}"
+              fill="none" stroke="${acc}" stroke-width="${Math.max(2.2,w*0.06)}" stroke-linecap="round" ${tirets}/>`;
+    }
+    return `<g transform="translate(${a.x},${a.y}) rotate(${a.rot})">${inner}
+      <text y="${h/2+15}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10"
+            fill="${acc}" opacity=".85">${cm} cm</text></g>`;
+  }).join("");
+}
+function photoFor(){
+  const p = PHOTOS[state.produit+":"+state.color];
+  const src = p && p[state.vue];
+  return (src && !PHOTO_KO.has(src)) ? src : null;
 }
 function draw(){
-  const view = POSITIONS[state.pos].view;
-  const s = SHAPES[state.garment][view];
-  const col = COLORS.find(c=>c.id===state.color);
-  const shade = col.dark ? "rgba(255,255,255,.07)" : "rgba(0,0,0,.06)";
-  el("canvas").innerHTML = `
-  <svg viewBox="0 0 400 480" role="img" aria-label="Aperçu : ${GARMENTS[state.garment].label} ${col.label}, ${POSITIONS[state.pos].label}, ${TECHS[state.tech].label}">
-    <defs>
-      <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#000" stop-opacity=".10"/>
-        <stop offset=".3" stop-color="#000" stop-opacity="0"/>
-        <stop offset=".7" stop-color="#000" stop-opacity="0"/>
-        <stop offset="1" stop-color="#000" stop-opacity=".12"/>
-      </linearGradient>
-      <clipPath id="clip"><path d="${s.body}"/></clipPath>
-    </defs>
-    <ellipse cx="200" cy="455" rx="130" ry="12" fill="#000" opacity=".05"/>
-    <path d="${s.body}" fill="${col.fill}" stroke="${col.line}" stroke-width="2" stroke-linejoin="round"/>
-    <g clip-path="url(#clip)"><rect width="400" height="480" fill="url(#grad)"/></g>
-    <g fill="none" stroke="${col.line}" stroke-width="1.4" opacity=".8">${s.det.map(d=>`<path d="${d}"/>`).join("")}</g>
-    ${markSvg()}
-  </svg>`;
-  el("viewTag").textContent = view==="dos" ? "Vue de dos" : "Vue de face";
-  el("zoomTag").textContent = `${GARMENTS[state.garment].label} · ${col.label}`;
+  const src = photoFor(), c = couleur();
+  if(src){
+    el("canvas").innerHTML = `<div class="photo-wrap">
+      <img class="garment" src="${src}" alt="${prod().nom} ${c.label}, vue de ${state.vue}">${markHtml()}</div>`;
+    el("canvas").querySelector("img.garment").addEventListener("error", ()=>{ PHOTO_KO.add(src); draw(); });
+    if(CALAGE) armerCalage();
+  } else {
+    const s = SHAPES[forme()][state.vue];
+    el("canvas").innerHTML = `
+    <svg viewBox="0 0 400 480" role="img" aria-label="Aperçu : ${prod().nom} ${c.label}, vue de ${state.vue}">
+      <defs>
+        <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#000" stop-opacity=".10"/><stop offset=".3" stop-color="#000" stop-opacity="0"/>
+          <stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".12"/>
+        </linearGradient>
+        <clipPath id="clip"><path d="${s.body}"/></clipPath>
+      </defs>
+      <ellipse cx="200" cy="455" rx="130" ry="12" fill="#000" opacity=".05"/>
+      <path d="${s.body}" fill="${c.fill}" stroke="${c.line}" stroke-width="2" stroke-linejoin="round"/>
+      <g clip-path="url(#clip)"><rect width="400" height="480" fill="url(#grad)"/></g>
+      <g fill="none" stroke="${c.line}" stroke-width="1.4" opacity=".8">${s.det.map(d=>`<path d="${d}"/>`).join("")}</g>
+      ${markSvg()}
+    </svg>`;
+  }
+  el("viewTag").textContent = state.vue==="dos" ? "Vue de dos" : "Vue de face";
+  el("zoomTag").textContent = `${prod().ref} · ${c.label}${src?"":" · illustration"}`;
+  [...el("viewsw").children].forEach(b=>b.classList.toggle("on", b.dataset.v===state.vue));
 }
 
 /* ============ PRIX ============ */
-const eur = n => n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €";
-function tier(q){ return TIERS.find(t=>q>=t.min) || TIERS[TIERS.length-1]; }
+function tier(){ return TIERS.find(t=>state.qty>=t.min) || TIERS[TIERS.length-1]; }
 function price(){
-  const g = GARMENTS[state.garment], t = TECHS[state.tech], p = POSITIONS[state.pos];
-  const marking = t.price[state.size] + p.extra;
-  const tr = tier(state.qty);
-  const unit = (g.base + marking) * tr.coef;
-  const setup = t.setup;
-  const ht = unit*state.qty + setup;
-  return {unit, setup, ht, ttc: ht*(1+TVA), marking, tier:tr};
+  const p = prod(), t = tier(), n = state.pos.size;
+  const marquage = n ? MARQ[state.tech].base + (n-1)*MARQ[state.tech].extra : 0;
+  if(!p.pv) return {devis:true, marquage, tier:t, n};
+  const pv = p.pv[classePrix()][t.i];
+  const unit = pv + marquage;
+  const sous = unit * state.qty;
+  const forfait = n ? FORFAIT : 0;
+  const d = DELAIS[state.delai];
+  const exp = d.pct ? Math.max(d.mini, (sous + forfait) * d.pct) : 0;
+  const ht = sous + forfait + exp;
+  return {devis:false, pv, marquage, unit, sous, forfait, exp, ht, ttc: ht*(1+TVA), tier:t, n};
 }
 function renderPrice(){
-  const r = price();
-  const posLabel = state.garment==="pantalon" ? POS_LABEL_PANTALON[state.pos] : POSITIONS[state.pos].label;
-  el("r-garment").textContent = `${GARMENTS[state.garment].label} · ${COLORS.find(c=>c.id===state.color).label}`;
-  el("r-mark").textContent    = `${TECHS[state.tech].label} · ${SIZES[state.size].cm} cm`;
-  el("r-pos").textContent     = posLabel;
-  el("r-qty").textContent     = `${state.qty} — ${r.tier.label}`;
-  el("r-unit").textContent    = eur(r.unit);
-  el("r-setup-l").textContent = state.tech==="broderie" ? "Numérisation (1 fois)" : "Calage transfert (1 fois)";
-  el("r-setup").textContent   = eur(r.setup);
-  el("r-ht").textContent      = eur(r.ht);
-  el("r-ttc").textContent     = `soit ${eur(r.ttc)} TTC`;
+  const p = prod(), r = price(), t = r.tier;
+  const empl = [...state.pos].map(posLabel).join(" + ") || "aucun";
+  el("p-info").textContent = `Réf. ${p.ref} · tailles ${p.tailles}`;
+  el("c-info").textContent = p.pv
+    ? `Coloris courants. Classe tarifaire : ${classePrix()}. La gamme complète figure au catalogue.`
+    : "Coloris à préciser dans votre demande.";
+  el("q-info").textContent = t.horsGrille
+    ? "En dessous de 50 pièces, le prix est établi sur devis. Le montant affiché utilise la base 50 pièces."
+    : `Tarif ${t.label}.`;
+  el("q-info").classList.toggle("warn", !!t.horsGrille);
 
-  const cfg = `${GARMENTS[state.garment].label} ${COLORS.find(c=>c.id===state.color).label} — ${TECHS[state.tech].label} — ${posLabel} — ${SIZES[state.size].cm} cm — ${state.qty} pièce(s)`;
+  el("r-produit").textContent = p.nom;
+  el("r-color").textContent   = couleur().label;
+  el("r-mark-l").textContent  = `${MARQ[state.tech].label} · ${empl}`;
+  el("r-mark").textContent    = eur(r.marquage);
+  el("r-qty").textContent     = `${state.qty} pièce(s)`;
+
+  if(r.devis){
+    ["r-pv","r-unit","r-forfait","r-exp"].forEach(i=>el(i).textContent = "—");
+    el("r-ht").textContent  = "Sur devis";
+    el("r-ttc").textContent = "Article hors sélection gamme courte";
+    el("r-exp-line").style.display = "none";
+  } else {
+    el("r-pv").textContent      = eur(r.pv);
+    el("r-unit").textContent    = eur(r.unit);
+    el("r-forfait").textContent = r.forfait ? eur(r.forfait) : "—";
+    el("r-exp-line").style.display = r.exp ? "flex" : "none";
+    el("r-exp").textContent     = eur(r.exp);
+    el("r-ht").textContent      = eur(r.ht);
+    el("r-ttc").textContent     = `soit ${eur(r.ttc)} TTC`;
+  }
+
+  const cfg = `${p.nom} (${p.ref}) — ${couleur().label} — ${MARQ[state.tech].label} sur ${empl} — `
+            + `${state.qty} pièce(s) — délai ${DELAIS[state.delai].label.toLowerCase()} (${DELAIS[state.delai].hint})`;
   el("h-config").value = cfg;
-  el("h-price").value  = `${eur(r.unit)} HT/pièce · préparation ${eur(r.setup)} · total ${eur(r.ht)} HT (${eur(r.ttc)} TTC) — estimation indicative`;
+  el("h-price").value = r.devis ? "Sur devis (article hors sélection gamme courte)"
+    : `PV textile ${eur(r.pv)} + marquage ${eur(r.marquage)} = ${eur(r.unit)} HT/pièce · `
+    + `forfait technique ${eur(r.forfait)}${r.exp?" · express "+eur(r.exp):""} · `
+    + `total ${eur(r.ht)} HT (${eur(r.ttc)} TTC) — estimation indicative`;
   el("formRecap").innerHTML = `
     <div><span>Configuration</span><b>${cfg}</b></div>
-    <div><span>Prix unitaire HT</span><b>${eur(r.unit)}</b></div>
-    <div><span>Total estimé HT</span><b>${eur(r.ht)}</b></div>`;
+    <div><span>Prix unitaire HT</span><b>${r.devis?"sur devis":eur(r.unit)}</b></div>
+    <div><span>Total estimé HT</span><b>${r.devis?"sur devis":eur(r.ht)}</b></div>`;
 }
+
 function update(){ draw(); renderPrice(); }
+function rebuild(){ renderTech(); renderPos(); update(); }
 
 /* ============ ÉVÈNEMENTS ============ */
+el("g-produit").addEventListener("change", e=>{
+  state.produit = e.target.value;
+  if(!EMPL[forme()].some(k=>POS_DEF[k].view===state.vue)) state.vue = "face";
+  rebuild();
+});
 document.addEventListener("change", e=>{
   const n = e.target.name;
-  if(n==="garment"){ state.garment=e.target.value; renderPositions(); renderSizes(); }
-  else if(n==="color") state.color=e.target.value;
-  else if(n==="tech")  state.tech=e.target.value;
-  else if(n==="pos"){  state.pos=e.target.value; renderSizes(); }
-  else if(n==="size")  state.size=e.target.value;
-  else return;
+  if(n==="color") state.color = e.target.value;
+  else if(n==="tech") state.tech = e.target.value;
+  else if(n==="delai") state.delai = e.target.value;
+  else if(n==="pos"){
+    const k = e.target.value;
+    if(e.target.checked){
+      const max = MAX_EMPL[forme()] || 4;
+      if(max === 1) state.pos.clear();
+      state.pos.add(k);
+      state.vue = POS_DEF[k].view;
+    } else if(state.pos.size > 1) state.pos.delete(k);
+    renderPos();
+  } else return;
   update();
+});
+el("viewsw").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  state.vue = b.dataset.v; update();
 });
 el("qty").addEventListener("input", e=>{
   const v = parseInt(e.target.value,10);
@@ -693,11 +948,9 @@ const MAX = 10*1024*1024;
 function showErr(m){ fileErr.textContent=m; fileErr.classList.add("on"); }
 function clearErr(){ fileErr.classList.remove("on"); }
 function handleFile(file){
-  clearErr();
-  if(!file) return;
+  clearErr(); if(!file) return;
   const name = file.name.toLowerCase();
-  const okType = name.endsWith(".pdf") || name.endsWith(".svg");
-  if(!okType){ reset(); showErr("Format refusé. Déposez un PDF vectoriel ou un SVG."); return; }
+  if(!(name.endsWith(".pdf") || name.endsWith(".svg"))){ reset(); showErr("Format refusé. Déposez un PDF vectoriel ou un SVG."); return; }
   if(file.size > MAX){ reset(); showErr("Fichier trop lourd : 10 Mo maximum. Envoyez-le par e-mail si besoin."); return; }
   el("chipName").textContent = `${file.name} — ${(file.size/1024/1024).toFixed(2)} Mo`;
   chip.classList.add("on");
@@ -705,16 +958,13 @@ function handleFile(file){
     const r = new FileReader();
     r.onload = ()=>{ state.logo = r.result; update(); };
     r.readAsDataURL(file);
-  }else{
+  } else {
     state.logo = null; update();
-    fileErr.textContent = "PDF reçu. L'aperçu du simulateur ne peut pas afficher un PDF, mais votre fichier sera bien joint au devis.";
+    fileErr.textContent = "PDF reçu. L'aperçu ne peut pas afficher un PDF, mais votre fichier sera bien joint au devis.";
     fileErr.style.color = "var(--gris)"; fileErr.classList.add("on");
   }
 }
-function reset(){
-  fileInput.value=""; chip.classList.remove("on"); state.logo=null;
-  fileErr.style.color=""; update();
-}
+function reset(){ fileInput.value=""; chip.classList.remove("on"); state.logo=null; fileErr.style.color=""; update(); }
 fileInput.addEventListener("change", e=>handleFile(e.target.files[0]));
 el("chipX").onclick = ()=>{ reset(); clearErr(); };
 ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
@@ -726,8 +976,7 @@ drop.addEventListener("drop", e=>{
 
 /* ============ ENVOI ============ */
 el("quoteForm").addEventListener("submit", e=>{
-  const err = el("formErr");
-  err.classList.remove("on");
+  const err = el("formErr"); err.classList.remove("on");
   const f = e.currentTarget;
   if(!f.checkValidity()){
     e.preventDefault();
@@ -738,7 +987,73 @@ el("quoteForm").addEventListener("submit", e=>{
 });
 el("toDevis").addEventListener("click", ()=>setTimeout(()=>el("f-nom").focus(),450));
 
-update();
+/* ============ MODE CALAGE (?calage=1) ============ */
+let calPos = null;
+function panneauCalage(){
+  if(el("calpanel")) return el("calpanel");
+  const d = document.createElement("div");
+  d.className="calpanel"; d.id="calpanel";
+  d.innerHTML = `<h4>Calage des marquages</h4>
+    <div>Faites glisser un marquage sur la photo.</div>
+    <label>Rotation : <b id="cal-rot">0</b>°</label>
+    <input type="range" id="cal-rotr" min="-90" max="90" step="1" value="0">
+    <label>Largeur réelle de la photo entière (cm) : <b id="cal-cmv">0</b></label>
+    <input type="range" id="cal-cm" min="15" max="160" step="1" value="80">
+    <label>À recopier dans PHOTO_GEO :</label>
+    <textarea id="cal-out" readonly></textarea>`;
+  document.body.appendChild(d);
+  d.querySelector("#cal-rotr").addEventListener("input", e=>{
+    const a = ancre(); if(!a) return;
+    a.rot = +e.target.value; el("cal-rot").textContent = a.rot;
+    const mk = document.querySelector(`.mk[data-pos="${calPos}"]`);
+    if(mk) mk.style.transform = `translate(-50%,-50%) rotate(${a.rot}deg)`;
+    majCalage();
+  });
+  d.querySelector("#cal-cm").addEventListener("input", e=>{
+    PHOTO_GEO[forme()].largeurCm = +e.target.value;
+    el("cal-cmv").textContent = e.target.value; draw(); majCalage();
+  });
+  return d;
+}
+function ancre(){
+  const geo = PHOTO_GEO[forme()], k = calPos || [...state.pos][0];
+  if(!k) return null;
+  if(!geo[state.vue]) geo[state.vue] = {};
+  if(!geo[state.vue][k]) geo[state.vue][k] = {x:50,y:40,rot:0};
+  return geo[state.vue][k];
+}
+function majCalage(){
+  if(!el("cal-out")) return;
+  const a = ancre(); if(!a) return;
+  el("cal-out").value = "const PHOTO_GEO = " + JSON.stringify(PHOTO_GEO)
+    .replace(/\},"/g, '},\n  "').replace(/^const PHOTO_GEO = \{/, "const PHOTO_GEO = {\n  ") + ";";
+  el("cal-rot").textContent = a.rot; el("cal-rotr").value = a.rot;
+  el("cal-cm").value = PHOTO_GEO[forme()].largeurCm;
+  el("cal-cmv").textContent = PHOTO_GEO[forme()].largeurCm;
+}
+function armerCalage(){
+  panneauCalage();
+  document.querySelector(".stage").classList.add("calage");
+  document.querySelectorAll(".mk").forEach(mk=>{
+    let drag = false;
+    mk.addEventListener("pointerdown", e=>{
+      calPos = mk.dataset.pos; drag = true;
+      mk.setPointerCapture(e.pointerId); mk.classList.add("drag"); e.preventDefault(); majCalage();
+    });
+    mk.addEventListener("pointermove", e=>{
+      if(!drag) return;
+      const a = ancre(), r = mk.parentElement.getBoundingClientRect();
+      a.x = +(((e.clientX - r.left)/r.width)*100).toFixed(1);
+      a.y = +(((e.clientY - r.top)/r.height)*100).toFixed(1);
+      mk.style.left = a.x+"%"; mk.style.top = a.y+"%"; majCalage();
+    });
+    mk.addEventListener("pointerup", ()=>{ drag = false; mk.classList.remove("drag"); });
+  });
+  majCalage();
+}
+
+/* ============ DÉMARRAGE ============ */
+renderProduits(); renderColors(); renderDelai(); rebuild();
 </script>
 </body>
 </html>
