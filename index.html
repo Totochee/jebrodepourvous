@@ -574,6 +574,7 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
 .drop strong{font-size:.95rem;color:#25272A}
 .drop small{font-size:.78rem;line-height:1.65;color:#71757A}
 .drop input{display:none!important}
+.err.ok{display:block;color:#249B62}
 
 @media(max-width:1000px){.hero-grid::after{right:-8%;width:min(45vw,390px);opacity:.55}.hero h1{font-size:clamp(4rem,13vw,7.2rem)}}
 @media(max-width:620px){.hero{min-height:auto}.hero-grid::after{right:-30%;top:34%;width:78vw}.hero h1{font-size:clamp(3.4rem,17vw,5.4rem)}.drop{min-height:170px;padding:28px 18px!important}}
@@ -769,13 +770,9 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
       <p style="color:var(--gris)">Réponse sous 48 h ouvrées. Votre logo reste confidentiel et ne sert qu'à établir le devis.</p>
     </div>
 
-    <form id="quoteForm" action="https://formsubmit.co/tbsngroupe@gmail.com" method="POST" enctype="multipart/form-data" novalidate>
-      <!-- Réglages FormSubmit -->
-      <input type="hidden" name="_subject" value="Nouvelle demande de devis — Je brode pour vous">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="true">
-      <input type="hidden" name="_next" value="https://VOTRE-DOMAINE.fr/merci.html">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <form id="quoteForm" action="#" method="POST" enctype="multipart/form-data" novalidate>
+      <!-- Enregistrement sécurisé dans Supabase -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
       <!-- Récap simulateur -->
       <input type="hidden" name="Configuration" id="h-config">
       <input type="hidden" name="Estimation" id="h-price">
@@ -791,7 +788,7 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
         </div>
         <div>
           <label class="lbl" for="f-mail">E-mail <em>*</em></label>
-          <input id="f-mail" name="Email" type="email" required autocomplete="email">
+          <input id="f-mail" name="email" type="email" required autocomplete="email">
         </div>
         <div>
           <label class="lbl" for="f-tel">Téléphone</label>
@@ -808,7 +805,7 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
           <label class="drop" id="drop" for="f-file">
             <strong>Déposez votre fichier ici ou cliquez pour le choisir</strong>
             <small>PDF vectoriel haute définition ou SVG · 10 Mo maximum · un SVG s'affiche aussitôt dans le simulateur</small>
-            <input id="f-file" name="Logo" type="file" accept=".pdf,.svg,application/pdf,image/svg+xml" required>
+            <input id="f-file" name="attachment" type="file" accept=".pdf,.svg,application/pdf,image/svg+xml" required>
           </label>
           <div class="filechip" id="chip">
             <span id="chipName"></span>
@@ -827,7 +824,7 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
 
         <div class="full">
           <button class="btn" type="submit" id="send">Envoyer la demande de devis</button>
-          <p class="err" id="formErr"></p>
+          <p class="err" id="formErr" role="status" aria-live="polite"></p>
         </div>
       </div>
     </form>
@@ -863,7 +860,12 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+/* Paramètres publics disponibles dans Supabase > Project Settings > API. */
+const SUPABASE_URL = "COLLEZ_ICI_URL_SUPABASE";
+const SUPABASE_PUBLISHABLE_KEY = "COLLEZ_ICI_CLE_PUBLIQUE_SUPABASE";
+
 /* ====================================================================
    1. CATALOGUE — Sélection gamme courte Liquière Hygiène
    pv = prix de vente textile HT par pièce, dans l'ordre [50, 100, 200].
@@ -1369,15 +1371,80 @@ drop.addEventListener("drop", e=>{
   if(f){ const dt = new DataTransfer(); dt.items.add(f); fileInput.files = dt.files; handleFile(f); }
 });
 
-/* ============ ENVOI ============ */
-el("quoteForm").addEventListener("submit", e=>{
-  const err = el("formErr"); err.classList.remove("on");
+/* ============ ENREGISTREMENT SUPABASE ============ */
+el("quoteForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  const err = el("formErr"), send = el("send");
+  err.classList.remove("on","ok");
   const f = e.currentTarget;
   if(!f.checkValidity()){
-    e.preventDefault();
     err.textContent = "Il manque des informations. Vérifiez les champs marqués d'une étoile et le fichier logo.";
     err.classList.add("on");
     const bad = f.querySelector(":invalid"); if(bad) bad.focus();
+    return;
+  }
+  if(!SUPABASE_URL.startsWith("https://") || SUPABASE_URL.includes("COLLEZ_ICI") || SUPABASE_PUBLISHABLE_KEY.includes("COLLEZ_ICI")){
+    err.textContent = "Le formulaire doit encore être relié au projet Supabase.";
+    err.classList.add("on");
+    return;
+  }
+  const initialLabel=send.textContent;
+  send.disabled=true;
+  send.textContent="Envoi en cours…";
+  try{
+    const logo=fileInput.files[0];
+    const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{
+      auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}
+    });
+    let {data:sessionData,error:sessionError}=await client.auth.getSession();
+    if(sessionError) throw sessionError;
+    let user=sessionData.session && sessionData.session.user;
+    if(!user){
+      const {data:anonymousData,error:anonymousError}=await client.auth.signInAnonymously();
+      if(anonymousError) throw anonymousError;
+      user=anonymousData.user;
+    }
+    if(!user) throw new Error("Session anonyme indisponible");
+
+    const extension=logo.name.toLowerCase().endsWith(".svg") ? "svg" : "pdf";
+    const logoPath=`${user.id}/${crypto.randomUUID()}.${extension}`;
+    const {error:uploadError}=await client.storage
+      .from("devis-logos")
+      .upload(logoPath,logo,{contentType:logo.type || (extension==="svg" ? "image/svg+xml" : "application/pdf"),upsert:false});
+    if(uploadError) throw uploadError;
+
+    const values=new FormData(f);
+    const record={
+      user_id:user.id,
+      nom:String(values.get("Nom") || "").trim(),
+      societe:String(values.get("Societe") || "").trim(),
+      email:String(values.get("email") || "").trim(),
+      telephone:String(values.get("Telephone") || "").trim() || null,
+      indications:String(values.get("Indications") || "").trim(),
+      configuration:String(values.get("Configuration") || "").trim(),
+      estimation:String(values.get("Estimation") || "").trim(),
+      logo_path:logoPath,
+      logo_name:logo.name,
+      logo_type:logo.type || null,
+      logo_size:logo.size,
+      source_url:location.href.split("#")[0]
+    };
+    const {error:insertError}=await client.from("demandes_devis").insert(record);
+    if(insertError){
+      await client.storage.from("devis-logos").remove([logoPath]);
+      throw insertError;
+    }
+    err.textContent="Votre demande et votre logo ont bien été enregistrés. Nous vous répondrons sous 48 h ouvrées.";
+    err.classList.add("ok");
+    f.reset();
+    reset();
+  }catch(error){
+    console.error("Enregistrement du devis impossible",error);
+    err.textContent="L'enregistrement n'a pas abouti. Vérifiez votre connexion puis réessayez.";
+    err.classList.add("on");
+  }finally{
+    send.disabled=false;
+    send.textContent=initialLabel;
   }
 });
 el("toDevis").addEventListener("click", ()=>setTimeout(()=>el("f-nom").focus(),450));
