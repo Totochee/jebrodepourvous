@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --anthracite:#2B2F33;
@@ -362,6 +363,222 @@ footer a{color:#A9BBB3}
   .panel,.recap{padding:20px}.opts.two{grid-template-columns:1fr}.foot{grid-template-columns:1fr;gap:28px}
 }
 </style>
+<style>
+/* Direction 2 — éditoriale, vivante et orientée conversion */
+:root{
+  --anthracite:#142821;--ardoise:#426158;--orange:#F0643B;--encre:#15231F;
+  --gris:#66756F;--trait:#DCE3DC;--papier:#F6F1E7;--blanc:#fff;--menthe:#DDEBE3;
+  --creme:#FFF9EF;--radius:18px;--ombre:0 24px 70px rgba(20,40,33,.13)
+}
+body{font-family:"Manrope","Inter",sans-serif;background:var(--papier);overflow-x:hidden}
+h1,h2,h3,.dsp{font-family:"Fraunces","Barlow Condensed",serif;text-transform:none;letter-spacing:-.035em}
+.eyebrow{font-family:"Manrope",sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.15em}
+.btn{font-family:"Manrope",sans-serif}
+
+header{background:rgba(20,40,33,.94)}
+.bar{height:76px}
+.logo b{font-family:"Manrope",sans-serif;font-weight:800;letter-spacing:-.04em}
+.logo span{color:#FFB08F}
+#burger{position:relative;z-index:70;align-items:center;justify-content:center;padding:0;line-height:1}
+
+.hero{padding:72px 0 86px;background:#142821;min-height:calc(100vh - 76px);display:flex;align-items:center}
+.hero::before{opacity:.12;background-size:58px 58px;mask-image:linear-gradient(90deg,transparent 5%,#000 75%)}
+.hero-grid{grid-template-columns:minmax(0,.9fr) minmax(440px,1.1fr);gap:68px}
+.hero h1{font-size:clamp(3.5rem,6.6vw,6.65rem);line-height:.89;max-width:9.5ch}
+.hero h1 span{color:#FF9978;font-style:normal}
+.hero p.lead{font-size:1.08rem;line-height:1.75;max-width:53ch;color:#CAD8D2}
+.hero-art{position:relative;aspect-ratio:1.04/1;overflow:hidden;padding:0;border-radius:42% 58% 45% 55% / 43% 40% 60% 57%;transform:none;background:#203B32;border:8px solid rgba(255,255,255,.08);box-shadow:0 35px 100px rgba(0,0,0,.38)}
+.hero-art::after{content:"Atelier de Saint-Affrique";position:absolute;right:24px;bottom:24px;padding:10px 15px;border-radius:999px;background:rgba(255,249,239,.94);color:var(--anthracite);font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 8px 25px rgba(0,0,0,.2)}
+.hero-art img{width:100%;height:100%;object-fit:cover;object-position:61% center;display:block;filter:saturate(.9) contrast(1.03)}
+.hero-art .hero-thread{position:absolute;width:130px;height:130px;border:2px dashed #FF9978;border-radius:50%;left:-22px;top:18px;animation:spinThread 28s linear infinite;pointer-events:none}
+@keyframes spinThread{to{transform:rotate(360deg)}}
+.stitch-box{max-width:570px;margin-top:34px;padding:0;border:0;background:transparent;backdrop-filter:none}
+.stitch-box .k{display:none}
+.stitch-box ul{list-style:none;padding:0;margin:0;gap:10px;display:flex}
+.stitch-box li{display:flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.06);font-size:.75rem;color:#E4ECE8;white-space:nowrap}
+.stitch-box li::before{content:"✓";display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:var(--orange);color:#fff;font-size:.65rem;font-weight:800}
+
+.trust-strip{background:var(--creme);border-bottom:1px solid rgba(20,40,33,.08)}
+.trust-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;align-items:stretch}
+.trust-title,.trust-item{padding:24px 28px;border-right:1px solid rgba(20,40,33,.09)}
+.trust-title{padding-left:0;font-family:"Fraunces",serif;font-size:1.18rem;font-weight:700;line-height:1.2;color:var(--anthracite)}
+.trust-item{display:flex;align-items:center;gap:11px;font-size:.8rem;font-weight:700;color:#456057}
+.trust-item i{display:grid;place-items:center;flex:none;width:31px;height:31px;border-radius:10px;background:#E4EDE7;color:var(--anthracite);font-style:normal}
+
+section{padding:112px 0}
+.sec-head{margin-bottom:54px}.sec-head h2{font-size:clamp(2.7rem,5vw,4.7rem)}
+#prestations{position:relative;background:var(--papier)}
+#prestations::after{content:"";position:absolute;width:280px;height:280px;border:1px dashed rgba(240,100,59,.35);border-radius:50%;right:-150px;top:70px;pointer-events:none}
+.cards{gap:24px}.card{border-radius:28px;padding:34px;min-height:250px;display:flex;flex-direction:column;justify-content:flex-end;background:#FFFCF7;box-shadow:0 14px 45px rgba(20,40,33,.07)}
+.card::before{height:100%;width:6px;background:#2E6655}.card.rouge::before{background:var(--orange)}
+.card h3{font-size:1.75rem}.card p{line-height:1.75}
+.card:nth-child(2){transform:translateY(26px);background:var(--anthracite)}
+.card:nth-child(2) h3{color:#fff}.card:nth-child(2) p{color:#C5D4CE}.card:nth-child(2):hover{transform:translateY(20px)}
+
+#simulateur{background:#E8EFEA}
+#simulateur .sec-head{display:grid;grid-template-columns:.75fr 1fr;max-width:none;align-items:end;gap:50px}
+#simulateur .sec-head .eyebrow,#simulateur .sec-head h2{grid-column:1}
+#simulateur .sec-head p:last-child{grid-column:2;grid-row:1/3;margin:0}
+.panel,.stage{background:#fff}.panel{box-shadow:0 18px 50px rgba(20,40,33,.08)}
+.recap{background:linear-gradient(155deg,#1D3B32,#10241E)}
+
+#tarifs{background:#FFFDF8}
+#devis{background:var(--anthracite);color:#fff}
+#devis .sec-head p:not(.eyebrow){color:#B9CBC4!important}
+#devis .sec-head h2{color:#fff}
+#devis form{color:var(--encre);background:#FFFDF9;border:0;box-shadow:0 30px 90px rgba(0,0,0,.25)}
+footer{background:#0C1B17}
+
+@media(max-width:1000px){
+  header nav{display:none!important;position:absolute;z-index:60;left:0;right:0;top:100%;height:calc(100dvh - 76px);padding:36px 24px 28px;background:#142821;backdrop-filter:none;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;overflow-y:auto}
+  header nav.open{display:flex!important}
+  header nav a{display:block;margin:0;padding:16px 2px;border:0;border-bottom:1px solid rgba(255,255,255,.1);border-radius:0;color:#fff;font-family:"Fraunces",serif;font-size:clamp(1.8rem,8vw,2.7rem);font-weight:600}
+  header nav a:hover{background:none;color:#FF9978}
+  header nav::before{content:"Navigation";display:block;margin-bottom:10px;color:#829A91;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  header nav::after{content:"Broderie & transfert • Saint-Affrique";margin-top:auto;padding-top:28px;color:#829A91;font-size:.72rem;text-align:center}
+  body.menu-open{overflow:hidden}
+  #burger{display:flex!important}
+  .hero{min-height:auto}.hero-grid{grid-template-columns:1fr;gap:48px}.hero h1{max-width:10ch}.hero-art{max-width:650px;width:100%;aspect-ratio:1.35/1;border-radius:30px}
+  .stitch-box ul{flex-wrap:wrap}.trust-grid{grid-template-columns:1fr 1fr}.trust-title{grid-column:1/-1;padding:20px 0;border-right:0;border-bottom:1px solid rgba(20,40,33,.09)}
+  .trust-item{padding:18px 0;border-right:0}.card:nth-child(2){transform:none}.card:nth-child(2):hover{transform:translateY(-5px)}
+  #simulateur .sec-head{display:block}#simulateur .sec-head p:last-child{margin-top:18px}
+}
+@media(max-width:620px){
+  .bar{height:68px}header nav{top:100%;height:calc(100dvh - 68px)}
+  .hero{padding:52px 0 66px}.hero h1{font-size:clamp(3rem,15.5vw,4.5rem)}.hero p.lead{line-height:1.65}
+  .hero-art{aspect-ratio:.92/1;border-radius:24px;border-width:5px}.hero-art::after{right:13px;bottom:13px;font-size:.62rem}.hero-art .hero-thread{width:90px;height:90px}
+  .stitch-box ul{display:grid;gap:7px}.stitch-box li{width:max-content;max-width:100%;white-space:normal}
+  .trust-grid{display:block}.trust-title{padding:18px 0}.trust-item{border-bottom:1px solid rgba(20,40,33,.08)}
+  section{padding:76px 0}.sec-head h2{font-size:clamp(2.45rem,13vw,3.5rem)}.card{min-height:auto;padding:28px}
+}
+</style>
+<style>
+/* Direction 3 — Liquière Hygiène / dark-tech premium */
+:root{
+  --anthracite:#222427;--ardoise:#4B4F54;--orange:#FF6B00;--encre:#1C1E21;
+  --gris:#71757A;--trait:#D9DCE0;--papier:#F2F3F4;--blanc:#FFFFFF;
+  --creme:#F8F8F7;--radius:10px;--ombre:0 30px 80px rgba(10,11,12,.16)
+}
+html{background:#111214}
+body{font-family:"Manrope","Inter",sans-serif;background:#F2F3F4;color:var(--encre)}
+h1,h2,h3,.dsp{font-family:"Manrope","Inter",sans-serif;font-weight:800;letter-spacing:-.065em}
+.wrap{max-width:1320px;padding-inline:38px}
+.eyebrow{gap:12px;color:var(--orange);letter-spacing:.18em;font-size:.67rem}
+.eyebrow::before{width:36px;height:2px}
+
+header{background:rgba(24,25,27,.82);border-color:rgba(255,255,255,.08);backdrop-filter:blur(22px) saturate(140%)}
+header::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:var(--orange);transform:scaleX(var(--scroll,0));transform-origin:left;transition:transform .08s linear}
+.bar{height:74px}.logo b{font-size:1.12rem;letter-spacing:-.045em;text-transform:uppercase}.logo span{color:var(--orange)}
+.logo .mark{border-radius:12px;box-shadow:0 0 32px rgba(255,107,0,.28)}
+nav a{position:relative;color:#C9CBCE;font-size:.77rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:5px;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .25s}
+nav a:hover::after{transform:scaleX(1)}
+.btn{position:relative;isolation:isolate;overflow:hidden;border-radius:7px;padding:16px 24px;text-transform:uppercase;letter-spacing:.07em;font-size:.76rem;background:var(--orange);box-shadow:0 12px 34px rgba(255,107,0,.24)}
+.btn::before{content:"";position:absolute;z-index:-1;top:-100%;left:-55%;width:35%;height:300%;background:rgba(255,255,255,.35);transform:rotate(22deg);transition:left .55s ease}
+.btn:hover::before{left:125%}.btn:hover{background:#FF7A1A;transform:translateY(-3px)}
+.btn.ghost{border:1px solid rgba(255,255,255,.25);border-radius:7px;background:transparent;color:#fff}
+
+.hero{min-height:calc(100svh - 74px);padding:70px 0 54px;background:#17181A;overflow:hidden}
+.hero::before{opacity:.24;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(90deg,#000,transparent 80%)}
+.hero::after{height:100%;width:42%;inset:0 0 0 auto;background:linear-gradient(115deg,transparent,rgba(255,107,0,.11));clip-path:polygon(38% 0,100% 0,100% 100%,0 100%)}
+.hero-grid{grid-template-columns:minmax(0,.92fr) minmax(460px,1.08fr);gap:80px}
+.hero-grid>div:first-child{position:relative;z-index:3}
+.hero h1{font-size:clamp(4.2rem,7.6vw,7.8rem);line-height:.82;max-width:8.5ch;text-transform:uppercase;color:#F7F7F5}
+.hero h1 span{display:block;color:var(--orange);font-style:normal;text-shadow:0 0 55px rgba(255,107,0,.18)}
+.hero p.lead{margin-top:30px;max-width:56ch;color:#AEB1B4;font-size:1rem;line-height:1.75}
+.hero-actions{margin-top:32px}
+.hero-art{position:relative;aspect-ratio:.96/1;max-height:680px;border:0;border-radius:6px;padding:0;overflow:visible;background:#2D3034;box-shadow:0 50px 110px rgba(0,0,0,.48);transform:none}
+.hero-art::before{content:"";position:absolute;z-index:-1;inset:-18px 22px 22px -18px;border:1px solid rgba(255,107,0,.5);border-radius:6px;animation:borderDrift 5s ease-in-out infinite}
+.hero-art::after{content:"ATELIER  •  SAINT-AFFRIQUE";right:-22px;bottom:28px;border-radius:3px;padding:12px 17px;background:var(--orange);color:#fff;font-size:.65rem;letter-spacing:.16em}
+.hero-art img{border-radius:6px;object-position:63% center;filter:saturate(.72) contrast(1.12) brightness(.78)}
+.hero-art .hero-thread{width:170px;height:170px;left:-74px;top:auto;bottom:60px;border:1px solid rgba(255,107,0,.8);box-shadow:0 0 70px rgba(255,107,0,.15)}
+.hero-art .hero-thread::before,.hero-art .hero-thread::after{content:"";position:absolute;inset:17px;border:1px dashed rgba(255,107,0,.55);border-radius:50%}.hero-art .hero-thread::after{inset:45px;border-style:solid}
+.stitch-box{margin-top:32px}.stitch-box ul{gap:8px}.stitch-box li{border-radius:5px;border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#C7C9CC;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em}.stitch-box li::before{border-radius:3px;background:var(--orange)}
+@keyframes borderDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(9px,-7px)}}
+
+.trust-strip{background:#202225;border:0;color:#fff}.trust-grid{grid-template-columns:1.25fr repeat(3,1fr)}
+.trust-title,.trust-item{border-color:rgba(255,255,255,.08);padding-block:22px}.trust-title{font-family:"Manrope",sans-serif;text-transform:uppercase;letter-spacing:-.04em;color:#fff;font-size:1rem}.trust-item{color:#BFC2C5;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}.trust-item i{background:var(--orange);color:#fff;border-radius:4px}
+.brand-marquee{overflow:hidden;background:var(--orange);color:#17181A;border-block:1px solid rgba(0,0,0,.12)}
+.marquee-track{display:flex;width:max-content;animation:marquee 24s linear infinite}
+.marquee-track span{display:flex;align-items:center;gap:32px;padding:13px 18px;font-weight:800;font-size:.72rem;text-transform:uppercase;letter-spacing:.16em;white-space:nowrap}
+.marquee-track span::after{content:"✦";font-size:.9rem}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+section{padding:124px 0}.sec-head{margin-bottom:60px}.sec-head h2{font-size:clamp(3rem,5.7vw,5.5rem);line-height:.9;text-transform:uppercase;max-width:12ch}.sec-head p:not(.eyebrow){font-size:.98rem}
+#prestations{background:#F2F3F4}
+#prestations::before{content:"01";position:absolute;right:3vw;top:42px;font-size:clamp(7rem,17vw,15rem);font-weight:800;line-height:1;color:rgba(30,32,35,.035);letter-spacing:-.1em}
+#prestations::after{display:none}
+.cards{gap:1px;background:#CFD2D5;border:1px solid #CFD2D5;border-radius:8px;overflow:hidden}
+.card{min-height:330px;border:0;border-radius:0;padding:38px;background:#FAFAF9;box-shadow:none;justify-content:space-between;overflow:hidden}
+.card::before{width:100%;height:4px;background:#282B2F;transform:scaleX(0);transform-origin:left;transition:transform .4s}.card:hover::before{transform:scaleX(1)}.card.rouge::before{background:var(--orange)}
+.card::after{content:"↗";align-self:flex-end;order:-1;display:grid;place-items:center;width:42px;height:42px;border:1px solid #D3D5D7;border-radius:50%;font-size:1.1rem;transition:.3s}
+.card:hover::after{background:var(--orange);border-color:var(--orange);color:#fff;transform:rotate(45deg)}
+.card:nth-child(2){transform:none;background:#282A2D}.card:nth-child(2):hover{transform:none}.card h3{font-size:1.8rem;text-transform:uppercase}.card:nth-child(2) h3{color:#fff}
+
+#simulateur{position:relative;background:#1F2124;color:#fff}
+#simulateur::before{content:"02";position:absolute;right:3vw;top:28px;font-size:clamp(7rem,17vw,15rem);font-weight:800;color:rgba(255,255,255,.025);letter-spacing:-.1em}
+#simulateur .sec-head p:last-child{color:#AEB1B4!important}
+.sim{gap:14px}.panel,.stage,.recap{border-radius:7px;border-color:rgba(255,255,255,.1)}
+.panel{background:#2A2C30;color:#fff;box-shadow:none}.field>label,.legend{color:#AEB2B6}.opt span,select,.qty button,.qty input{border-radius:4px;border-color:#494D52;background:#34373B;color:#F3F3F2}.opt span:hover{border-color:var(--orange)}.opt input:checked+span,.opt input[type=checkbox]:checked+span{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:none}
+.stage{background:radial-gradient(circle at 50% 40%,#3B3E43,#292B2F);box-shadow:none}.recap{background:#111214;border-top:3px solid var(--orange);box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.viewsw,.stage .view-tag{border-radius:4px}.viewsw button{border-radius:3px}
+
+#tarifs{background:#F6F6F5}#tarifs .card{min-height:270px}
+#devis{position:relative;background:#E9EAEC;color:var(--encre)}
+#devis::before{content:"03";position:absolute;right:3vw;top:32px;font-size:clamp(7rem,17vw,15rem);font-weight:800;color:rgba(30,32,35,.035);letter-spacing:-.1em}
+#devis .sec-head h2{color:var(--encre)}#devis .sec-head p:not(.eyebrow){color:var(--gris)!important}
+#devis form{border-radius:8px;background:#FAFAF9;box-shadow:0 25px 80px rgba(20,21,23,.12)}
+input[type=text],input[type=email],input[type=tel],textarea{border-radius:5px}.drop,.filechip,.recap-form{border-radius:5px}
+footer{background:#141517}
+
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.65,.2,1),transform .8s cubic-bezier(.2,.65,.2,1)}
+.reveal.in-view{opacity:1;transform:none}.cards .reveal:nth-child(2){transition-delay:.1s}.cards .reveal:nth-child(3){transition-delay:.2s}
+body:not(.is-ready) .hero-grid>div:first-child{opacity:0;transform:translateY(26px)}
+body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
+.hero-grid>div:first-child,.hero-art{transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+
+@media(max-width:1000px){
+  .wrap{padding-inline:26px}.hero{min-height:auto;padding:70px 0 84px}.hero-grid{grid-template-columns:1fr;gap:70px}.hero h1{font-size:clamp(4rem,13vw,7rem)}
+  .hero-art{width:min(100%,680px);aspect-ratio:1.28/1}.hero-art .hero-thread{left:-30px}.trust-grid{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:1fr}.card{min-height:250px}
+  header nav{background:#1A1B1D}header nav a{font-family:"Manrope",sans-serif;text-transform:uppercase;letter-spacing:-.04em}
+}
+@media(max-width:620px){
+  .wrap{padding-inline:18px}.hero{padding:50px 0 68px}.hero h1{font-size:clamp(3.35rem,17vw,5.3rem);line-height:.84}.hero p.lead{margin-top:24px}
+  .hero-art{aspect-ratio:.86/1}.hero-art::before{inset:-9px 10px 10px -9px}.hero-art::after{right:-5px}.hero-art .hero-thread{width:110px;height:110px;left:-18px}
+  .trust-grid{display:block}.trust-title{font-size:.9rem}.trust-item{padding:15px 0}
+  section{padding:84px 0}.sec-head h2{font-size:clamp(2.7rem,14vw,4rem)}
+  .card{min-height:230px;padding:28px}.cards{border-radius:5px}.stitch-box li{font-size:.62rem}
+}
+@media(prefers-reduced-motion:reduce){.marquee-track,.hero-thread,.hero-art::before{animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+<style>
+/* Ajustements demandés — hero sans photo et dépôt de fichier robuste */
+.hero{min-height:calc(100svh - 74px);display:flex;align-items:center;background:
+  radial-gradient(circle at 82% 38%,rgba(255,107,0,.14),transparent 22%),
+  radial-gradient(circle at 74% 35%,rgba(255,255,255,.035),transparent 38%),
+  #17181A}
+.hero-grid{position:relative;display:block;width:100%}
+.hero-grid::after{content:"";position:absolute;z-index:0;right:3%;top:50%;width:min(32vw,450px);aspect-ratio:1;border:1px solid rgba(255,107,0,.6);border-radius:50%;transform:translateY(-50%);box-shadow:0 0 0 42px rgba(255,107,0,.07),0 0 0 84px rgba(255,107,0,.035);animation:heroPulse 5s ease-in-out infinite;pointer-events:none}
+.hero-grid>div:first-child{position:relative;z-index:2;max-width:1080px}
+.hero h1{max-width:10.8ch;font-size:clamp(4.4rem,9vw,9.2rem)}
+.hero p.lead{max-width:62ch}
+.hero-actions{position:relative;z-index:3}
+@keyframes heroPulse{0%,100%{transform:translateY(-50%) scale(.96);opacity:.65}50%{transform:translateY(-50%) scale(1.03);opacity:1}}
+
+.drop{display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;min-height:190px;padding:34px 24px!important;overflow:hidden;border:2px dashed #B9BDC1!important;border-radius:7px!important;background:#F3F4F4!important;text-align:center;line-height:1.45;cursor:pointer}
+.drop::before{content:"↑";display:grid;place-items:center;width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:#25272A;color:#fff;font-size:1.35rem;font-weight:700;transition:transform .25s,background .25s}
+.drop:hover,.drop.over{border-color:var(--orange)!important;background:#FFF8F2!important}
+.drop:hover::before,.drop.over::before{background:var(--orange);transform:translateY(-4px)}
+.drop strong,.drop small{display:block;width:100%;max-width:680px;white-space:normal;overflow-wrap:anywhere}
+.drop strong{font-size:.95rem;color:#25272A}
+.drop small{font-size:.78rem;line-height:1.65;color:#71757A}
+.drop input{display:none!important}
+
+@media(max-width:1000px){.hero-grid::after{right:-8%;width:min(45vw,390px);opacity:.55}.hero h1{font-size:clamp(4rem,13vw,7.2rem)}}
+@media(max-width:620px){.hero{min-height:auto}.hero-grid::after{right:-30%;top:34%;width:78vw}.hero h1{font-size:clamp(3.4rem,17vw,5.4rem)}.drop{min-height:170px;padding:28px 18px!important}}
+@media(prefers-reduced-motion:reduce){.hero-grid::after{animation:none!important}}
+</style>
 </head>
 <body>
 
@@ -381,7 +598,7 @@ footer a{color:#A9BBB3}
       <a href="#devis">Devis</a>
     </nav>
     <a class="btn nav-cta" href="#devis">Demander un devis</a>
-    <button id="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <button id="burger" aria-label="Ouvrir le menu" aria-controls="nav" aria-expanded="false">☰</button>
   </div>
 </header>
 
@@ -392,32 +609,28 @@ footer a{color:#A9BBB3}
   <div class="wrap hero-grid">
     <div>
       <p class="eyebrow">Broderie &amp; transfert — Saint-Affrique, Aveyron</p>
-      <h1>Votre logo<span>sur vos vêtements</span></h1>
-      <p class="lead">Vêtements de travail, polos d'équipe, softshells de chantier, casquettes. Vous choisissez l'article et l'emplacement, vous voyez le rendu et le prix tout de suite, vous recevez un devis chiffré.</p>
+      <h1>Votre équipe, <span>brodée pour durer.</span></h1>
+      <p class="lead">Transformez vos vêtements professionnels en une vraie signature. Un marquage soigné, réalisé dans notre atelier, avec un aperçu et un prix immédiats.</p>
       <div class="hero-actions">
-        <a class="btn" href="#simulateur">Ouvrir le simulateur</a>
-        <a class="btn ghost" href="#devis">Demander un devis</a>
+        <a class="btn" href="#simulateur">Créer mon aperçu</a>
+        <a class="btn ghost" href="#prestations">Découvrir le savoir-faire</a>
       </div>
       <div class="stitch-box">
-        <div class="k">Ce qu'il faut pour démarrer</div>
+        <div class="k">Les essentiels</div>
         <ul>
-          <li>Votre logo en PDF vectoriel ou SVG</li>
-          <li>La quantité et la répartition des tailles</li>
-          <li>Les emplacements de marquage</li>
+          <li>Aperçu instantané</li>
+          <li>Conseil personnalisé</li>
+          <li>Fabrication locale</li>
         </ul>
       </div>
     </div>
-    <div class="hero-art">
-      <svg viewBox="0 0 400 300" role="img" aria-label="Aperçu d'un marquage brodé">
-        <rect width="400" height="300" fill="#22262A" rx="4"/>
-        <g stroke="#FFB259" stroke-width="1" opacity=".35">
-          <path d="M0 60H400M0 120H400M0 180H400M0 240H400"/>
-        </g>
-        <circle cx="200" cy="150" r="72" fill="none" stroke="#F07E00" stroke-width="10" stroke-dasharray="9 6" stroke-linecap="round"/>
-        <path d="M160 168 C182 108, 206 196, 244 118" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 7"/>
-        <text x="200" y="272" fill="#FFB259" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="3" text-anchor="middle">POINT SATIN · FIL POLYESTER · 12 COULEURS</text>
-      </svg>
-    </div>
+  </div>
+</div>
+
+<div class="brand-marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Broderie professionnelle</span><span>Textile personnalisé</span><span>Production locale</span><span>Devis instantané</span>
+    <span>Broderie professionnelle</span><span>Textile personnalisé</span><span>Production locale</span><span>Devis instantané</span>
   </div>
 </div>
 
@@ -1094,7 +1307,34 @@ el("qty").addEventListener("input", e=>{
 el("qty").addEventListener("blur", e=>{ e.target.value = state.qty; });
 el("minus").onclick = ()=>{ state.qty=Math.max(1,state.qty-1); el("qty").value=state.qty; renderPrice(); };
 el("plus").onclick  = ()=>{ state.qty=Math.min(5000,state.qty+1); el("qty").value=state.qty; renderPrice(); };
-el("burger").onclick = e=>{ const n=el("nav"); n.classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", n.classList.contains("open")); };
+function setMenu(open){
+  const n=el("nav"), b=el("burger");
+  n.classList.toggle("open",open);
+  document.body.classList.toggle("menu-open",open);
+  b.setAttribute("aria-expanded",String(open));
+  b.setAttribute("aria-label",open ? "Fermer le menu" : "Ouvrir le menu");
+  b.textContent=open ? "×" : "☰";
+}
+el("burger").onclick=()=>setMenu(!el("nav").classList.contains("open"));
+el("nav").querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setMenu(false)));
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") setMenu(false); });
+window.addEventListener("resize",()=>{ if(window.innerWidth>1000) setMenu(false); });
+
+/* ============ ANIMATIONS D'INTERFACE ============ */
+document.querySelectorAll("section .sec-head, .cards .card, .sim > *, #devis form").forEach(node=>node.classList.add("reveal"));
+if("IntersectionObserver" in window){
+  const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add("in-view"); revealObserver.unobserve(entry.target); } });
+  },{threshold:.12,rootMargin:"0px 0px -40px"});
+  document.querySelectorAll(".reveal").forEach(node=>revealObserver.observe(node));
+}else{ document.querySelectorAll(".reveal").forEach(node=>node.classList.add("in-view")); }
+requestAnimationFrame(()=>document.body.classList.add("is-ready"));
+function updateScrollProgress(){
+  const max=document.documentElement.scrollHeight-innerHeight;
+  document.documentElement.style.setProperty("--scroll",max>0 ? Math.min(scrollY/max,1) : 0);
+}
+addEventListener("scroll",updateScrollProgress,{passive:true});
+updateScrollProgress();
 el("year").textContent = new Date().getFullYear();
 
 /* ============ FICHIER LOGO ============ */
