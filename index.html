@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Je Brode Pour Vous — Broderie & transfert sur vêtements professionnels</title>
+<meta name="description" content="Personnalisation de vêtements professionnels : broderie et transfert sur t-shirt, polo, pull, veste et pantalon. Simulateur en temps réel et demande de devis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --anthracite:#2B2F33;
+  --ardoise:#4A525A;
+  --orange:#F07E00;
+  --encre:#1E2225;
+  --gris:#6B7278;
+  --trait:#DDE0E3;
+  --papier:#F4F5F6;
+  --blanc:#FFFFFF;
+  --radius:4px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--papier);color:var(--encre);
+  font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.dsp{font-family:"Barlow Condensed","Inter",sans-serif;font-weight:700;line-height:1.05;text-transform:uppercase;letter-spacing:.01em;margin:0}
+h1{font-size:clamp(2.4rem,6vw,4.4rem)}
+h2{font-size:clamp(1.7rem,3.4vw,2.6rem)}
+h3{font-size:1.15rem;letter-spacing:.04em}
+p{margin:0 0 1rem}
+a{color:var(--anthracite);text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin:0 0 .6rem}
+
+/* ---------- en-tête ---------- */
+header{position:sticky;top:0;z-index:50;background:var(--anthracite);color:#fff}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:20px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff}
+.logo .mark{width:30px;height:30px;flex:none}
+.logo b{font-family:"Barlow Condensed",sans-serif;font-size:1.35rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.logo span{color:#FFB259;font-weight:500}
+nav a{color:#C7CDD3;font-size:.9rem;font-weight:500;margin-left:22px}
+nav a:hover{color:#fff}
+.btn{
+  display:inline-block;border:0;cursor:pointer;font:600 .92rem/1 "Inter",sans-serif;
+  padding:14px 22px;border-radius:var(--radius);background:var(--orange);color:#fff;transition:.15s;
+}
+.btn:hover{background:#C96500}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.5);color:#fff}
+.btn.ghost:hover{background:rgba(255,255,255,.12)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.nav-cta{padding:10px 16px}
+#burger{display:none;background:none;border:0;color:#fff;font-size:1.5rem;cursor:pointer}
+
+/* ---------- hero ---------- */
+.hero{background:var(--anthracite);color:#fff;padding:64px 0 88px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:linear-gradient(90deg,var(--orange) 0 33%,#fff 33% 66%,var(--ardoise) 66% 100%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero h1 span{color:#FFB259;display:block}
+.hero p.lead{color:#B9BFC5;font-size:1.08rem;max-width:46ch}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.stitch-box{border:2px dashed rgba(240,126,0,.45);border-radius:6px;padding:18px 20px;margin-top:34px;max-width:430px}
+.stitch-box .k{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.14em;color:#FFB259;text-transform:uppercase}
+.stitch-box ul{margin:.5rem 0 0;padding-left:18px;color:#C7CDD3;font-size:.9rem}
+.hero-art{background:rgba(255,255,255,.06);border-radius:8px;padding:16px}
+.hero-art svg{width:100%;height:auto;display:block}
+
+/* ---------- sections ---------- */
+section{padding:76px 0}
+.sec-head{max-width:60ch;margin-bottom:36px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid var(--trait);border-radius:var(--radius);padding:26px;border-top:3px solid var(--anthracite)}
+.card.rouge{border-top-color:var(--orange)}
+.card h3{margin-bottom:8px}
+.card p{color:var(--gris);font-size:.94rem;margin:0}
+
+/* ---------- simulateur ---------- */
+#simulateur{background:#fff;border-top:1px solid var(--trait);border-bottom:1px solid var(--trait)}
+.sim{display:grid;grid-template-columns:300px 1fr 268px;gap:24px;align-items:start}
+.panel{background:var(--papier);border:1px solid var(--trait);border-radius:var(--radius);padding:20px}
+.field{margin-bottom:20px}
+.field:last-child{margin-bottom:0}
+.field > label,.legend{display:block;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);margin-bottom:8px}
+.opts{display:grid;gap:6px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt input{position:absolute;opacity:0;width:0;height:0}
+.opt{position:relative;display:block}
+.opt span{
+  display:block;padding:10px 12px;background:#fff;border:1px solid var(--trait);border-radius:var(--radius);
+  font-size:.88rem;font-weight:500;cursor:pointer;transition:.12s;text-align:left;
+}
+.opt span small{display:block;color:var(--gris);font-weight:400;font-size:.74rem}
+.opt input:checked + span{border-color:var(--anthracite);background:var(--anthracite);color:#fff;box-shadow:inset 0 0 0 1px var(--anthracite)}
+.opt input:checked + span small{color:#E8D3BC}
+.opt input:focus-visible + span{outline:2px solid var(--orange);outline-offset:2px}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw input{position:absolute;opacity:0;width:0;height:0}
+.sw i{display:block;width:30px;height:30px;border-radius:50%;border:1px solid var(--trait);cursor:pointer}
+.sw input:checked + i{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--anthracite)}
+.qty{display:flex;align-items:center;gap:0}
+.qty button{width:40px;height:42px;border:1px solid var(--trait);background:#fff;font-size:1.1rem;cursor:pointer}
+.qty input{width:100%;height:42px;border:1px solid var(--trait);border-left:0;border-right:0;text-align:center;font:600 1rem "Inter";}
+.qty button:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.qty button:last-child{border-radius:0 var(--radius) var(--radius) 0}
+
+.stage{background:var(--papier);border:1px solid var(--trait);border-radius:var(--radius);padding:8px;position:relative}
+.stage svg{width:100%;height:auto;display:block;max-height:560px}
+.stage .view-tag{
+  position:absolute;top:16px;left:16px;font-family:"IBM Plex Mono",monospace;font-size:.66rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gris);background:#fff;border:1px solid var(--trait);
+  padding:4px 8px;border-radius:2px;
+}
+.stage .zoom-tag{position:absolute;bottom:16px;right:16px;font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--gris)}
+
+.recap{background:var(--anthracite);color:#fff;border-radius:var(--radius);padding:22px;position:sticky;top:86px}
+.recap h3{color:#fff;margin-bottom:14px;font-size:1rem}
+.line{display:flex;justify-content:space-between;gap:10px;font-size:.86rem;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.14);color:#B9BFC5}
+.line b{color:#fff;font-weight:600;text-align:right}
+.total{margin-top:16px;padding-top:14px;border-top:2px solid var(--orange)}
+.total .big{font-family:"Barlow Condensed",sans-serif;font-size:2.6rem;font-weight:700;line-height:1;color:#fff}
+.total .u{font-size:.8rem;color:#FFB259}
+.recap .note{font-size:.72rem;color:#FFB259;margin:14px 0 0;line-height:1.45}
+.recap .btn{width:100%;text-align:center;margin-top:16px}
+
+/* ---------- formulaire ---------- */
+#devis{background:var(--papier)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-grid .full{grid-column:1/-1}
+label.lbl{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px}
+label.lbl em{color:var(--orange);font-style:normal}
+input[type=text],input[type=email],input[type=tel],textarea{
+  width:100%;padding:12px 14px;border:1px solid var(--trait);border-radius:var(--radius);
+  font:400 .95rem "Inter",sans-serif;background:#fff;color:var(--encre);
+}
+textarea{min-height:130px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--ardoise);outline-offset:0;border-color:var(--ardoise)}
+.drop{
+  border:2px dashed var(--trait);border-radius:var(--radius);background:#fff;padding:28px;text-align:center;cursor:pointer;transition:.15s;
+}
+.drop:hover,.drop.over{border-color:var(--anthracite);background:#FDF3E8}
+.drop strong{display:block;font-size:.95rem}
+.drop small{color:var(--gris);font-size:.8rem}
+.drop input{display:none}
+.filechip{display:none;align-items:center;gap:10px;background:#fff;border:1px solid var(--anthracite);border-radius:var(--radius);padding:10px 12px;margin-top:10px;font-size:.85rem}
+.filechip.on{display:flex}
+.filechip .x{margin-left:auto;border:0;background:none;cursor:pointer;color:var(--orange);font-size:1.1rem}
+.err{color:var(--orange);font-size:.8rem;margin-top:8px;display:none}
+.err.on{display:block}
+.recap-form{background:#fff;border:1px solid var(--trait);border-left:3px solid var(--orange);border-radius:var(--radius);padding:16px;font-size:.85rem}
+.recap-form div{display:flex;justify-content:space-between;padding:4px 0;color:var(--gris)}
+.recap-form div b{color:var(--encre)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;color:var(--gris)}
+.consent input{margin-top:3px}
+
+footer{background:var(--encre);color:#949AA1;padding:52px 0 32px;font-size:.86rem}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+footer h3{color:#fff;font-size:.95rem;margin-bottom:10px}
+footer a{color:#949AA1}
+footer a:hover{color:#fff}
+.foot-bot{border-top:1px solid #343A40;margin-top:34px;padding-top:18px;font-size:.76rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:1000px){
+  .sim{grid-template-columns:1fr}
+  .recap{position:static}
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-art{max-width:380px}
+  .cards{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  nav{display:none;position:absolute;top:66px;left:0;right:0;background:var(--anthracite);padding:8px 24px 20px;border-top:1px solid rgba(255,255,255,.15)}
+  nav.open{display:block}
+  nav a{display:block;margin:0;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  #burger{display:block}
+  .nav-cta{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top">
+      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#F07E00"/>
+        <path d="M8 28 C16 8, 24 32, 32 12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 3.5"/>
+      </svg>
+      <b>Je brode <span>pour vous</span></b>
+    </a>
+    <nav id="nav">
+      <a href="#prestations">Prestations</a>
+      <a href="#simulateur">Simulateur</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#devis">Devis</a>
+    </nav>
+    <a class="btn nav-cta" href="#devis">Demander un devis</a>
+    <button id="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Broderie &amp; transfert — Saint-Affrique, Aveyron</p>
+      <h1>Votre logo<span>sur vos vêtements</span></h1>
+      <p class="lead">Vêtements de travail, polos d'équipe, vestes de chantier, tenues d'accueil. Vous choisissez le vêtement et l'emplacement, vous voyez le rendu tout de suite, vous recevez un devis chiffré.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#simulateur">Ouvrir le simulateur</a>
+        <a class="btn ghost" href="#devis">Demander un devis</a>
+      </div>
+      <div class="stitch-box">
+        <div class="k">Ce qu'il faut pour démarrer</div>
+        <ul>
+          <li>Votre logo en PDF vectoriel ou SVG</li>
+          <li>La quantité et les tailles souhaitées</li>
+          <li>Les emplacements de marquage</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 400 300" role="img" aria-label="Aperçu d'un marquage brodé">
+        <rect width="400" height="300" fill="#22262A" rx="4"/>
+        <g stroke="#FFB259" stroke-width="1" opacity=".35">
+          <path d="M0 60H400M0 120H400M0 180H400M0 240H400"/>
+        </g>
+        <circle cx="200" cy="150" r="72" fill="none" stroke="#F07E00" stroke-width="10" stroke-dasharray="9 6" stroke-linecap="round"/>
+        <path d="M160 168 C182 108, 206 196, 244 118" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-dasharray="10 7"/>
+        <text x="200" y="272" fill="#FFB259" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="3" text-anchor="middle">POINT SATIN · FIL POLYESTER · 12 COULEURS</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- PRESTATIONS -->
+<section id="prestations">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Prestations</p>
+      <h2>Deux techniques, deux usages</h2>
+      <p style="color:var(--gris)">Le choix dépend du vêtement, du nombre de couleurs de votre logo et de la quantité. En cas de doute, indiquez-le dans votre demande : nous vous conseillons.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Broderie</h3>
+        <p>Fil cousu dans la matière. Résistante au lavage industriel, rendu haut de gamme. Idéale sur polo, pull, veste et casquette. Une numérisation du logo est réalisée une fois pour toutes.</p>
+      </div>
+      <div class="card rouge">
+        <h3>Transfert</h3>
+        <p>Marquage pressé à chaud. Restitue les dégradés et les logos très détaillés, permet les grands formats dans le dos. Plus économique sur les petites séries et les t-shirts.</p>
+      </div>
+      <div class="card">
+        <h3>Fourniture du textile</h3>
+        <p>Nous marquons notre textile ou le vôtre. Les tarifs affichés dans le simulateur comprennent le vêtement ; si vous fournissez le vôtre, précisez-le dans votre demande.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULATEUR -->
+<section id="simulateur">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Simulateur</p>
+      <h2>Composez votre marquage</h2>
+      <p style="color:var(--gris)">Le rendu et le prix se mettent à jour à chaque choix. Déposez votre logo SVG plus bas : il apparaît directement sur le vêtement.</p>
+    </div>
+
+    <div class="sim">
+      <!-- colonne réglages -->
+      <div class="panel">
+        <div class="field">
+          <label>Vêtement</label>
+          <div class="opts two" id="g-garment"></div>
+        </div>
+        <div class="field">
+          <label>Couleur du vêtement</label>
+          <div class="swatches" id="g-color"></div>
+        </div>
+        <div class="field">
+          <label>Technique</label>
+          <div class="opts two" id="g-tech"></div>
+        </div>
+        <div class="field">
+          <label>Emplacement</label>
+          <div class="opts" id="g-pos"></div>
+        </div>
+        <div class="field">
+          <label>Taille du marquage</label>
+          <div class="opts" id="g-size"></div>
+        </div>
+        <div class="field">
+          <label for="qty">Quantité</label>
+          <div class="qty">
+            <button type="button" id="minus" aria-label="Retirer une pièce">−</button>
+            <input id="qty" type="number" min="1" max="5000" step="1" value="25" inputmode="numeric">
+            <button type="button" id="plus" aria-label="Ajouter une pièce">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- colonne aperçu -->
+      <div class="stage">
+        <span class="view-tag" id="viewTag">Vue de face</span>
+        <div id="canvas"></div>
+        <span class="zoom-tag" id="zoomTag"></span>
+      </div>
+
+      <!-- colonne prix -->
+      <div class="recap">
+        <h3>Estimation</h3>
+        <div class="line"><span>Vêtement</span><b id="r-garment">—</b></div>
+        <div class="line"><span>Marquage</span><b id="r-mark">—</b></div>
+        <div class="line"><span>Emplacement</span><b id="r-pos">—</b></div>
+        <div class="line"><span>Quantité</span><b id="r-qty">—</b></div>
+        <div class="line"><span>Prix unitaire HT</span><b id="r-unit">—</b></div>
+        <div class="line"><span id="r-setup-l">Frais de préparation</span><b id="r-setup">—</b></div>
+        <div class="total">
+          <div class="u">Total HT</div>
+          <div class="big" id="r-ht">—</div>
+          <div class="u" id="r-ttc">—</div>
+        </div>
+        <p class="note">Estimation indicative calculée sur nos grilles courantes. Le devis définitif tient compte du logo, du nombre de couleurs et des tailles.</p>
+        <a class="btn" href="#devis" id="toDevis">Demander ce devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section id="tarifs">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Tarifs</p>
+      <h2>Comment le prix se calcule</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Le vêtement</h3>
+        <p>T-shirt à partir de 7,90 € HT, polo 14,50 €, pull 23,00 €, pantalon 26,00 €, veste 38,00 €. Textile professionnel, tailles XS à 4XL.</p>
+      </div>
+      <div class="card rouge">
+        <h3>Le marquage</h3>
+        <p>Facturé par emplacement, selon la technique et la taille. La broderie coûte plus cher au petit format mais ne se dégrade pas ; le transfert devient intéressant sur les grands formats.</p>
+      </div>
+      <div class="card">
+        <h3>La quantité</h3>
+        <p>Dégressif dès 10 pièces, puis 25, 50 et 100. Les frais de préparation (numérisation broderie ou calage transfert) ne sont facturés qu'une seule fois par logo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVIS -->
+<section id="devis">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Devis</p>
+      <h2>Envoyez votre demande</h2>
+      <p style="color:var(--gris)">Réponse sous 48 h ouvrées. Votre logo reste confidentiel et ne sert qu'à établir le devis.</p>
+    </div>
+
+    <form id="quoteForm" action="https://formsubmit.co/VOTRE-ADRESSE@EXEMPLE.FR" method="POST" enctype="multipart/form-data" novalidate>
+      <!-- Réglages FormSubmit -->
+      <input type="hidden" name="_subject" value="Nouvelle demande de devis — Je brode pour vous">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_next" value="https://VOTRE-DOMAINE.fr/merci.html">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <!-- Récap simulateur -->
+      <input type="hidden" name="Configuration" id="h-config">
+      <input type="hidden" name="Estimation" id="h-price">
+
+      <div class="form-grid">
+        <div>
+          <label class="lbl" for="f-nom">Nom et prénom <em>*</em></label>
+          <input id="f-nom" name="Nom" type="text" required autocomplete="name">
+        </div>
+        <div>
+          <label class="lbl" for="f-soc">Société <em>*</em></label>
+          <input id="f-soc" name="Societe" type="text" required autocomplete="organization">
+        </div>
+        <div>
+          <label class="lbl" for="f-mail">E-mail <em>*</em></label>
+          <input id="f-mail" name="Email" type="email" required autocomplete="email">
+        </div>
+        <div>
+          <label class="lbl" for="f-tel">Téléphone</label>
+          <input id="f-tel" name="Telephone" type="tel" autocomplete="tel">
+        </div>
+
+        <div class="full">
+          <label class="lbl" for="f-ind">Indications <em>*</em></label>
+          <textarea id="f-ind" name="Indications" required placeholder="Tailles et répartition, couleurs du logo, plusieurs emplacements, délai souhaité, textile fourni par vos soins…"></textarea>
+        </div>
+
+        <div class="full">
+          <label class="lbl">Logo — PDF vectoriel ou SVG <em>*</em></label>
+          <label class="drop" id="drop" for="f-file">
+            <strong>Déposez votre fichier ici ou cliquez pour le choisir</strong>
+            <small>PDF vectoriel haute définition ou SVG · 10 Mo maximum · un SVG s'affiche aussitôt dans le simulateur</small>
+            <input id="f-file" name="Logo" type="file" accept=".pdf,.svg,application/pdf,image/svg+xml" required>
+          </label>
+          <div class="filechip" id="chip">
+            <span id="chipName"></span>
+            <button type="button" class="x" id="chipX" aria-label="Retirer le fichier">✕</button>
+          </div>
+          <p class="err" id="fileErr"></p>
+        </div>
+
+        <div class="full">
+          <div class="recap-form" id="formRecap"></div>
+        </div>
+
+        <div class="full">
+          <label class="consent"><input type="checkbox" required id="f-rgpd"> J'accepte que ces informations soient utilisées pour me recontacter et établir mon devis.</label>
+        </div>
+
+        <div class="full">
+          <button class="btn" type="submit" id="send">Envoyer la demande de devis</button>
+          <p class="err" id="formErr"></p>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h3>Je brode pour vous</h3>
+        <p>Broderie et transfert sur vêtements professionnels. Petites et grandes séries, du prototype à la dotation complète.</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p>
+          <a href="mailto:contact@jebrodepourvous.fr">contact@jebrodepourvous.fr</a><br>
+          <a href="tel:+33565490240">05 65 49 02 40</a><br>
+          Saint-Affrique (12400)
+        </p>
+      </div>
+      <div>
+        <h3>Aller à</h3>
+        <p><a href="#prestations">Prestations</a><br><a href="#simulateur">Simulateur</a><br><a href="#devis">Devis</a></p>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="year"></span> Je brode pour vous</span>
+      <span>Les prix du simulateur sont indicatifs et ne valent pas offre commerciale.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============ DONNÉES ============ */
+const GARMENTS = {
+  tshirt:   {label:"T-shirt",  base:7.90},
+  polo:     {label:"Polo",     base:14.50},
+  pull:     {label:"Pull",     base:23.00},
+  pantalon: {label:"Pantalon", base:26.00},
+  veste:    {label:"Veste",    base:38.00}
+};
+const COLORS = [
+  {id:"blanc", label:"Blanc",       fill:"#FFFFFF", line:"#C6CDD5", dark:false},
+  {id:"marine",label:"Marine",      fill:"#12294A", line:"#0A1A31", dark:true},
+  {id:"gris",  label:"Gris chiné",  fill:"#A9B1BA", line:"#7E868F", dark:false},
+  {id:"noir",  label:"Noir",        fill:"#1B1F24", line:"#000000", dark:true},
+  {id:"rouge", label:"Rouge",       fill:"#C0182F", line:"#8C0E20", dark:true},
+  {id:"vert",  label:"Vert",        fill:"#2E6B4F", line:"#1D4834", dark:true},
+  {id:"jaune", label:"Jaune HV",    fill:"#E9E12B", line:"#B7B015", dark:false},
+  {id:"orange",label:"Orange HV",   fill:"#F07E00", line:"#B45E00", dark:false}
+];
+const TECHS = {
+  broderie: {label:"Broderie", setup:45, hint:"Fil cousu, durable", price:{S:6.20, M:11.40, L:14.90}},
+  transfert:{label:"Transfert",setup:25, hint:"Pressé à chaud",     price:{S:3.40, M:6.20, L:8.30}}
+};
+const SIZES = {
+  S:{label:"Petit format", cm:8,  hint:"≈ 8 cm — logo poitrine"},
+  M:{label:"Moyen format", cm:20, hint:"≈ 20 cm — dos ou grand côté"},
+  L:{label:"Grand format", cm:28, hint:"≈ 28 cm — dos pleine largeur"}
+};
+const POSITIONS = {
+  coeur:     {label:"Cœur",              hint:"Poitrine gauche du porteur", view:"face", extra:0,    sizes:["S"]},
+  anticoeur: {label:"Anti-cœur",         hint:"Poitrine droite du porteur", view:"face", extra:0,    sizes:["S"]},
+  manche:    {label:"Côté de la manche", hint:"Bras gauche",                view:"face", extra:1.10, sizes:["S"]},
+  dos:       {label:"Dos",               hint:"Haut du dos",                view:"dos",  extra:0,    sizes:["S","M","L"]}
+};
+const TIERS = [
+  {min:100,coef:0.82,label:"100 pièces et +"},
+  {min:50, coef:0.90,label:"50 à 99 pièces"},
+  {min:25, coef:1.00,label:"25 à 49 pièces"},
+  {min:10, coef:1.15,label:"10 à 24 pièces"},
+  {min:1,  coef:1.35,label:"1 à 9 pièces"}
+];
+const TVA = 0.20;
+
+/* Silhouettes : chemin principal + détails, par vue.
+   Ancres de marquage : {x,y,rot} dans le repère 0 0 400 480 */
+const SHAPES = {
+  tshirt:{
+    face:{body:"M150 62 L104 78 L52 116 L88 178 L118 158 L118 430 L282 430 L282 158 L312 178 L348 116 L296 78 L250 62 C238 96 162 96 150 62 Z",
+          det:["M150 62 C162 100 238 100 250 62","M118 158 L118 430","M282 158 L282 430"]},
+    dos:{body:"M150 62 L104 78 L52 116 L88 178 L118 158 L118 430 L282 430 L282 158 L312 178 L348 116 L296 78 L250 62 C240 76 160 76 150 62 Z",
+         det:["M150 62 C160 78 240 78 250 62"]},
+    anchors:{coeur:{x:246,y:176,rot:0},anticoeur:{x:154,y:176,rot:0},manche:{x:74,y:132,rot:-38},dos:{x:200,y:180,rot:0}}
+  },
+  polo:{
+    face:{body:"M152 66 L106 80 L56 118 L90 180 L120 160 L120 430 L280 430 L280 160 L310 180 L344 118 L294 80 L248 66 C238 96 162 96 152 66 Z",
+          det:["M152 66 L200 104 L248 66","M186 100 L186 152 M214 100 L214 152","M170 66 L152 96 L200 106 M230 66 L248 96 L200 106"]},
+    dos:{body:"M152 66 L106 80 L56 118 L90 180 L120 160 L120 430 L280 430 L280 160 L310 180 L344 118 L294 80 L248 66 C240 78 160 78 152 66 Z",
+         det:["M152 66 C160 84 240 84 248 66 L248 78 C240 92 160 92 152 78 Z"]},
+    anchors:{coeur:{x:246,y:180,rot:0},anticoeur:{x:154,y:180,rot:0},manche:{x:78,y:136,rot:-38},dos:{x:200,y:186,rot:0}}
+  },
+  pull:{
+    face:{body:"M150 62 L96 78 L44 124 L22 236 L62 254 L88 194 L88 424 L312 424 L312 194 L338 254 L378 236 L356 124 L304 78 L250 62 C238 96 162 96 150 62 Z",
+          det:["M150 62 C162 100 238 100 250 62 L250 74 C238 108 162 108 150 74 Z","M88 404 L312 404","M40 232 L74 246","M326 246 L360 232"]},
+    dos:{body:"M150 62 L96 78 L44 124 L22 236 L62 254 L88 194 L88 424 L312 424 L312 194 L338 254 L378 236 L356 124 L304 78 L250 62 C240 76 160 76 150 62 Z",
+         det:["M150 62 C160 80 240 80 250 62","M88 404 L312 404"]},
+    anchors:{coeur:{x:248,y:178,rot:0},anticoeur:{x:152,y:178,rot:0},manche:{x:60,y:150,rot:-52},dos:{x:200,y:182,rot:0}}
+  },
+  veste:{
+    face:{body:"M150 60 L96 76 L44 122 L24 240 L64 258 L88 198 L88 428 L312 428 L312 198 L336 258 L376 240 L356 122 L304 76 L250 60 C238 92 162 92 150 60 Z",
+          det:["M200 92 L200 428","M150 60 L188 96 L200 92 L212 96 L250 60","M162 250 L188 250 M212 250 L238 250","M88 410 L312 410"]},
+    dos:{body:"M150 60 L96 76 L44 122 L24 240 L64 258 L88 198 L88 428 L312 428 L312 198 L336 258 L376 240 L356 122 L304 76 L250 60 C240 74 160 74 150 60 Z",
+         det:["M150 60 C160 78 240 78 250 60","M88 410 L312 410"]},
+    anchors:{coeur:{x:252,y:176,rot:0},anticoeur:{x:148,y:176,rot:0},manche:{x:62,y:152,rot:-52},dos:{x:200,y:180,rot:0}}
+  },
+  pantalon:{
+    face:{body:"M112 58 L288 58 L300 176 L288 446 L224 446 L200 246 L176 446 L112 446 L100 176 Z",
+          det:["M112 58 L288 58 L290 84 L110 84 Z","M200 84 L200 246","M118 108 L154 108 L150 150 L118 138 Z","M282 108 L246 108 L250 150 L282 138 Z"]},
+    dos:{body:"M112 58 L288 58 L300 176 L288 446 L224 446 L200 246 L176 446 L112 446 L100 176 Z",
+         det:["M112 58 L288 58 L290 84 L110 84 Z","M200 84 L200 246","M124 108 L172 108 L172 142 L124 142 Z","M276 108 L228 108 L228 142 L276 142 Z"]},
+    anchors:{coeur:{x:250,y:190,rot:0},anticoeur:{x:150,y:190,rot:0},manche:{x:146,y:330,rot:0},dos:{x:200,y:150,rot:0}}
+  }
+};
+/* Étiquettes d'emplacement adaptées au pantalon */
+const POS_LABEL_PANTALON = {coeur:"Cuisse droite",anticoeur:"Cuisse gauche",manche:"Bas de jambe",dos:"Haut du dos"};
+
+const PX_PER_CM = 3.2;
+
+/* ============ ÉTAT ============ */
+const state = {garment:"tshirt", color:"marine", tech:"broderie", pos:"coeur", size:"S", qty:25, logo:null};
+
+/* ============ CONSTRUCTION DES CHOIX ============ */
+const el = id => document.getElementById(id);
+function radio(group,value,label,hint,checked){
+  return `<label class="opt"><input type="radio" name="${group}" value="${value}" ${checked?"checked":""}>
+  <span>${label}${hint?`<small>${hint}</small>`:""}</span></label>`;
+}
+el("g-garment").innerHTML = Object.entries(GARMENTS)
+  .map(([k,v])=>radio("garment",k,v.label,`dès ${v.base.toFixed(2).replace(".",",")} €`,k===state.garment)).join("");
+el("g-tech").innerHTML = Object.entries(TECHS)
+  .map(([k,v])=>radio("tech",k,v.label,v.hint,k===state.tech)).join("");
+el("g-color").innerHTML = COLORS.map(c=>
+  `<label class="sw" title="${c.label}"><input type="radio" name="color" value="${c.id}" ${c.id===state.color?"checked":""} aria-label="${c.label}"><i style="background:${c.fill}"></i></label>`).join("");
+
+function renderPositions(){
+  el("g-pos").innerHTML = Object.entries(POSITIONS).map(([k,v])=>{
+    const lbl = state.garment==="pantalon" ? POS_LABEL_PANTALON[k] : v.label;
+    return radio("pos",k,lbl,v.hint,k===state.pos);
+  }).join("");
+}
+function renderSizes(){
+  const allowed = POSITIONS[state.pos].sizes;
+  if(!allowed.includes(state.size)) state.size = allowed[0];
+  el("g-size").innerHTML = allowed.map(k=>radio("size",k,SIZES[k].label,SIZES[k].hint,k===state.size)).join("");
+}
+renderPositions(); renderSizes();
+
+/* ============ APERÇU ============ */
+function markSvg(){
+  const cm = SIZES[state.size].cm;
+  const w = cm*PX_PER_CM, h = w*0.62;
+  const a = SHAPES[state.garment].anchors[state.pos];
+  const col = COLORS.find(c=>c.id===state.color);
+  const accent = col.dark ? "#FFFFFF" : "#F07E00";
+  const soft   = col.dark ? "#FFB259" : "#2B2F33";
+
+  let content;
+  if(state.logo){
+    content = `<image href="${state.logo}" x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet"/>`;
+  }else if(state.tech==="broderie"){
+    content = `
+      <rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="none" stroke="${accent}" stroke-width="2.2" stroke-dasharray="4 3" rx="2"/>
+      <path d="M${-w*0.32} ${h*0.16} C${-w*0.12} ${-h*0.3}, ${w*0.06} ${h*0.3}, ${w*0.3} ${-h*0.26}" fill="none"
+            stroke="${accent}" stroke-width="${Math.max(2.4,w*0.06)}" stroke-linecap="round" stroke-dasharray="${w*0.07} ${w*0.05}"/>`;
+  }else{
+    content = `
+      <rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="${soft}" opacity=".14" rx="2"/>
+      <rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" fill="none" stroke="${accent}" stroke-width="1.6" rx="2"/>
+      <path d="M${-w*0.32} ${h*0.16} C${-w*0.12} ${-h*0.3}, ${w*0.06} ${h*0.3}, ${w*0.3} ${-h*0.26}" fill="none"
+            stroke="${accent}" stroke-width="${Math.max(2.4,w*0.06)}" stroke-linecap="round"/>`;
+  }
+  return `<g transform="translate(${a.x},${a.y}) rotate(${a.rot})">
+    ${content}
+    <text y="${h/2+16}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="${accent}" opacity=".85">${cm} cm</text>
+  </g>`;
+}
+function draw(){
+  const view = POSITIONS[state.pos].view;
+  const s = SHAPES[state.garment][view];
+  const col = COLORS.find(c=>c.id===state.color);
+  const shade = col.dark ? "rgba(255,255,255,.07)" : "rgba(0,0,0,.06)";
+  el("canvas").innerHTML = `
+  <svg viewBox="0 0 400 480" role="img" aria-label="Aperçu : ${GARMENTS[state.garment].label} ${col.label}, ${POSITIONS[state.pos].label}, ${TECHS[state.tech].label}">
+    <defs>
+      <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#000" stop-opacity=".10"/>
+        <stop offset=".3" stop-color="#000" stop-opacity="0"/>
+        <stop offset=".7" stop-color="#000" stop-opacity="0"/>
+        <stop offset="1" stop-color="#000" stop-opacity=".12"/>
+      </linearGradient>
+      <clipPath id="clip"><path d="${s.body}"/></clipPath>
+    </defs>
+    <ellipse cx="200" cy="455" rx="130" ry="12" fill="#000" opacity=".05"/>
+    <path d="${s.body}" fill="${col.fill}" stroke="${col.line}" stroke-width="2" stroke-linejoin="round"/>
+    <g clip-path="url(#clip)"><rect width="400" height="480" fill="url(#grad)"/></g>
+    <g fill="none" stroke="${col.line}" stroke-width="1.4" opacity=".8">${s.det.map(d=>`<path d="${d}"/>`).join("")}</g>
+    ${markSvg()}
+  </svg>`;
+  el("viewTag").textContent = view==="dos" ? "Vue de dos" : "Vue de face";
+  el("zoomTag").textContent = `${GARMENTS[state.garment].label} · ${col.label}`;
+}
+
+/* ============ PRIX ============ */
+const eur = n => n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2}) + " €";
+function tier(q){ return TIERS.find(t=>q>=t.min) || TIERS[TIERS.length-1]; }
+function price(){
+  const g = GARMENTS[state.garment], t = TECHS[state.tech], p = POSITIONS[state.pos];
+  const marking = t.price[state.size] + p.extra;
+  const tr = tier(state.qty);
+  const unit = (g.base + marking) * tr.coef;
+  const setup = t.setup;
+  const ht = unit*state.qty + setup;
+  return {unit, setup, ht, ttc: ht*(1+TVA), marking, tier:tr};
+}
+function renderPrice(){
+  const r = price();
+  const posLabel = state.garment==="pantalon" ? POS_LABEL_PANTALON[state.pos] : POSITIONS[state.pos].label;
+  el("r-garment").textContent = `${GARMENTS[state.garment].label} · ${COLORS.find(c=>c.id===state.color).label}`;
+  el("r-mark").textContent    = `${TECHS[state.tech].label} · ${SIZES[state.size].cm} cm`;
+  el("r-pos").textContent     = posLabel;
+  el("r-qty").textContent     = `${state.qty} — ${r.tier.label}`;
+  el("r-unit").textContent    = eur(r.unit);
+  el("r-setup-l").textContent = state.tech==="broderie" ? "Numérisation (1 fois)" : "Calage transfert (1 fois)";
+  el("r-setup").textContent   = eur(r.setup);
+  el("r-ht").textContent      = eur(r.ht);
+  el("r-ttc").textContent     = `soit ${eur(r.ttc)} TTC`;
+
+  const cfg = `${GARMENTS[state.garment].label} ${COLORS.find(c=>c.id===state.color).label} — ${TECHS[state.tech].label} — ${posLabel} — ${SIZES[state.size].cm} cm — ${state.qty} pièce(s)`;
+  el("h-config").value = cfg;
+  el("h-price").value  = `${eur(r.unit)} HT/pièce · préparation ${eur(r.setup)} · total ${eur(r.ht)} HT (${eur(r.ttc)} TTC) — estimation indicative`;
+  el("formRecap").innerHTML = `
+    <div><span>Configuration</span><b>${cfg}</b></div>
+    <div><span>Prix unitaire HT</span><b>${eur(r.unit)}</b></div>
+    <div><span>Total estimé HT</span><b>${eur(r.ht)}</b></div>`;
+}
+function update(){ draw(); renderPrice(); }
+
+/* ============ ÉVÈNEMENTS ============ */
+document.addEventListener("change", e=>{
+  const n = e.target.name;
+  if(n==="garment"){ state.garment=e.target.value; renderPositions(); renderSizes(); }
+  else if(n==="color") state.color=e.target.value;
+  else if(n==="tech")  state.tech=e.target.value;
+  else if(n==="pos"){  state.pos=e.target.value; renderSizes(); }
+  else if(n==="size")  state.size=e.target.value;
+  else return;
+  update();
+});
+el("qty").addEventListener("input", e=>{
+  const v = parseInt(e.target.value,10);
+  state.qty = (!v || v<1) ? 1 : Math.min(v,5000);
+  renderPrice();
+});
+el("qty").addEventListener("blur", e=>{ e.target.value = state.qty; });
+el("minus").onclick = ()=>{ state.qty=Math.max(1,state.qty-1); el("qty").value=state.qty; renderPrice(); };
+el("plus").onclick  = ()=>{ state.qty=Math.min(5000,state.qty+1); el("qty").value=state.qty; renderPrice(); };
+el("burger").onclick = e=>{ const n=el("nav"); n.classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", n.classList.contains("open")); };
+el("year").textContent = new Date().getFullYear();
+
+/* ============ FICHIER LOGO ============ */
+const drop = el("drop"), fileInput = el("f-file"), chip = el("chip"), fileErr = el("fileErr");
+const MAX = 10*1024*1024;
+function showErr(m){ fileErr.textContent=m; fileErr.classList.add("on"); }
+function clearErr(){ fileErr.classList.remove("on"); }
+function handleFile(file){
+  clearErr();
+  if(!file) return;
+  const name = file.name.toLowerCase();
+  const okType = name.endsWith(".pdf") || name.endsWith(".svg");
+  if(!okType){ reset(); showErr("Format refusé. Déposez un PDF vectoriel ou un SVG."); return; }
+  if(file.size > MAX){ reset(); showErr("Fichier trop lourd : 10 Mo maximum. Envoyez-le par e-mail si besoin."); return; }
+  el("chipName").textContent = `${file.name} — ${(file.size/1024/1024).toFixed(2)} Mo`;
+  chip.classList.add("on");
+  if(name.endsWith(".svg")){
+    const r = new FileReader();
+    r.onload = ()=>{ state.logo = r.result; update(); };
+    r.readAsDataURL(file);
+  }else{
+    state.logo = null; update();
+    fileErr.textContent = "PDF reçu. L'aperçu du simulateur ne peut pas afficher un PDF, mais votre fichier sera bien joint au devis.";
+    fileErr.style.color = "var(--gris)"; fileErr.classList.add("on");
+  }
+}
+function reset(){
+  fileInput.value=""; chip.classList.remove("on"); state.logo=null;
+  fileErr.style.color=""; update();
+}
+fileInput.addEventListener("change", e=>handleFile(e.target.files[0]));
+el("chipX").onclick = ()=>{ reset(); clearErr(); };
+["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+drop.addEventListener("drop", e=>{
+  const f = e.dataTransfer.files[0];
+  if(f){ const dt = new DataTransfer(); dt.items.add(f); fileInput.files = dt.files; handleFile(f); }
+});
+
+/* ============ ENVOI ============ */
+el("quoteForm").addEventListener("submit", e=>{
+  const err = el("formErr");
+  err.classList.remove("on");
+  const f = e.currentTarget;
+  if(!f.checkValidity()){
+    e.preventDefault();
+    err.textContent = "Il manque des informations. Vérifiez les champs marqués d'une étoile et le fichier logo.";
+    err.classList.add("on");
+    const bad = f.querySelector(":invalid"); if(bad) bad.focus();
+  }
+});
+el("toDevis").addEventListener("click", ()=>setTimeout(()=>el("f-nom").focus(),450));
+
+update();
+</script>
+</body>
+</html>
