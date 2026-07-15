@@ -582,6 +582,8 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
 </style>
 <style>
 /* Simulateur ergonomique : aperçu et prix restent visibles pendant les réglages. */
+.logo{gap:0}
+.logo b{font-size:1.18rem;letter-spacing:-.035em;text-transform:none;color:#fff}
 @media(min-width:1001px){
   #simulateur .sim{grid-template-columns:minmax(300px,330px) minmax(420px,1fr) minmax(300px,330px);gap:18px}
   #simulateur .panel{padding:21px}
@@ -619,11 +621,7 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top">
-      <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
-        <circle cx="20" cy="20" r="19" fill="#F07E00"/>
-        <path d="M8 28 C16 8, 24 32, 32 12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 3.5"/>
-      </svg>
-      <b>Je brode <span>pour vous</span></b>
+      <b>Je brode pour vous</b>
     </a>
     <nav id="nav">
       <a href="#prestations">Prestations</a>
