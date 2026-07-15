@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Demandes de devis — Je brode pour vous</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#202225;--panel:#292c30;--panel2:#32363b;--orange:#ef7d2c;--orange2:#ff9a52;--paper:#f5f2ed;--muted:#aaaeb4;--line:#42464c;--good:#55c894;--danger:#ff786e;--shadow:0 24px 70px rgba(0,0,0,.24)}
+    *{box-sizing:border-box}
+    html{color-scheme:dark}
+    body{margin:0;min-height:100vh;background:var(--ink);color:#f7f7f5;font-family:"DM Sans",sans-serif;background-image:radial-gradient(circle at 95% 0,rgba(239,125,44,.17),transparent 32%),radial-gradient(circle at 0 100%,rgba(239,125,44,.08),transparent 35%)}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    .noise{position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+    .shell{width:min(1440px,calc(100% - 40px));margin:auto;padding:28px 0 52px;position:relative}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:42px}
+    .brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:#fff;font-family:Manrope,sans-serif;font-weight:800;letter-spacing:-.04em;font-size:19px}
+    .brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,var(--orange2),var(--orange));display:grid;place-items:center;box-shadow:0 10px 28px rgba(239,125,44,.25);font-size:21px}
+    .brand small{display:block;color:var(--muted);font:600 10px/1.3 "DM Sans",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .secure{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}.secure i{width:8px;height:8px;background:var(--good);border-radius:50%;box-shadow:0 0 0 5px rgba(85,200,148,.1)}
+    .auth-wrap{min-height:calc(100vh - 150px);display:grid;place-items:center;padding-bottom:8vh}
+    .auth-card{width:min(520px,100%);background:rgba(41,44,48,.86);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:46px;box-shadow:var(--shadow);backdrop-filter:blur(18px);position:relative;overflow:hidden}
+    .auth-card:before{content:"";position:absolute;width:170px;height:170px;border:36px solid rgba(239,125,44,.11);border-radius:50%;right:-75px;top:-80px}
+    .eyebrow{color:var(--orange2);font-weight:700;font-size:12px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:13px}
+    h1,h2{font-family:Manrope,sans-serif;letter-spacing:-.045em;margin:0}h1{font-size:clamp(34px,4vw,54px);line-height:1.02}h2{font-size:31px;line-height:1.1}
+    .auth-card p{color:var(--muted);font-size:16px;line-height:1.7;margin:18px 0 28px;max-width:410px}
+    .email-box{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:#222428;border-radius:14px;padding:15px 17px;color:#e7e7e5;margin-bottom:13px}.email-box svg{color:var(--orange)}
+    .btn{border:0;border-radius:13px;padding:14px 18px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.2s transform,.2s background,.2s opacity}.btn:hover{transform:translateY(-2px)}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn-primary{width:100%;background:linear-gradient(135deg,var(--orange2),var(--orange));color:#fff;box-shadow:0 12px 28px rgba(239,125,44,.2)}
+    .btn-quiet{color:#eee;background:var(--panel2);border:1px solid var(--line)}
+    .message{min-height:22px;margin-top:17px;font-size:14px;line-height:1.5}.message.ok{color:var(--good)}.message.error{color:var(--danger)}
+    .dashboard{display:none}.dashboard.active{display:block}.auth-wrap.hidden{display:none}
+    .dash-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:32px}.dash-head p{color:var(--muted);margin:10px 0 0}.head-actions{display:flex;gap:10px}
+    .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-bottom:23px}.stat{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:21px 23px;position:relative;overflow:hidden}.stat:after{content:"";position:absolute;right:-20px;bottom:-30px;width:90px;height:90px;border-radius:50%;border:18px solid rgba(239,125,44,.08)}.stat span{color:var(--muted);font-size:13px}.stat strong{display:block;font-family:Manrope,sans-serif;font-size:32px;margin-top:3px}.stat:first-child strong{color:var(--orange2)}
+    .toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}.search{position:relative;width:min(430px,100%)}.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted)}.search input{width:100%;height:48px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:white;padding:0 16px 0 45px;outline:none}.search input:focus{border-color:var(--orange)}.count{color:var(--muted);font-size:13px}
+    .table-wrap{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+    table{border-collapse:collapse;width:100%;min-width:1050px}th{text-align:left;color:#8f949b;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:15px 17px;background:#25282b;border-bottom:1px solid var(--line)}td{padding:18px 17px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;font-size:14px}tbody tr{transition:.18s background}tbody tr:hover{background:rgba(255,255,255,.025)}tbody tr:last-child td{border-bottom:0}
+    .date{white-space:nowrap;color:var(--muted);font-size:12px}.person strong{font-size:15px}.person small,.contact small{display:block;color:var(--muted);margin-top:4px}.contact a{color:#fff;text-decoration:none}.contact a:hover{color:var(--orange2)}.details{max-width:310px;color:#d8d8d5;line-height:1.45}.details button{border:0;background:none;padding:0;color:var(--orange2);font-weight:600;margin-top:7px}.estimate{white-space:nowrap;font-weight:700;color:var(--orange2)}
+    .download{border:1px solid var(--line);background:#25272a;color:#fff;border-radius:10px;padding:9px 11px;font-weight:600;max-width:170px;display:flex;gap:7px;align-items:center}.download:hover{border-color:var(--orange)}.download span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .status{border:1px solid var(--line);color:#fff;background:#242629;border-radius:10px;padding:9px 30px 9px 10px;outline:none}.status:focus{border-color:var(--orange)}
+    .state{padding:70px 25px;text-align:center;color:var(--muted)}.spinner{width:31px;height:31px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 13px}@keyframes spin{to{transform:rotate(360deg)}}
+    .toast{position:fixed;right:24px;bottom:24px;max-width:380px;padding:14px 18px;border-radius:13px;background:#35393e;border:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast.error{border-color:rgba(255,120,110,.55)}
+    @media(max-width:760px){.shell{width:min(100% - 24px,1440px);padding-top:18px}.topbar{margin-bottom:26px}.secure{display:none}.auth-card{padding:32px 22px;border-radius:22px}.dash-head{align-items:flex-start;flex-direction:column}.head-actions{width:100%}.head-actions .btn{flex:1;padding:12px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.toolbar{align-items:flex-start;flex-direction:column}.table-wrap{overflow:visible;background:transparent;border:0;box-shadow:none}table,tbody{display:block;min-width:0}thead{display:none}tbody{display:grid;gap:13px}tr{display:grid;background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:17px;padding:17px;gap:13px}td{display:block;padding:0;border:0}td:before{content:attr(data-label);display:block;color:#858a91;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}.details{max-width:none}.download{max-width:none;width:100%}.status{width:100%}.toast{left:12px;right:12px;bottom:12px}}
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="https://totochee.github.io/jebrodepourvous/" aria-label="Retour au site"><span class="brand-mark">✦</span><span>Je brode pour vous<small>Espace professionnel</small></span></a>
+      <span class="secure"><i></i> Accès sécurisé par Supabase</span>
+    </header>
+
+    <section class="auth-wrap" id="authView">
+      <div class="auth-card">
+        <div class="eyebrow">Administration privée</div>
+        <h2>Vos demandes,<br>au même endroit.</h2>
+        <p>Recevez un lien de connexion par e-mail. Aucun mot de passe à mémoriser et aucun fichier client exposé publiquement.</p>
+        <div class="email-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <span>tbsngroupe@gmail.com</span>
+        </div>
+        <button class="btn btn-primary" id="loginBtn">Recevoir mon lien de connexion <span>→</span></button>
+        <div class="message" id="authMessage" role="status"></div>
+      </div>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+      <div class="dash-head">
+        <div><div class="eyebrow">Tableau de bord</div><h1>Demandes de devis</h1><p id="welcomeText">Contacts, fichiers et suivi réunis au même endroit.</p></div>
+        <div class="head-actions"><button class="btn btn-quiet" id="refreshBtn">↻ Actualiser</button><button class="btn btn-quiet" id="logoutBtn">Déconnexion</button></div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>Nouvelles demandes</span><strong id="newCount">—</strong></div>
+        <div class="stat"><span>En cours</span><strong id="progressCount">—</strong></div>
+        <div class="stat"><span>Total reçu</span><strong id="totalCount">—</strong></div>
+      </div>
+      <div class="toolbar">
+        <label class="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+          <input id="searchInput" type="search" placeholder="Rechercher un nom, une société, un e-mail…">
+        </label>
+        <span class="count" id="resultCount"></span>
+      </div>
+      <div class="table-wrap" id="tableWrap"><div class="state"><div class="spinner"></div>Chargement des demandes…</div></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (() => {
+      "use strict";
+      const SUPABASE_URL = "https://hrooomzvntlfhalhtvsw.supabase.co";
+      const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_vdnrgOJTPrFfcNcalv3g_aYGjl2UO";
+      const ADMIN_EMAIL = "tbsngroupe@gmail.com";
+      const ADMIN_URL = "https://totochee.github.io/jebrodepourvous/admin-devis.html";
+      const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+      });
+      const authView = document.getElementById("authView");
+      const dashboard = document.getElementById("dashboard");
+      const authMessage = document.getElementById("authMessage");
+      const loginBtn = document.getElementById("loginBtn");
+      const tableWrap = document.getElementById("tableWrap");
+      const searchInput = document.getElementById("searchInput");
+      const statuses = { nouveau: "Nouveau", en_cours: "En cours", traite: "Traité", archive: "Archivé" };
+      let rows = [];
+
+      function isAdmin(session) {
+        const user = session && session.user;
+        return Boolean(user && !user.is_anonymous && (user.email || "").toLowerCase() === ADMIN_EMAIL);
+      }
+      function setAuthMessage(text, type = "") {
+        authMessage.textContent = text;
+        authMessage.className = "message " + type;
+      }
+      function showToast(text, error = false) {
+        const toast = document.getElementById("toast");
+        toast.textContent = text;
+        toast.className = "toast show" + (error ? " error" : "");
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(() => toast.className = "toast", 3500);
+      }
+      function showAuth() {
+        authView.classList.remove("hidden");
+        dashboard.classList.remove("active");
+      }
+      function showDashboard() {
+        authView.classList.add("hidden");
+        dashboard.classList.add("active");
+      }
+      function formatDate(value) {
+        return new Intl.DateTimeFormat("fr-FR", { dateStyle: "medium", timeStyle: "short" }).format(new Date(value));
+      }
+      function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined && text !== null) node.textContent = String(text);
+        return node;
+      }
+      function labeledCell(label, className) {
+        const td = el("td", className);
+        td.dataset.label = label;
+        return td;
+      }
+
+      async function requestMagicLink() {
+        loginBtn.disabled = true;
+        setAuthMessage("Envoi du lien sécurisé…");
+        try {
+          const { data: sessionData } = await db.auth.getSession();
+          if (sessionData.session && sessionData.session.user && sessionData.session.user.is_anonymous) {
+            await db.auth.signOut({ scope: "local" });
+          }
+          const { error } = await db.auth.signInWithOtp({
+            email: ADMIN_EMAIL,
+            options: { shouldCreateUser: true, emailRedirectTo: ADMIN_URL }
+          });
+          if (error) throw error;
+          setAuthMessage("Lien envoyé. Ouvrez l’e-mail reçu puis cliquez sur le bouton de connexion.", "ok");
+        } catch (error) {
+          setAuthMessage("Impossible d’envoyer le lien : " + (error.message || "erreur inconnue"), "error");
+        } finally {
+          loginBtn.disabled = false;
+        }
+      }
+
+      async function loadRows() {
+        tableWrap.replaceChildren(el("div", "state", "Chargement des demandes…"));
+        const state = tableWrap.firstChild;
+        state.prepend(el("div", "spinner"));
+        const { data, error } = await db.from("demandes_devis").select("*").order("created_at", { ascending: false });
+        if (error) {
+          tableWrap.replaceChildren(el("div", "state", "Accès refusé ou configuration Supabase incomplète : " + error.message));
+          return;
+        }
+        rows = data || [];
+        document.getElementById("newCount").textContent = rows.filter(r => r.statut === "nouveau").length;
+        document.getElementById("progressCount").textContent = rows.filter(r => r.statut === "en_cours").length;
+        document.getElementById("totalCount").textContent = rows.length;
+        renderRows();
+      }
+
+      function renderRows() {
+        const query = searchInput.value.trim().toLowerCase();
+        const filtered = rows.filter(row => [row.nom,row.societe,row.email,row.telephone,row.indications,row.configuration].some(value => String(value || "").toLowerCase().includes(query)));
+        document.getElementById("resultCount").textContent = filtered.length + " demande" + (filtered.length > 1 ? "s" : "");
+        if (!filtered.length) {
+          tableWrap.replaceChildren(el("div", "state", query ? "Aucune demande ne correspond à cette recherche." : "Aucune demande reçue pour le moment."));
+          return;
+        }
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const hr = document.createElement("tr");
+        ["Date","Client","Contact","Demande","Estimation","Logo","Statut"].forEach(label => hr.appendChild(el("th", "", label)));
+        thead.appendChild(hr);
+        const tbody = document.createElement("tbody");
+        filtered.forEach(row => tbody.appendChild(buildRow(row)));
+        table.append(thead, tbody);
+        tableWrap.replaceChildren(table);
+      }
+
+      function buildRow(row) {
+        const tr = document.createElement("tr");
+        const date = labeledCell("Date", "date"); date.textContent = formatDate(row.created_at);
+        const person = labeledCell("Client", "person"); person.append(el("strong", "", row.nom || "—"), el("small", "", row.societe || "Sans société"));
+        const contact = labeledCell("Contact", "contact");
+        const mail = el("a", "", row.email || "—"); mail.href = "mailto:" + (row.email || ""); contact.appendChild(mail);
+        if (row.telephone) { const phone = el("small"); const phoneLink = el("a", "", row.telephone); phoneLink.href = "tel:" + row.telephone.replace(/[^+\d]/g, ""); phone.appendChild(phoneLink); contact.appendChild(phone); }
+        const details = labeledCell("Demande", "details");
+        const summary = el("div", "", row.indications || "—");
+        const extra = [row.configuration, row.source_url ? "Source : " + row.source_url : ""].filter(Boolean).join(" · ");
+        details.appendChild(summary); if (extra) details.appendChild(el("small", "", extra));
+        const estimate = labeledCell("Estimation", "estimate"); estimate.textContent = row.estimation || "À étudier";
+        const logo = labeledCell("Logo", "");
+        const download = el("button", "download"); download.type = "button"; download.title = "Télécharger " + row.logo_name;
+        download.append(el("span", "", row.logo_name || "Fichier"));
+        download.addEventListener("click", () => downloadLogo(row, download)); logo.appendChild(download);
+        const statusCell = labeledCell("Statut", "");
+        const select = el("select", "status"); select.setAttribute("aria-label", "Statut de la demande de " + row.nom);
+        Object.entries(statuses).forEach(([value,label]) => { const option = el("option", "", label); option.value = value; option.selected = value === row.statut; select.appendChild(option); });
+        select.addEventListener("change", () => updateStatus(row, select)); statusCell.appendChild(select);
+        tr.append(date,person,contact,details,estimate,logo,statusCell);
+        return tr;
+      }
+
+      async function downloadLogo(row, button) {
+        button.disabled = true;
+        const { data, error } = await db.storage.from("devis-logos").createSignedUrl(row.logo_path, 60, { download: row.logo_name || true });
+        button.disabled = false;
+        if (error || !data || !data.signedUrl) return showToast("Téléchargement impossible : " + (error ? error.message : "lien absent"), true);
+        window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+      }
+
+      async function updateStatus(row, select) {
+        const previous = row.statut;
+        select.disabled = true;
+        const { error } = await db.from("demandes_devis").update({ statut: select.value }).eq("id", row.id);
+        select.disabled = false;
+        if (error) { select.value = previous; return showToast("Statut non enregistré : " + error.message, true); }
+        row.statut = select.value;
+        document.getElementById("newCount").textContent = rows.filter(r => r.statut === "nouveau").length;
+        document.getElementById("progressCount").textContent = rows.filter(r => r.statut === "en_cours").length;
+        showToast("Statut mis à jour.");
+      }
+
+      async function enterIfAuthorized(session) {
+        if (!isAdmin(session)) { showAuth(); return false; }
+        showDashboard();
+        document.getElementById("welcomeText").textContent = "Connecté avec " + session.user.email + " · contacts et fichiers réunis au même endroit.";
+        await loadRows();
+        return true;
+      }
+
+      loginBtn.addEventListener("click", requestMagicLink);
+      document.getElementById("refreshBtn").addEventListener("click", loadRows);
+      document.getElementById("logoutBtn").addEventListener("click", async () => { await db.auth.signOut(); rows = []; showAuth(); setAuthMessage("Vous êtes déconnecté.", "ok"); });
+      searchInput.addEventListener("input", renderRows);
+
+      db.auth.getSession().then(({ data }) => enterIfAuthorized(data.session));
+      db.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_IN" && isAdmin(session) && !dashboard.classList.contains("active")) {
+          setTimeout(() => enterIfAuthorized(session), 0);
+        }
+        if (event === "SIGNED_OUT") showAuth();
+      });
+    })();
+  </script>
+</body>
+</html>
