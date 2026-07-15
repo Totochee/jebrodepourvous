@@ -28,7 +28,7 @@
     .eyebrow{color:var(--orange2);font-weight:700;font-size:12px;letter-spacing:.17em;text-transform:uppercase;margin-bottom:13px}
     h1,h2{font-family:Manrope,sans-serif;letter-spacing:-.045em;margin:0}h1{font-size:clamp(34px,4vw,54px);line-height:1.02}h2{font-size:31px;line-height:1.1}
     .auth-card p{color:var(--muted);font-size:16px;line-height:1.7;margin:18px 0 28px;max-width:410px}
-    .email-box{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:#222428;border-radius:14px;padding:15px 17px;color:#e7e7e5;margin-bottom:13px}.email-box svg{color:var(--orange)}
+    .email-box,.password-box{display:flex;align-items:center;gap:12px;border:1px solid var(--line);background:#222428;border-radius:14px;padding:15px 17px;color:#e7e7e5;margin-bottom:13px}.email-box svg,.password-box svg{color:var(--orange);flex:0 0 auto}.password-box:focus-within{border-color:var(--orange);box-shadow:0 0 0 3px rgba(239,125,44,.1)}.password-box input{min-width:0;width:100%;border:0;outline:0;background:transparent;color:#fff;padding:0}.password-box input::placeholder{color:#858a91}
     .btn{border:0;border-radius:13px;padding:14px 18px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:9px;transition:.2s transform,.2s background,.2s opacity}.btn:hover{transform:translateY(-2px)}.btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
     .btn-primary{width:100%;background:linear-gradient(135deg,var(--orange2),var(--orange));color:#fff;box-shadow:0 12px 28px rgba(239,125,44,.2)}
     .btn-quiet{color:#eee;background:var(--panel2);border:1px solid var(--line)}
@@ -59,12 +59,16 @@
       <div class="auth-card">
         <div class="eyebrow">Administration privée</div>
         <h2>Vos demandes,<br>au même endroit.</h2>
-        <p>Recevez un lien de connexion par e-mail. Aucun mot de passe à mémoriser et aucun fichier client exposé publiquement.</p>
+        <p>Connectez-vous avec votre mot de passe administrateur. Les contacts et les fichiers restent protégés par Supabase.</p>
         <div class="email-box">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
           <span>tbsngroupe@gmail.com</span>
         </div>
-        <button class="btn btn-primary" id="loginBtn">Recevoir mon lien de connexion <span>→</span></button>
+        <label class="password-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Mot de passe administrateur" aria-label="Mot de passe administrateur">
+        </label>
+        <button class="btn btn-primary" id="loginBtn">Se connecter <span>→</span></button>
         <div class="message" id="authMessage" role="status"></div>
       </div>
     </section>
@@ -98,7 +102,6 @@
       const SUPABASE_URL = "https://hrooomzvntlfhalhtvsw.supabase.co";
       const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_C_vdnrgOJTPrFfcNcalv3g_aYGjl2UO";
       const ADMIN_EMAIL = "tbsngroupe@gmail.com";
-      const ADMIN_URL = "https://totochee.github.io/jebrodepourvous/admin-devis.html";
       const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
         auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
       });
@@ -106,6 +109,7 @@
       const dashboard = document.getElementById("dashboard");
       const authMessage = document.getElementById("authMessage");
       const loginBtn = document.getElementById("loginBtn");
+      const passwordInput = document.getElementById("passwordInput");
       const tableWrap = document.getElementById("tableWrap");
       const searchInput = document.getElementById("searchInput");
       const statuses = { nouveau: "Nouveau", en_cours: "En cours", traite: "Traité", archive: "Archivé" };
@@ -149,22 +153,33 @@
         return td;
       }
 
-      async function requestMagicLink() {
+      async function loginWithPassword() {
+        const password = passwordInput.value;
+        if (!password) {
+          setAuthMessage("Saisissez votre mot de passe administrateur.", "error");
+          passwordInput.focus();
+          return;
+        }
         loginBtn.disabled = true;
-        setAuthMessage("Envoi du lien sécurisé…");
+        setAuthMessage("Connexion sécurisée…");
         try {
           const { data: sessionData } = await db.auth.getSession();
           if (sessionData.session && sessionData.session.user && sessionData.session.user.is_anonymous) {
             await db.auth.signOut({ scope: "local" });
           }
-          const { error } = await db.auth.signInWithOtp({
+          const { data, error } = await db.auth.signInWithPassword({
             email: ADMIN_EMAIL,
-            options: { shouldCreateUser: true, emailRedirectTo: ADMIN_URL }
+            password
           });
           if (error) throw error;
-          setAuthMessage("Lien envoyé. Ouvrez l’e-mail reçu puis cliquez sur le bouton de connexion.", "ok");
+          if (!isAdmin(data.session)) throw new Error("Ce compte n’est pas autorisé.");
+          passwordInput.value = "";
+          await enterIfAuthorized(data.session);
         } catch (error) {
-          setAuthMessage("Impossible d’envoyer le lien : " + (error.message || "erreur inconnue"), "error");
+          const message = /invalid login credentials/i.test(error.message || "")
+            ? "Adresse ou mot de passe incorrect. Vérifiez le compte créé dans Supabase."
+            : (error.message || "erreur inconnue");
+          setAuthMessage("Connexion impossible : " + message, "error");
         } finally {
           loginBtn.disabled = false;
         }
@@ -264,7 +279,10 @@
         return true;
       }
 
-      loginBtn.addEventListener("click", requestMagicLink);
+      loginBtn.addEventListener("click", loginWithPassword);
+      passwordInput.addEventListener("keydown", event => {
+        if (event.key === "Enter") loginWithPassword();
+      });
       document.getElementById("refreshBtn").addEventListener("click", loadRows);
       document.getElementById("logoutBtn").addEventListener("click", async () => { await db.auth.signOut(); rows = []; showAuth(); setAuthMessage("Vous êtes déconnecté.", "ok"); });
       searchInput.addEventListener("input", renderRows);
