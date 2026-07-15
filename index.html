@@ -580,6 +580,39 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
 @media(max-width:620px){.hero{min-height:auto}.hero-grid::after{right:-30%;top:34%;width:78vw}.hero h1{font-size:clamp(3.4rem,17vw,5.4rem)}.drop{min-height:170px;padding:28px 18px!important}}
 @media(prefers-reduced-motion:reduce){.hero-grid::after{animation:none!important}}
 </style>
+<style>
+/* Simulateur ergonomique : aperçu et prix restent visibles pendant les réglages. */
+@media(min-width:1001px){
+  #simulateur .sim{grid-template-columns:minmax(300px,330px) minmax(420px,1fr) minmax(300px,330px);gap:18px}
+  #simulateur .panel{padding:21px}
+  #simulateur .field{margin-bottom:20px}
+  #simulateur .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:9px}
+  #simulateur .sw{display:grid;place-items:center}
+  #simulateur .stage{position:sticky;top:92px;height:clamp(480px,calc(100vh - 116px),640px);display:flex;align-items:center;justify-content:center}
+  #simulateur .stage #canvas{width:100%;max-height:100%;display:grid;place-items:center}
+  #simulateur .stage #canvas>svg{width:100%;max-height:calc(100vh - 150px)}
+  #simulateur .recap{top:92px;max-height:calc(100vh - 116px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--orange) #222}
+}
+@media(max-width:1000px){
+  #simulateur .sim{display:grid;grid-template-columns:1fr;gap:18px}
+  #simulateur .panel{order:1;display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+  #simulateur .stage{order:2;position:relative;top:auto;height:min(68vw,540px);display:flex;align-items:center;justify-content:center}
+  #simulateur .stage #canvas{width:100%;display:grid;place-items:center}
+  #simulateur .stage #canvas>svg{max-height:500px}
+  #simulateur .recap{order:3;position:static;max-height:none;overflow:visible}
+  #simulateur .viewsw button{min-height:42px;padding:8px 16px}
+}
+@media(max-width:700px){
+  #simulateur .panel{display:block;padding:18px}
+  #simulateur .field{margin-bottom:22px}
+  #simulateur .stage{height:clamp(360px,115vw,510px)}
+  #simulateur .swatches{gap:10px}
+  #simulateur .sw i{width:36px;height:36px}
+  #simulateur .opt span{min-height:52px;display:flex;flex-direction:column;justify-content:center}
+  #simulateur .qty button,#simulateur .qty input{height:50px}
+  #simulateur .recap{padding:22px 18px}
+}
+</style>
 </head>
 <body>
 
@@ -1440,7 +1473,20 @@ el("quoteForm").addEventListener("submit", async e=>{
     reset();
   }catch(error){
     console.error("Enregistrement du devis impossible",error);
-    err.textContent="L'enregistrement n'a pas abouti. Vérifiez votre connexion puis réessayez.";
+    const detail=String(error && (error.message || error.error_description || error) || "");
+    if(/anonymous sign-ins? (are )?disabled/i.test(detail)){
+      err.textContent="Les connexions anonymes ne sont pas activées dans Supabase. Activez Authentication > Providers > Anonymous Sign-Ins.";
+    }else if(/bucket.*not found|devis-logos/i.test(detail)){
+      err.textContent="Le stockage Supabase n'est pas encore configuré. Exécutez le fichier supabase-configuration.sql.";
+    }else if(/relation.*demandes_devis|could not find.*demandes_devis/i.test(detail)){
+      err.textContent="La table des devis n'existe pas encore. Exécutez le fichier supabase-configuration.sql.";
+    }else if(/row-level security|violates.*policy|permission denied/i.test(detail)){
+      err.textContent="Les règles de sécurité Supabase sont incomplètes. Réexécutez le fichier supabase-configuration.sql.";
+    }else if(/failed to fetch|networkerror|load failed/i.test(detail)){
+      err.textContent="Supabase est momentanément inaccessible. Vérifiez la connexion puis réessayez.";
+    }else{
+      err.textContent="Supabase a refusé l'enregistrement. Vérifiez que le script SQL est installé et les connexions anonymes activées.";
+    }
     err.classList.add("on");
   }finally{
     send.disabled=false;
