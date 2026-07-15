@@ -40,7 +40,7 @@
     .table-wrap{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
     table{border-collapse:collapse;width:100%;min-width:1050px}th{text-align:left;color:#8f949b;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:15px 17px;background:#25282b;border-bottom:1px solid var(--line)}td{padding:18px 17px;border-bottom:1px solid rgba(255,255,255,.06);vertical-align:top;font-size:14px}tbody tr{transition:.18s background}tbody tr:hover{background:rgba(255,255,255,.025)}tbody tr:last-child td{border-bottom:0}
     .date{white-space:nowrap;color:var(--muted);font-size:12px}.person strong{font-size:15px}.person small,.contact small{display:block;color:var(--muted);margin-top:4px}.contact a{color:#fff;text-decoration:none}.contact a:hover{color:var(--orange2)}.details{max-width:310px;color:#d8d8d5;line-height:1.45}.details button{border:0;background:none;padding:0;color:var(--orange2);font-weight:600;margin-top:7px}.estimate{white-space:nowrap;font-weight:700;color:var(--orange2)}
-    .download{border:1px solid var(--line);background:#25272a;color:#fff;border-radius:10px;padding:9px 11px;font-weight:600;max-width:170px;display:flex;gap:7px;align-items:center}.download:hover{border-color:var(--orange)}.download span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .download{border:0;background:linear-gradient(135deg,var(--orange2),var(--orange));color:#fff;border-radius:11px;padding:10px 12px;font-weight:700;width:175px;display:grid;grid-template-columns:26px minmax(0,1fr);grid-template-areas:"icon action" "icon name";column-gap:8px;align-items:center;text-align:left;box-shadow:0 8px 20px rgba(239,125,44,.18)}.download:hover{filter:brightness(1.07);transform:translateY(-1px)}.download:disabled{opacity:.55;cursor:wait}.download-icon{grid-area:icon;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:17px}.download-action{grid-area:action;font-size:13px;line-height:1.15}.download-name{grid-area:name;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;line-height:1.35;opacity:.82;font-weight:500}
     .status{border:1px solid var(--line);color:#fff;background:#242629;border-radius:10px;padding:9px 30px 9px 10px;outline:none}.status:focus{border-color:var(--orange)}
     .state{padding:70px 25px;text-align:center;color:var(--muted)}.spinner{width:31px;height:31px;border:3px solid var(--line);border-top-color:var(--orange);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 13px}@keyframes spin{to{transform:rotate(360deg)}}
     .toast{position:fixed;right:24px;bottom:24px;max-width:380px;padding:14px 18px;border-radius:13px;background:#35393e;border:1px solid var(--line);box-shadow:var(--shadow);transform:translateY(20px);opacity:0;pointer-events:none;transition:.25s}.toast.show{transform:none;opacity:1}.toast.error{border-color:rgba(255,120,110,.55)}
@@ -219,7 +219,7 @@
         const estimate = labeledCell("Estimation", "estimate"); estimate.textContent = row.estimation || "À étudier";
         const logo = labeledCell("Logo", "");
         const download = el("button", "download"); download.type = "button"; download.title = "Télécharger " + row.logo_name;
-        download.append(el("span", "", row.logo_name || "Fichier"));
+        download.append(el("span", "download-icon", "↓"), el("span", "download-action", "Télécharger"), el("span", "download-name", row.logo_name || "Logo client"));
         download.addEventListener("click", () => downloadLogo(row, download)); logo.appendChild(download);
         const statusCell = labeledCell("Statut", "");
         const select = el("select", "status"); select.setAttribute("aria-label", "Statut de la demande de " + row.nom);
@@ -234,7 +234,14 @@
         const { data, error } = await db.storage.from("devis-logos").createSignedUrl(row.logo_path, 60, { download: row.logo_name || true });
         button.disabled = false;
         if (error || !data || !data.signedUrl) return showToast("Téléchargement impossible : " + (error ? error.message : "lien absent"), true);
-        window.open(data.signedUrl, "_blank", "noopener,noreferrer");
+        const link = document.createElement("a");
+        link.href = data.signedUrl;
+        link.download = row.logo_name || "logo-client";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        showToast("Téléchargement du logo lancé.");
       }
 
       async function updateStatus(row, select) {
