@@ -110,7 +110,7 @@
   <div class="noise"></div>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="jebrodepourvous-site.html" aria-label="Retour au site Je Brode Pour Vous">
+      <a class="brand" href="index.html" aria-label="Retour au site Je Brode Pour Vous">
         <img class="brand-logo" src="jebrodepourvous.png" alt="Je Brode Pour Vous">
         <span class="brand-copy"><small>Espace professionnel</small></span>
       </a>
@@ -274,7 +274,7 @@
         const table = document.createElement("table");
         const thead = document.createElement("thead");
         const hr = document.createElement("tr");
-        ["Date","Client","Contact","Demande","Pièce jointe","Estimation","BAT & paiement","Statut"].forEach(label => hr.appendChild(el("th", "", label)));
+        ["Date","Client","Contact","Demande","Pièce jointe","Estimation","BAT client","Statut"].forEach(label => hr.appendChild(el("th", "", label)));
         thead.appendChild(hr);
         const tbody = document.createElement("tbody");
         filtered.forEach(row => tbody.appendChild(buildRow(row)));
@@ -302,98 +302,85 @@
         const select = el("select", "status"); select.setAttribute("aria-label", "Statut de la demande de " + row.nom);
         Object.entries(statuses).forEach(([value,label]) => { const option = el("option", "", label); option.value = value; option.selected = value === row.statut; select.appendChild(option); });
         select.addEventListener("change", () => updateStatus(row, select)); statusCell.appendChild(select);
-        const batCell = labeledCell("BAT & paiement", "");
+        const batCell = labeledCell("BAT client", "");
         batCell.appendChild(buildBatCell(row));
         tr.append(date,person,contact,details,logo,estimate,batCell,statusCell);
         return tr;
       }
 
-      function paymentLabel(status) {
+      function batLabel(status) {
         return ({
-          non_prepare: "BAT non préparé",
-          bat_envoye: "BAT prêt à envoyer",
-          bat_valide: "BAT validé",
-          paiement_en_attente: "Paiement en attente",
-          paye: "Payé",
-          echec: "Paiement à vérifier"
+          non_prepare: "BAT non déposé",
+          disponible: "BAT envoyé au client",
+          valide: "BAT validé",
+          modification_demandee: "Modification demandée"
         })[status] || "BAT non préparé";
       }
 
       function buildBatCell(row) {
         const wrap = el("div", "batbox");
-        const stateClass = row.payment_status === "paye" ? " paid" : (["bat_valide","paiement_en_attente"].includes(row.payment_status) ? " waiting" : "");
-        wrap.appendChild(el("span", "pay-state" + stateClass, paymentLabel(row.payment_status)));
-
-        const amount = document.createElement("input");
-        amount.type = "number"; amount.min = "1"; amount.step = "0.01";
-        amount.placeholder = "Montant TTC en €";
-        if (row.bat_amount_cents) amount.value = (row.bat_amount_cents / 100).toFixed(2);
+        const stateClass = row.bat_status === "valide" ? " paid" : (["disponible","modification_demandee"].includes(row.bat_status) ? " waiting" : "");
+        wrap.appendChild(el("span", "pay-state" + stateClass, batLabel(row.bat_status)));
+        if(row.bat_status === "modification_demandee" && row.bat_message){
+          const request = el("small", "", "Client : " + row.bat_message); request.style.color="#ffb1b5"; wrap.appendChild(request);
+        }
 
         const file = document.createElement("input");
         file.type = "file"; file.accept = "application/pdf,image/png,image/jpeg";
         file.setAttribute("aria-label", "BAT de " + (row.nom || "ce client"));
-        wrap.append(amount, file);
+        wrap.appendChild(file);
 
         const actions = el("div", "batbox-actions");
-        const prepare = el("button", "", row.bat_token ? "Mettre à jour" : "Préparer le BAT");
+        const prepare = el("button", "", row.bat_path ? "Remplacer et notifier" : "Déposer et notifier");
         prepare.type = "button";
-        prepare.addEventListener("click", () => prepareBat(row, amount, file, prepare));
+        prepare.addEventListener("click", () => prepareBat(row, file, prepare));
         actions.appendChild(prepare);
 
         if (row.bat_path) {
           const view = el("button", "secondary", "Voir"); view.type = "button";
           view.addEventListener("click", () => viewBat(row)); actions.appendChild(view);
-        }
-        if (row.bat_token) {
-          const copy = el("button", "secondary", "Copier le lien client"); copy.type = "button";
-          copy.addEventListener("click", () => copyBatLink(row)); actions.appendChild(copy);
+          const copy = el("button", "secondary", "Copier le lien Mon compte"); copy.type = "button";
+          copy.addEventListener("click", () => copyAccountLink(row)); actions.appendChild(copy);
         }
         wrap.appendChild(actions);
         return wrap;
       }
 
-      async function prepareBat(row, amountInput, fileInput, button) {
-        const euros = Number(String(amountInput.value).replace(",", "."));
+      async function prepareBat(row, fileInput, button) {
         const file = fileInput.files[0];
-        if (!Number.isFinite(euros) || euros <= 0) return showToast("Indiquez un montant valide.", true);
-        if (!file && !row.bat_path) return showToast("Ajoutez le fichier BAT en PDF, PNG ou JPEG.", true);
+        if (!file) return showToast("Ajoutez le nouveau BAT en PDF, PNG ou JPEG.", true);
         if (file && file.size > 15 * 1024 * 1024) return showToast("Le BAT ne doit pas dépasser 15 Mo.", true);
 
-        button.disabled = true; button.textContent = "Préparation…";
+        button.disabled = true; button.textContent = "Dépôt et envoi…";
         let uploadedPath = null;
         try {
-          let batPath = row.bat_path || null;
-          let batName = row.bat_name || null;
-          if (file) {
-            const safeName = file.name.replace(/[^a-zA-Z0-9._-]+/g, "-");
-            uploadedPath = `${row.id}/${crypto.randomUUID()}-${safeName}`;
-            const { error: uploadError } = await db.storage.from("bat-documents").upload(uploadedPath, file, { contentType: file.type, upsert: false });
-            if (uploadError) throw uploadError;
-            batPath = uploadedPath; batName = file.name;
-          }
+          const safeName = file.name.replace(/[^a-zA-Z0-9._-]+/g, "-");
+          uploadedPath = `${row.id}/${crypto.randomUUID()}-${safeName}`;
+          const { error: uploadError } = await db.storage.from("bat-documents").upload(uploadedPath, file, { contentType: file.type, upsert: false });
+          if (uploadError) throw uploadError;
           const update = {
-            bat_path: batPath,
-            bat_name: batName,
-            bat_amount_cents: Math.round(euros * 100),
-            bat_token: row.bat_token || crypto.randomUUID(),
+            bat_path: uploadedPath,
+            bat_name: file.name,
             bat_sent_at: new Date().toISOString(),
-            bat_approved_at: null,
-            payment_status: "bat_envoye",
-            sumup_checkout_id: null,
-            sumup_checkout_url: null,
-            paid_at: null
+            bat_status: "disponible",
+            bat_message: null,
+            bat_notified_at: null,
+            bat_validated_at: null,
+            bat_notification_error: null
           };
           const { error } = await db.from("demandes_devis").update(update).eq("id", row.id);
           if (error) throw error;
-          if (file && row.bat_path && row.bat_path !== uploadedPath) await db.storage.from("bat-documents").remove([row.bat_path]);
+          if (row.bat_path && row.bat_path !== uploadedPath) await db.storage.from("bat-documents").remove([row.bat_path]);
           Object.assign(row, update);
+          const { data: notice, error: noticeError } = await db.functions.invoke("notify-bat", { body: { quote_id: row.id } });
           renderRows();
-          showToast("BAT préparé. Le lien client peut être envoyé.");
+          if(noticeError || notice?.error) showToast("BAT déposé, mais l’e-mail n’a pas été envoyé : " + (notice?.error || noticeError.message), true);
+          else showToast("BAT déposé et e-mail envoyé au client.");
         } catch (error) {
           if (uploadedPath) await db.storage.from("bat-documents").remove([uploadedPath]);
-          showToast("Préparation impossible : " + (error.message || error), true);
+          showToast("Dépôt impossible : " + (error.message || error), true);
         } finally {
-          button.disabled = false; button.textContent = row.bat_token ? "Mettre à jour" : "Préparer le BAT";
+          button.disabled = false; button.textContent = row.bat_path ? "Remplacer et notifier" : "Déposer et notifier";
         }
       }
 
@@ -403,12 +390,12 @@
         window.open(data.signedUrl, "_blank", "noopener");
       }
 
-      async function copyBatLink(row) {
-        const url = new URL("jebrodepourvous-bat.html", window.location.href);
-        url.searchParams.set("token", row.bat_token);
+      async function copyAccountLink(row) {
+        const url = new URL("mon-compte.html", window.location.href);
+        url.searchParams.set("commande", row.id);
         try {
           await navigator.clipboard.writeText(url.href);
-          showToast("Lien client copié. Envoyez-le par e-mail ou SMS.");
+          showToast("Lien Mon compte copié.");
         } catch {
           window.prompt("Copiez ce lien client :", url.href);
         }
