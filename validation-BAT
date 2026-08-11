@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Validation du BAT — Je Brode Pour Vous</title>
+  <link rel="icon" type="image/png" href="jebrodepourvous.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#071633;--navy2:#10254d;--red:#d70812;--red2:#f31a24;--paper:#f5f7fb;--muted:#68758e;--line:#dde2ea;--good:#16875f}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% 0,rgba(215,8,18,.12),transparent 30rem),var(--paper);color:var(--navy);font-family:Manrope,sans-serif}
+    .top{background:#fff;border-bottom:1px solid var(--line);box-shadow:0 8px 30px rgba(7,22,51,.06)}
+    .top-inner{width:min(1120px,calc(100% - 36px));height:92px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{height:72px;width:auto}.secure{font-size:12px;color:var(--muted);font-weight:700}.secure::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:var(--good)}
+    main{width:min(1120px,calc(100% - 36px));margin:54px auto 80px}.grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 22px 60px rgba(7,22,51,.09);overflow:hidden}.content{padding:32px}.side{padding:28px;position:sticky;top:24px}
+    .eyebrow{color:var(--red);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}h1{margin:0;font-size:clamp(30px,5vw,52px);line-height:1.02;letter-spacing:-.05em}p{line-height:1.7;color:var(--muted)}
+    .bat-frame{height:min(68vh,720px);background:#e9edf4;border-top:1px solid var(--line)}.bat-frame iframe,.bat-frame img{width:100%;height:100%;border:0;display:block;object-fit:contain}.bat-frame img{padding:20px}
+    .summary{display:grid;gap:12px;margin:20px 0}.row{display:flex;justify-content:space-between;gap:18px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}.row strong{color:var(--navy);text-align:right}.amount{font-size:34px;letter-spacing:-.04em;color:var(--navy)}
+    .consent{display:flex;gap:10px;align-items:flex-start;padding:14px;border-radius:12px;background:#f5f7fb;font-size:12px;line-height:1.5;color:#52617c}.consent input{margin-top:3px}
+    .btn{width:100%;margin-top:14px;border:0;border-radius:11px;padding:15px 18px;background:linear-gradient(135deg,var(--red2),var(--red));color:#fff;font-weight:800;cursor:pointer;box-shadow:0 13px 28px rgba(215,8,18,.22)}.btn:disabled{opacity:.5;cursor:not-allowed}.message{padding:28px;text-align:center;color:var(--muted)}.message.error{color:#b1000a}.paid{padding:26px;border-radius:16px;background:#e9f8f2;color:#126b4e;text-align:center}.paid strong{display:block;font-size:24px;margin-bottom:7px}
+    .note{font-size:11px;color:#8791a5;text-align:center;margin:13px 0 0}.hidden{display:none!important}
+    @media(max-width:820px){.grid{grid-template-columns:1fr}.side{position:static;order:-1}.bat-frame{height:62vh}.top-inner{height:76px}.logo{height:58px}.secure{display:none}main{margin-top:28px}.content,.side{padding:22px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-inner"><img class="logo" src="jebrodepourvous.png" alt="Je Brode Pour Vous"><span class="secure">Lien privé et sécurisé</span></div></header>
+  <main>
+    <div id="loading" class="card message">Chargement de votre bon à tirer…</div>
+    <div id="error" class="card message error hidden"></div>
+    <div id="app" class="grid hidden">
+      <section class="card">
+        <div class="content"><div class="eyebrow">Bon à tirer</div><h1>Vérifiez votre marquage</h1><p>Contrôlez attentivement les textes, couleurs, dimensions et emplacement avant de valider. Cette validation autorise la mise en production.</p></div>
+        <div class="bat-frame" id="batFrame"></div>
+      </section>
+      <aside class="card side">
+        <div id="payPanel">
+          <div class="eyebrow">Votre commande</div>
+          <div class="summary">
+            <div class="row"><span>Client</span><strong id="clientName">—</strong></div>
+            <div class="row"><span>Référence</span><strong id="reference">—</strong></div>
+            <div class="row"><span>Montant à régler</span><strong class="amount" id="amount">—</strong></div>
+          </div>
+          <label class="consent"><input type="checkbox" id="approval"> <span>J’ai vérifié le BAT et je confirme qu’il est conforme à ma demande. J’autorise sa mise en production.</span></label>
+          <button class="btn" id="payBtn" disabled>Valider le BAT et payer</button>
+          <p class="note">Le paiement est traité sur la page sécurisée de SumUp.</p>
+        </div>
+        <div id="paidPanel" class="paid hidden"><strong>Paiement reçu</strong>Merci, votre BAT est validé et votre commande peut passer en production.</div>
+      </aside>
+    </div>
+  </main>
+  <script>
+    (() => {
+      "use strict";
+      const SUPABASE_URL = "https://awuxkfjwzxqsbdlwyxud.supabase.co";
+      const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_BH_aUqqsRkHlqpPbwCg6Sw_abU_RcWa";
+      const endpoint = SUPABASE_URL + "/functions/v1/bat-session";
+      const token = new URLSearchParams(location.search).get("token");
+      const loading = document.getElementById("loading"), errorBox = document.getElementById("error"), app = document.getElementById("app");
+      const approval = document.getElementById("approval"), payBtn = document.getElementById("payBtn");
+
+      function showError(message) { loading.classList.add("hidden"); app.classList.add("hidden"); errorBox.textContent = message; errorBox.classList.remove("hidden"); }
+      async function call(action) {
+        const response = await fetch(endpoint, { method:"POST", headers:{"Content-Type":"application/json","apikey":SUPABASE_PUBLISHABLE_KEY,"Authorization":"Bearer "+SUPABASE_PUBLISHABLE_KEY}, body:JSON.stringify({token,action}) });
+        const body = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(body.error || "Service momentanément indisponible.");
+        return body;
+      }
+      function renderBat(data) {
+        document.getElementById("clientName").textContent = data.client_name || "Client";
+        document.getElementById("reference").textContent = data.reference || "Devis";
+        document.getElementById("amount").textContent = new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(data.amount_cents/100);
+        const frame = document.getElementById("batFrame"); frame.replaceChildren();
+        const isImage = /image\/(png|jpeg)/i.test(data.bat_type || "") || /\.(png|jpe?g)(\?|$)/i.test(data.bat_url || "");
+        if (isImage) { const img = new Image(); img.src = data.bat_url; img.alt = "Aperçu du bon à tirer"; frame.appendChild(img); }
+        else { const iframe = document.createElement("iframe"); iframe.src = data.bat_url; iframe.title = "Bon à tirer"; frame.appendChild(iframe); }
+        if (data.payment_status === "paye") { document.getElementById("payPanel").classList.add("hidden"); document.getElementById("paidPanel").classList.remove("hidden"); }
+        loading.classList.add("hidden"); app.classList.remove("hidden");
+      }
+      async function load() {
+        if (!token) return showError("Ce lien de BAT est incomplet. Demandez un nouveau lien à Je Brode Pour Vous.");
+        try { renderBat(await call("view")); } catch (error) { showError(error.message); }
+      }
+      approval.addEventListener("change", () => payBtn.disabled = !approval.checked);
+      payBtn.addEventListener("click", async () => {
+        if (!approval.checked) return;
+        payBtn.disabled = true; payBtn.textContent = "Préparation du paiement…";
+        try { const data = await call("approve"); if (!data.payment_url) throw new Error("Lien de paiement absent."); location.href = data.payment_url; }
+        catch (error) { showError(error.message); }
+      });
+      load();
+    })();
+  </script>
+</body>
+</html>
