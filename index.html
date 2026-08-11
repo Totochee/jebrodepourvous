@@ -613,13 +613,108 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
   #simulateur .recap{padding:22px 18px}
 }
 </style>
+<style>
+/* Identité Je Brode Pour Vous — palette issue du logo */
+:root{
+  --anthracite:#071633;
+  --ardoise:#24375E;
+  --orange:#D70812;
+  --encre:#071633;
+  --gris:#667085;
+  --trait:#DDE2EA;
+  --papier:#F5F7FB;
+  --blanc:#FFFFFF;
+  --creme:#FFF8F8;
+  --radius:10px;
+  --ombre:0 26px 70px rgba(7,22,51,.14);
+}
+html{background:#071633}
+body{background:#F5F7FB;color:var(--encre)}
+body::selection{background:rgba(215,8,18,.2)}
+.eyebrow{color:var(--orange)}
+.eyebrow::before{background:var(--orange)}
+
+header{background:rgba(255,255,255,.96);border-bottom:1px solid rgba(7,22,51,.1);box-shadow:0 8px 30px rgba(7,22,51,.06)}
+header::after{background:var(--orange)}
+.bar{height:92px}
+.logo{display:flex;align-items:center;flex:none}
+.logo img{display:block;width:auto;height:72px;object-fit:contain}
+nav a{color:#24375E}
+nav a:hover{background:rgba(7,22,51,.06);color:#071633}
+nav a::after{background:var(--orange)}
+#burger{color:#071633;background:rgba(7,22,51,.07)}
+.btn{background:var(--orange);box-shadow:0 12px 34px rgba(215,8,18,.24)}
+.btn:hover{background:#B9000A;box-shadow:0 16px 38px rgba(215,8,18,.3)}
+
+.hero{min-height:calc(100svh - 92px);background:
+  radial-gradient(circle at 83% 40%,rgba(215,8,18,.22),transparent 20%),
+  radial-gradient(circle at 76% 38%,rgba(255,255,255,.055),transparent 38%),
+  #071633}
+.hero::before{background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px)}
+.hero::after{background:linear-gradient(115deg,transparent,rgba(215,8,18,.12))}
+.hero-grid::after{border-color:rgba(215,8,18,.72);box-shadow:0 0 0 42px rgba(215,8,18,.08),0 0 0 84px rgba(215,8,18,.04)}
+.hero h1{color:#fff}
+.hero h1 span{color:#F31A24;text-shadow:0 0 55px rgba(215,8,18,.22)}
+.hero p.lead{color:#C8D1E2}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.35);color:#fff;box-shadow:none}
+.btn.ghost:hover{background:#fff;color:#071633}
+.stitch-box li{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#E8EDF7}
+.stitch-box li::before{background:var(--orange)}
+
+.brand-marquee{background:var(--orange);color:#fff;border:0}
+.trust-strip{background:#fff}
+.trust-item i{background:#EEF1F7;color:#071633}
+#prestations{background:#F5F7FB}
+#prestations::before,#simulateur::before,#devis::before{color:rgba(7,22,51,.04)}
+.cards{background:#D7DDE8;border-color:#D7DDE8}
+.card{background:#fff}
+.card::before{background:#071633}
+.card.rouge::before{background:var(--orange)}
+.card:nth-child(2){background:#071633}
+.card:hover::after{background:var(--orange);border-color:var(--orange)}
+
+#simulateur{background:#0A1B40}
+#simulateur .sec-head p:last-child{color:#C4CCDB!important}
+.panel{background:#132751}
+.field>label,.legend{color:#B8C3D8}
+.opt span,select,.qty button,.qty input{background:#1B315E;border-color:#40537A;color:#fff}
+.opt span small{color:#BFC8D8}
+.opt span:hover{border-color:#F31A24}
+.opt input:checked+span,.opt input[type=checkbox]:checked+span{background:var(--orange);border-color:var(--orange)}
+.stage{background:radial-gradient(circle at 50% 40%,#30466F,#132751)}
+.recap{background:#050F27;border-top-color:var(--orange)}
+#tarifs{background:#F7F8FB}
+#devis{background:#EEF1F7}
+#devis form{background:#fff}
+input:focus,textarea:focus,select:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(215,8,18,.12)}
+.drop:hover,.drop.over{border-color:var(--orange)!important;background:#FFF6F6!important}
+.drop:hover::before,.drop.over::before{background:var(--orange)}
+
+footer{background:#050F27;color:#AEB8CD}
+footer h3{color:#fff}
+footer a{color:#C9D1E0}
+.footer-logo{display:block;width:190px;height:auto;margin-bottom:18px;background:#fff;border-radius:8px;padding:8px}
+
+@media(max-width:1000px){
+  header nav{top:100%;height:calc(100dvh - 92px);background:#071633!important}
+  header nav a{color:#fff}
+  header nav a:hover{color:#F31A24}
+  .hero{min-height:auto}
+}
+@media(max-width:620px){
+  .bar{height:76px}
+  .logo img{height:58px}
+  header nav{height:calc(100dvh - 76px)}
+  .hero{padding-top:58px}
+}
+</style>
 </head>
 <body>
 
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#top">
-      <b>Je brode <span>pour vous</span></b>
+    <a class="logo" href="#top" aria-label="Je Brode Pour Vous — accueil">
+      <img src="jebrodepourvous.png" alt="Je Brode Pour Vous">
     </a>
     <nav id="nav">
       <a href="#prestations">Prestations</a>
@@ -866,7 +961,7 @@ body:not(.is-ready) .hero-art{opacity:0;transform:translateX(44px)}
   <div class="wrap">
     <div class="foot">
       <div>
-        <h3>Je brode pour vous</h3>
+        <img class="footer-logo" src="jebrodepourvous.png" alt="Je Brode Pour Vous">
         <p>Broderie et transfert sur vêtements professionnels. Petites et grandes séries, du prototype à la dotation complète.</p>
       </div>
       <div>
