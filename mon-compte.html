@@ -14,10 +14,10 @@
     *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 90% 0,rgba(215,8,18,.12),transparent 30rem),var(--paper);color:var(--navy);font-family:Manrope,sans-serif}
     button,input,textarea{font:inherit}.top{background:#fff;border-bottom:1px solid var(--line);box-shadow:0 8px 30px rgba(7,22,51,.06)}.top-inner{width:min(1180px,calc(100% - 36px));height:92px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{height:72px;width:auto}.back{color:var(--navy);font-size:13px;font-weight:800;text-decoration:none}
     main{width:min(1180px,calc(100% - 36px));margin:46px auto 80px}.auth{width:min(550px,100%);margin:7vh auto 0;padding:38px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 24px 70px rgba(7,22,51,.11)}.eyebrow{color:var(--red);font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}h1,h2,h3{margin:0;letter-spacing:-.045em}h1{font-size:clamp(34px,5vw,56px);line-height:1}h2{font-size:clamp(28px,4vw,44px)}p{color:var(--muted);line-height:1.7}
-    .email{width:100%;height:52px;border:1px solid var(--line);border-radius:11px;padding:0 15px;outline:0}.email:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(215,8,18,.1)}.auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.btn{border:0;border-radius:10px;padding:13px 16px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(135deg,var(--red2),var(--red));color:#fff}.secondary{background:#edf0f6;color:var(--navy)}.btn:disabled{opacity:.5;cursor:not-allowed}.msg{min-height:24px;margin-top:14px;font-size:13px;color:var(--muted)}.msg.error{color:#b1000a}.msg.ok{color:var(--good)}
+    .email,.profile-input{width:100%;height:52px;border:1px solid var(--line);border-radius:11px;padding:0 15px;outline:0}.email:focus,.profile-input:focus,textarea:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(215,8,18,.1)}.signup-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.signup-fields .full{grid-column:1/-1}.field-label{display:block;margin:0 0 5px;font-size:11px;font-weight:800;color:#52617c}.auth-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.btn{border:0;border-radius:10px;padding:13px 16px;font-weight:800;cursor:pointer}.primary{background:linear-gradient(135deg,var(--red2),var(--red));color:#fff}.secondary{background:#edf0f6;color:var(--navy)}.btn:disabled{opacity:.5;cursor:not-allowed}.msg{min-height:24px;margin-top:14px;font-size:13px;color:var(--muted)}.msg.error{color:#b1000a}.msg.ok{color:var(--good)}.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:#8a94a8;font-size:11px}.divider::before,.divider::after{content:"";height:1px;flex:1;background:var(--line)}.social-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.social{display:flex;align-items:center;justify-content:center;gap:9px;background:#fff;color:var(--navy);border:1px solid var(--line)}.social-mark{font-size:18px;line-height:1}.social-note{margin:12px 0 0;text-align:center;font-size:10px;color:#8a94a8}
     .dashboard.hidden,.auth.hidden{display:none}.dash-head{display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:28px}.identity{display:flex;align-items:center;gap:10px;margin-top:10px;color:var(--muted);font-size:13px}.identity i{width:8px;height:8px;border-radius:50%;background:var(--good)}.head-actions{display:flex;gap:8px}.return-devis{display:none;margin-bottom:22px;padding:15px 18px;border:1px solid #a8dcc8;border-radius:12px;background:#f0faf6;color:#126b4e;font-size:13px}.return-devis.on{display:flex;justify-content:space-between;align-items:center;gap:16px}.return-devis a{color:inherit;font-weight:800}
-    .orders{display:grid;gap:16px}.order{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 13px 38px rgba(7,22,51,.07);overflow:hidden}.order.highlight{border-color:var(--red);box-shadow:0 0 0 3px rgba(215,8,18,.08)}.order-head{display:flex;justify-content:space-between;gap:20px;padding:22px 24px;border-bottom:1px solid var(--line)}.order-title strong{display:block;font-size:18px}.order-title small{color:var(--muted)}.status{height:max-content;padding:6px 9px;border-radius:999px;background:#edf0f6;color:#53617b;font-size:10px;font-weight:800;text-transform:uppercase}.status.available{background:#fff0f1;color:#ad0710}.status.valid{background:#e9f8f2;color:#126b4e}.status.change{background:#fff5e5;color:#8b5200}.order-body{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:22px 24px}.info{font-size:13px;color:var(--muted);line-height:1.7}.info strong{color:var(--navy)}.bat-area{padding:18px;border-radius:14px;background:#f5f7fb}.bat-area h3{font-size:16px}.bat-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.small-btn{border:0;border-radius:9px;padding:10px 12px;background:var(--navy);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.small-btn.red{background:var(--red)}.small-btn.light{background:#e2e7f0;color:var(--navy)}textarea{display:none;width:100%;min-height:90px;margin-top:10px;padding:11px;border:1px solid var(--line);border-radius:9px;resize:vertical}.empty{padding:50px 24px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:18px;color:var(--muted)}
-    @media(max-width:720px){.top-inner{height:76px}.logo{height:58px}.back{font-size:0}.back::after{content:"← Site";font-size:12px}.auth{padding:28px 20px}.auth-actions{grid-template-columns:1fr}.dash-head{align-items:flex-start;flex-direction:column}.order-head,.order-body{grid-template-columns:1fr;flex-direction:column}.return-devis.on{align-items:flex-start;flex-direction:column}}
+    .profile-panel{display:none;margin-bottom:22px;padding:28px;background:#fff;border:1px solid #f1b7bb;border-top:5px solid var(--red);border-radius:18px;box-shadow:0 15px 42px rgba(7,22,51,.08)}.profile-panel.on{display:block}.profile-panel p{margin:8px 0 20px}.profile-actions{display:flex;justify-content:flex-end;margin-top:13px}.orders{display:grid;gap:16px}.orders.locked{display:none}.order{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 13px 38px rgba(7,22,51,.07);overflow:hidden}.order.highlight{border-color:var(--red);box-shadow:0 0 0 3px rgba(215,8,18,.08)}.order-head{display:flex;justify-content:space-between;gap:20px;padding:22px 24px;border-bottom:1px solid var(--line)}.order-title strong{display:block;font-size:18px}.order-title small{color:var(--muted)}.status{height:max-content;padding:6px 9px;border-radius:999px;background:#edf0f6;color:#53617b;font-size:10px;font-weight:800;text-transform:uppercase}.status.available{background:#fff0f1;color:#ad0710}.status.valid{background:#e9f8f2;color:#126b4e}.status.change{background:#fff5e5;color:#8b5200}.order-body{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:22px 24px}.info{font-size:13px;color:var(--muted);line-height:1.7}.info strong{color:var(--navy)}.bat-area{padding:18px;border-radius:14px;background:#f5f7fb}.bat-area h3{font-size:16px}.bat-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}.small-btn{border:0;border-radius:9px;padding:10px 12px;background:var(--navy);color:#fff;font-size:11px;font-weight:800;cursor:pointer}.small-btn.red{background:var(--red)}.small-btn.light{background:#e2e7f0;color:var(--navy)}textarea{display:none;width:100%;min-height:90px;margin-top:10px;padding:11px;border:1px solid var(--line);border-radius:9px;resize:vertical}.empty{padding:50px 24px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:18px;color:var(--muted)}
+    @media(max-width:720px){.top-inner{height:76px}.logo{height:58px}.back{font-size:0}.back::after{content:"← Site";font-size:12px}.auth{padding:28px 20px}.auth-actions,.social-actions,.signup-fields{grid-template-columns:1fr}.signup-fields .full{grid-column:auto}.dash-head{align-items:flex-start;flex-direction:column}.order-head,.order-body{grid-template-columns:1fr;flex-direction:column}.return-devis.on{align-items:flex-start;flex-direction:column}}
   </style>
 </head>
 <body>
@@ -25,15 +25,24 @@
   <main>
     <section class="auth" id="authView">
       <div class="eyebrow">Espace client</div><h1>Mon compte</h1>
-      <p>Créez votre compte avec l’adresse e-mail utilisée pour vos devis. Vous recevrez un lien sécurisé pour vous connecter, sans mot de passe à retenir.</p>
+      <p>Créez votre compte avec vos coordonnées, ou connectez-vous si vous avez déjà un compte.</p>
+      <div class="signup-fields" id="signupFields">
+        <label><span class="field-label">Prénom *</span><input class="profile-input" id="signupFirstName" autocomplete="given-name"></label>
+        <label><span class="field-label">Nom *</span><input class="profile-input" id="signupLastName" autocomplete="family-name"></label>
+        <label class="full"><span class="field-label">Société <small>(facultatif)</small></span><input class="profile-input" id="signupCompany" autocomplete="organization"></label>
+      </div>
       <input class="email" id="emailInput" type="email" autocomplete="email" placeholder="votre@email.fr" aria-label="Votre adresse e-mail">
       <div class="auth-actions"><button class="btn primary" id="createBtn">Créer mon compte</button><button class="btn secondary" id="loginBtn">J’ai déjà un compte</button></div>
+      <div class="divider">ou continuer avec</div>
+      <div class="social-actions"><button class="btn social" id="googleBtn"><span class="social-mark">G</span> Google</button><button class="btn social" id="appleBtn"><span class="social-mark">●</span> Apple</button></div>
+      <p class="social-note">Lors de la première connexion Google ou Apple, vos coordonnées vous seront demandées.</p>
       <div class="msg" id="authMessage" role="status"></div>
     </section>
 
     <section class="dashboard hidden" id="dashboard">
       <div class="return-devis" id="returnDevis"><span>Votre compte est prêt. Vous pouvez maintenant envoyer votre demande.</span><a href="index.html#devis">Retourner au devis →</a></div>
       <div class="dash-head"><div><div class="eyebrow">Espace client</div><h2>Mes commandes</h2><div class="identity"><i></i><span id="accountEmail"></span></div></div><div class="head-actions"><button class="btn secondary" id="refreshBtn">Actualiser</button><button class="btn secondary" id="logoutBtn">Déconnexion</button></div></div>
+      <section class="profile-panel" id="profilePanel"><div class="eyebrow">Première connexion</div><h3>Complétez votre profil</h3><p>Ces informations seront utilisées pour vos demandes de devis et vos commandes.</p><div class="signup-fields"><label><span class="field-label">Prénom *</span><input class="profile-input" id="profileFirstName" autocomplete="given-name"></label><label><span class="field-label">Nom *</span><input class="profile-input" id="profileLastName" autocomplete="family-name"></label><label class="full"><span class="field-label">Société <small>(facultatif)</small></span><input class="profile-input" id="profileCompany" autocomplete="organization"></label></div><div class="msg" id="profileMessage"></div><div class="profile-actions"><button class="btn primary" id="saveProfileBtn">Enregistrer et continuer</button></div></section>
       <div class="orders" id="orders"><div class="empty">Chargement de vos commandes…</div></div>
     </section>
   </main>
@@ -44,23 +53,52 @@
       const SUPABASE_URL="https://awuxkfjwzxqsbdlwyxud.supabase.co";
       const SUPABASE_PUBLISHABLE_KEY="sb_publishable_BH_aUqqsRkHlqpPbwCg6Sw_abU_RcWa";
       const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-      const authView=document.getElementById("authView"),dashboard=document.getElementById("dashboard"),authMessage=document.getElementById("authMessage"),emailInput=document.getElementById("emailInput"),orders=document.getElementById("orders");
+      const authView=document.getElementById("authView"),dashboard=document.getElementById("dashboard"),authMessage=document.getElementById("authMessage"),emailInput=document.getElementById("emailInput"),orders=document.getElementById("orders"),profilePanel=document.getElementById("profilePanel");
       const params=new URLSearchParams(location.search),highlightId=params.get("commande");
       const labels={nouveau:"Demande reçue",en_cours:"En cours",traite:"Traitée",archive:"Archivée"};
       const batLabels={non_prepare:"BAT en préparation",disponible:"BAT à valider",valide:"BAT validé",modification_demandee:"Modification demandée"};
+      let currentSession=null;
 
       function setMessage(text,type=""){authMessage.textContent=text;authMessage.className="msg "+type}
       function accountUrl(){const url=new URL("mon-compte.html",location.href);if(params.get("retour"))url.searchParams.set("retour",params.get("retour"));if(highlightId)url.searchParams.set("commande",highlightId);return url.href}
       async function sendLink(create){
         const email=emailInput.value.trim();if(!/^\S+@\S+\.\S+$/.test(email)){setMessage("Saisissez une adresse e-mail valide.","error");emailInput.focus();return}
+        const firstName=document.getElementById("signupFirstName").value.trim(),lastName=document.getElementById("signupLastName").value.trim(),company=document.getElementById("signupCompany").value.trim();
+        if(create&&(!firstName||!lastName)){setMessage("Indiquez votre prénom et votre nom pour créer le compte.","error");(!firstName?document.getElementById("signupFirstName"):document.getElementById("signupLastName")).focus();return}
         document.getElementById("createBtn").disabled=true;document.getElementById("loginBtn").disabled=true;setMessage("Envoi du lien sécurisé…");
-        const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:accountUrl(),shouldCreateUser:create}});
+        const {error}=await db.auth.signInWithOtp({email,options:{emailRedirectTo:accountUrl(),shouldCreateUser:create,data:create?{first_name:firstName,last_name:lastName,company}:undefined}});
         document.getElementById("createBtn").disabled=false;document.getElementById("loginBtn").disabled=false;
         if(error){setMessage(create?"Création impossible : "+error.message:"Connexion impossible. Si vous n’avez pas encore de compte, cliquez sur « Créer mon compte ».","error");return}
         setMessage("Consultez votre boîte e-mail et cliquez sur le lien de connexion. Pensez à vérifier les courriers indésirables.","ok");
       }
-      function showAuth(){authView.classList.remove("hidden");dashboard.classList.add("hidden")}
-      async function showDashboard(session){authView.classList.add("hidden");dashboard.classList.remove("hidden");document.getElementById("accountEmail").textContent=session.user.email||"Compte client";document.getElementById("returnDevis").classList.toggle("on",params.get("retour")==="devis");await loadOrders()}
+      async function socialLogin(provider){
+        setMessage("Redirection vers "+(provider==="google"?"Google":"Apple")+"…");
+        const {error}=await db.auth.signInWithOAuth({provider,options:{redirectTo:accountUrl()}});
+        if(error)setMessage("Connexion "+(provider==="google"?"Google":"Apple")+" indisponible : "+error.message,"error");
+      }
+      function showAuth(){currentSession=null;authView.classList.remove("hidden");dashboard.classList.add("hidden")}
+      async function showDashboard(session){currentSession=session;authView.classList.add("hidden");dashboard.classList.remove("hidden");document.getElementById("accountEmail").textContent=session.user.email||"Compte client";await ensureProfile(session)}
+      async function ensureProfile(session){
+        const {data:profile,error}=await db.from("profiles").select("first_name,last_name,company,onboarding_completed").eq("id",session.user.id).maybeSingle();
+        if(error){profilePanel.classList.add("on");orders.classList.add("locked");document.getElementById("profileMessage").textContent="Impossible de charger votre profil : "+error.message;return}
+        const metadata=session.user.user_metadata||{};
+        document.getElementById("profileFirstName").value=profile?.first_name||metadata.first_name||metadata.given_name||"";
+        document.getElementById("profileLastName").value=profile?.last_name||metadata.last_name||metadata.family_name||"";
+        document.getElementById("profileCompany").value=profile?.company||metadata.company||"";
+        if(!profile?.onboarding_completed){profilePanel.classList.add("on");orders.classList.add("locked");document.getElementById("returnDevis").classList.remove("on");return}
+        profilePanel.classList.remove("on");orders.classList.remove("locked");document.getElementById("returnDevis").classList.toggle("on",params.get("retour")==="devis");await loadOrders();
+      }
+      async function saveProfile(){
+        if(!currentSession)return;
+        const firstName=document.getElementById("profileFirstName").value.trim(),lastName=document.getElementById("profileLastName").value.trim(),company=document.getElementById("profileCompany").value.trim(),message=document.getElementById("profileMessage"),button=document.getElementById("saveProfileBtn");
+        if(!firstName||!lastName){message.textContent="Le prénom et le nom sont obligatoires.";message.className="msg error";return}
+        button.disabled=true;message.textContent="Enregistrement…";message.className="msg";
+        const profile={id:currentSession.user.id,email:currentSession.user.email,first_name:firstName,last_name:lastName,company:company||null,onboarding_completed:true,updated_at:new Date().toISOString()};
+        const {error}=await db.from("profiles").upsert(profile,{onConflict:"id"});
+        if(error){message.textContent="Profil non enregistré : "+error.message;message.className="msg error";button.disabled=false;return}
+        await db.auth.updateUser({data:{first_name:firstName,last_name:lastName,company:company||null}});
+        button.disabled=false;profilePanel.classList.remove("on");orders.classList.remove("locked");document.getElementById("returnDevis").classList.toggle("on",params.get("retour")==="devis");await loadOrders();
+      }
       async function loadOrders(){
         orders.innerHTML='<div class="empty">Chargement de vos commandes…</div>';
         const {data,error}=await db.from("demandes_devis").select("id,created_at,nom,societe,configuration,estimation,statut,bat_path,bat_name,bat_status,bat_message,bat_notified_at,bat_validated_at").order("created_at",{ascending:false});
@@ -98,7 +136,7 @@
         if(action==="request_change"&&!message.trim())return alert("Décrivez la modification souhaitée.");
         const {data,error}=await db.functions.invoke("bat-response",{body:{quote_id:row.id,action,message:message.trim()}});if(error||data?.error)return alert("Réponse non enregistrée : "+(data?.error||error.message));await loadOrders();
       }
-      document.getElementById("createBtn").addEventListener("click",()=>sendLink(true));document.getElementById("loginBtn").addEventListener("click",()=>sendLink(false));emailInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendLink(false)});document.getElementById("refreshBtn").addEventListener("click",loadOrders);document.getElementById("logoutBtn").addEventListener("click",async()=>{await db.auth.signOut();showAuth()});
+      document.getElementById("createBtn").addEventListener("click",()=>sendLink(true));document.getElementById("loginBtn").addEventListener("click",()=>sendLink(false));document.getElementById("googleBtn").addEventListener("click",()=>socialLogin("google"));document.getElementById("appleBtn").addEventListener("click",()=>socialLogin("apple"));document.getElementById("saveProfileBtn").addEventListener("click",saveProfile);emailInput.addEventListener("keydown",e=>{if(e.key==="Enter")sendLink(false)});document.getElementById("refreshBtn").addEventListener("click",loadOrders);document.getElementById("logoutBtn").addEventListener("click",async()=>{await db.auth.signOut();showAuth()});
       db.auth.getSession().then(({data})=>data.session&&!data.session.user.is_anonymous?showDashboard(data.session):showAuth());db.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_IN"&&session&&!session.user.is_anonymous)setTimeout(()=>showDashboard(session),0);if(event==="SIGNED_OUT")showAuth()});
     })();
   </script>
