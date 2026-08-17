@@ -98,7 +98,7 @@
     .status{background:#091a3b}
     .spinner{border-top-color:var(--orange)}
     .toast{background:#1a315d}
-    .batbox{display:grid;gap:8px;min-width:210px}.batbox input[type=number],.batbox input[type=file]{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;background:#091a3b;color:#fff;padding:9px;font-size:12px}.batbox input[type=file]{padding:7px}.batbox-actions{display:flex;flex-wrap:wrap;gap:6px}.batbox button{border:0;border-radius:8px;padding:8px 10px;background:var(--orange);color:#fff;font-weight:700;font-size:11px}.batbox button.secondary{background:#263f70}.pay-state{display:inline-flex;width:max-content;max-width:100%;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:#cbd5e8;font-size:10px;font-weight:700}.pay-state.paid{background:rgba(85,200,148,.15);color:#75ddb0}.pay-state.waiting{background:rgba(243,26,36,.14);color:#ff858b}
+    .batbox{display:grid;gap:8px;min-width:210px}.batbox input[type=number],.batbox input[type=file]{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;background:#091a3b;color:#fff;padding:9px;font-size:12px}.batbox input[type=file]{padding:7px}.batbox-actions{display:flex;flex-wrap:wrap;gap:6px}.batbox button{border:0;border-radius:8px;padding:8px 10px;background:var(--orange);color:#fff;font-weight:700;font-size:11px}.batbox button.secondary{background:#263f70}.batbox-hint{color:#aebad0;font-size:10px;line-height:1.4}.pay-state{display:inline-flex;width:max-content;max-width:100%;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.08);color:#cbd5e8;font-size:10px;font-weight:700}.pay-state.paid{background:rgba(85,200,148,.15);color:#75ddb0}.pay-state.waiting{background:rgba(243,26,36,.14);color:#ff858b}
     @media(max-width:760px){
       .topbar{min-height:76px;padding:8px 12px;margin-bottom:28px;border-radius:14px}
       .brand-logo{height:58px}
@@ -323,6 +323,10 @@
         wrap.appendChild(el("span", "pay-state" + stateClass, batLabel(row.bat_status)));
         if(row.bat_status === "modification_demandee" && row.bat_message){
           const request = el("small", "", "Client : " + row.bat_message); request.style.color="#ffb1b5"; wrap.appendChild(request);
+        }
+
+        if(row.bat_approval_name){
+          wrap.appendChild(el("small", "batbox-hint", "Bon pour accord automatique : " + row.bat_approval_name + (row.bat_validated_at ? " · " + formatDate(row.bat_validated_at) : "")));
         }
 
         const file = document.createElement("input");
