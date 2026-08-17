@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Je Brode Pour Vous — Broderie & transfert sur vêtements professionnels</title>
-<link rel="icon" type="image/png" href="iconejebrodepourvous.png">
-<link rel="apple-touch-icon" href="iconejebrodepourvous.png">
+<link rel="icon" type="image/png" href="jebrodepourvous.png">
+<link rel="apple-touch-icon" href="jebrodepourvous.png">
 <meta name="description" content="Personnalisation de vêtements professionnels : broderie et transfert sur t-shirt, polo, pull, veste et pantalon. Simulateur en temps réel et demande de devis.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -712,7 +712,9 @@ footer a{color:#C9D1E0}
 </style>
 <style>
 .account-state{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:-14px 0 24px;padding:16px 18px;border:1px solid #F1B7BB;border-left:4px solid var(--orange);border-radius:12px;background:#FFF6F6;color:#7C1720;font-size:.88rem}.account-state.connected{border-color:#A8DCC8;border-left-color:#16875F;background:#F0FAF6;color:#126B4E}.account-state a{flex:none;font-weight:800;color:inherit;text-decoration:underline}.account-nav{font-weight:800!important;color:var(--orange)!important}
+.bat-dialog{width:min(1050px,calc(100% - 28px));max-height:calc(100dvh - 28px);padding:0;border:0;border-radius:22px;background:#fff;color:var(--encre);box-shadow:0 35px 100px rgba(7,22,51,.36)}.bat-dialog::backdrop{background:rgba(4,14,35,.76);backdrop-filter:blur(5px)}.bat-dialog-inner{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.7fr)}.bat-visual{padding:26px;background:#eef1f7}.bat-visual-head{display:flex;justify-content:space-between;gap:18px;margin-bottom:18px}.bat-visual-head h3{font-family:"Manrope",sans-serif;font-size:24px;color:var(--bleu);margin:0}.bat-visual-head p{margin:5px 0 0;color:var(--gris);font-size:13px}.bat-ref{height:max-content;padding:7px 9px;border-radius:8px;background:var(--bleu);color:#fff;font:700 11px "IBM Plex Mono",monospace}.bat-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.bat-preview{margin:0;padding:12px;border:1px solid #dce2ed;border-radius:14px;background:#fff}.bat-preview img{display:block;width:100%;height:330px;object-fit:contain}.bat-preview figcaption{text-align:center;color:var(--bleu);font-weight:800;font-size:12px;margin-top:7px}.bat-approval{padding:28px;display:flex;flex-direction:column}.bat-approval .eyebrow{margin-bottom:8px}.bat-approval h3{font-family:"Manrope",sans-serif;font-size:27px;color:var(--bleu);margin:0}.bat-approval>p{color:var(--gris);font-size:13px;line-height:1.6}.bat-summary{margin:12px 0;padding:14px;border-radius:12px;background:#f5f7fb;font-size:12px;line-height:1.55;color:#52617a}.bat-summary strong{color:var(--bleu)}.bat-approval label{display:grid;gap:6px;margin-top:12px;font-size:12px;font-weight:800;color:var(--bleu)}.bat-approval input[type=text]{height:46px;border:1px solid #d6ddea;border-radius:10px;padding:0 12px}.bat-consent{display:flex!important;grid-template-columns:none!important;align-items:flex-start;gap:9px!important;padding:13px;border:1px solid #f1b7bb;border-radius:11px;background:#fff7f7;line-height:1.45}.bat-consent input{margin-top:2px;accent-color:var(--orange)}.bat-actions{display:grid;grid-template-columns:1fr 1.25fr;gap:8px;margin-top:auto;padding-top:18px}.bat-actions button{border:0;border-radius:10px;padding:12px;font-weight:800}.bat-close{background:#e8ecf3;color:var(--bleu)}.bat-approve{background:var(--orange);color:#fff}.bat-approve:disabled{opacity:.55;cursor:wait}.bat-message{min-height:19px;margin-top:10px;color:var(--orange);font-size:12px}.payment-next{margin-top:12px;padding:11px;border-radius:10px;background:#eef7f3;color:#126b4e;font-size:11px;font-weight:700}
 @media(max-width:620px){.account-state{align-items:flex-start;flex-direction:column}.account-state a{width:100%;padding:10px;text-align:center;border-radius:8px;background:rgba(255,255,255,.75)}}
+@media(max-width:780px){.bat-dialog-inner{grid-template-columns:1fr}.bat-preview img{height:230px}.bat-approval{padding:22px}.bat-actions{grid-template-columns:1fr}.bat-dialog{max-height:calc(100dvh - 14px)}}
 </style>
 </head>
 <body>
@@ -720,7 +722,7 @@ footer a{color:#C9D1E0}
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="Je Brode Pour Vous — accueil">
-      <img src="logojebrodepourvous.png" alt="Je Brode Pour Vous">
+      <img src="jebrodepourvous.png" alt="Je Brode Pour Vous">
     </a>
     <nav id="nav">
       <a href="#prestations">Prestations</a>
@@ -862,7 +864,7 @@ footer a{color:#C9D1E0}
           <div class="u" id="r-ttc">—</div>
         </div>
         <p class="note">Estimation indicative issue de la grille Sélection gamme courte, hors remises et frais de port. Le devis définitif tient compte du logo, du nombre de couleurs et de la répartition des tailles.</p>
-        <a class="btn" href="#devis" id="toDevis">Demander ce devis</a>
+        <a class="btn" href="#devis" id="toDevis">Continuer vers mon panier</a>
       </div>
     </div>
   </div>
@@ -896,9 +898,9 @@ footer a{color:#C9D1E0}
 <section id="devis">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Devis</p>
-      <h2>Envoyez votre demande</h2>
-      <p style="color:var(--gris)">Réponse sous 48 h ouvrées. Votre logo reste confidentiel et ne sert qu'à établir le devis.</p>
+      <p class="eyebrow">Panier et bon pour accord</p>
+      <h2>Finalisez votre commande</h2>
+      <p style="color:var(--gris)">Avant la future étape de paiement, votre BAT sera créé automatiquement avec le vêtement et votre logo. Vous devrez le vérifier et donner votre bon pour accord.</p>
     </div>
 
     <div class="account-state" id="accountState" role="status">
@@ -919,8 +921,8 @@ footer a{color:#C9D1E0}
           <input id="f-nom" name="Nom" type="text" required autocomplete="name">
         </div>
         <div>
-          <label class="lbl" for="f-soc">Société <em>*</em></label>
-          <input id="f-soc" name="Societe" type="text" required autocomplete="organization">
+          <label class="lbl" for="f-soc">Société <small>(facultatif)</small></label>
+          <input id="f-soc" name="Societe" type="text" autocomplete="organization">
         </div>
         <div>
           <label class="lbl" for="f-mail">E-mail <em>*</em></label>
@@ -937,11 +939,11 @@ footer a{color:#C9D1E0}
         </div>
 
         <div class="full">
-          <label class="lbl">Logo — PDF vectoriel ou SVG <em>*</em></label>
+          <label class="lbl">Logo — PDF, SVG, PNG ou JPEG <em>*</em></label>
           <label class="drop" id="drop" for="f-file">
             <strong>Déposez votre fichier ici ou cliquez pour le choisir</strong>
-            <small>PDF vectoriel haute définition ou SVG · 10 Mo maximum · un SVG s'affiche aussitôt dans le simulateur</small>
-            <input id="f-file" name="attachment" type="file" accept=".pdf,.svg,application/pdf,image/svg+xml" required>
+            <small>10 Mo maximum · le logo s’affiche automatiquement sur le vêtement et dans le BAT</small>
+            <input id="f-file" name="attachment" type="file" accept=".pdf,.svg,.png,.jpg,.jpeg,application/pdf,image/svg+xml,image/png,image/jpeg" required>
           </label>
           <div class="filechip" id="chip">
             <span id="chipName"></span>
@@ -959,7 +961,7 @@ footer a{color:#C9D1E0}
         </div>
 
         <div class="full">
-          <button class="btn" type="submit" id="send">Envoyer la demande de devis</button>
+          <button class="btn" type="submit" id="send">Voir mon BAT et donner mon accord</button>
           <p class="err" id="formErr" role="status" aria-live="polite"></p>
         </div>
       </div>
@@ -967,13 +969,32 @@ footer a{color:#C9D1E0}
   </div>
 </section>
 
+<dialog class="bat-dialog" id="batDialog" aria-labelledby="batDialogTitle">
+  <div class="bat-dialog-inner">
+    <section class="bat-visual">
+      <div class="bat-visual-head"><div><h3 id="batDialogTitle">Votre bon à tirer</h3><p>Vérifiez le vêtement, le logo et ses emplacements.</p></div><span class="bat-ref" id="batRef">BAT</span></div>
+      <div class="bat-preview-grid" id="batPreviewGrid"></div>
+    </section>
+    <section class="bat-approval">
+      <div class="eyebrow">Dernière vérification</div><h3>Bon pour accord</h3>
+      <p>Votre accord confirme que le visuel présenté peut être utilisé pour préparer la commande.</p>
+      <div class="bat-summary" id="batSummary"></div>
+      <label>Nom de la personne donnant son accord<input id="batApprovalName" type="text" autocomplete="name" placeholder="Nom et prénom"></label>
+      <label class="bat-consent"><input id="batConsent" type="checkbox"><span>J’ai vérifié le produit, le coloris, le logo, ses emplacements et les quantités. Je donne mon bon pour accord.</span></label>
+      <div class="payment-next">Étape suivante : paiement en ligne. Cette partie sera activée ultérieurement ; aujourd’hui la commande sera enregistrée après votre accord.</div>
+      <div class="bat-message" id="batMessage" role="status"></div>
+      <div class="bat-actions"><button class="bat-close" id="batClose" type="button">Modifier mon panier</button><button class="bat-approve" id="batApprove" type="button">Donner mon bon pour accord</button></div>
+    </section>
+  </div>
+</dialog>
+
 </main>
 
 <footer>
   <div class="wrap">
     <div class="foot">
       <div>
-        <img class="footer-logo" src="logojebrodepourvous.png" alt="Je Brode Pour Vous">
+        <img class="footer-logo" src="jebrodepourvous.png" alt="Je Brode Pour Vous">
         <p>Broderie et transfert sur vêtements professionnels. Petites et grandes séries, du prototype à la dotation complète.</p>
       </div>
       <div>
@@ -997,6 +1018,9 @@ footer a{color:#C9D1E0}
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 <script>
 /* Paramètres publics disponibles dans Supabase > Project Settings > API. */
 const SUPABASE_URL = "https://awuxkfjwzxqsbdlwyxud.supabase.co";
@@ -1004,12 +1028,19 @@ const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_BH_aUqqsRkHlqpPbwCg6Sw_abU_RcWa
 const supabaseClient = window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{
   auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}
 });
+window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
 async function updateAccountState(){
   const box=document.getElementById("accountState"); if(!box) return;
   const {data}=await supabaseClient.auth.getSession();
   const user=data.session && data.session.user && !data.session.user.is_anonymous ? data.session.user : null;
   if(user){
+    const {data:profile}=await supabaseClient.from("profiles").select("first_name,last_name,company,onboarding_completed").eq("id",user.id).maybeSingle();
+    if(!profile || !profile.onboarding_completed){
+      box.classList.remove("connected");
+      box.innerHTML='<span>Votre compte est créé. Complétez votre nom, votre prénom et éventuellement votre société avant d’envoyer le devis.</span><a href="mon-compte.html?retour=devis">Compléter mon profil</a>';
+      return;
+    }
     box.classList.add("connected");
     const message=document.createElement("span"); message.append("Connecté avec ");
     const identity=document.createElement("strong"); identity.textContent=user.email || "votre compte";
@@ -1017,6 +1048,8 @@ async function updateAccountState(){
     const link=document.createElement("a"); link.href="mon-compte.html"; link.textContent="Voir mon compte";
     box.replaceChildren(message,link);
     const email=document.getElementById("f-mail"); if(email && !email.value && user.email) email.value=user.email;
+    const name=document.getElementById("f-nom"); if(name && !name.value) name.value=[profile.first_name,profile.last_name].filter(Boolean).join(" ");
+    const company=document.getElementById("f-soc"); if(company && !company.value && profile.company) company.value=profile.company;
   }else{
     box.classList.remove("connected");
     box.innerHTML='<span>Pour envoyer une demande de devis, vous devez d’abord créer votre compte ou vous connecter.</span><a href="mon-compte.html?retour=devis">Créer mon compte</a>';
@@ -1501,36 +1534,109 @@ el("year").textContent = new Date().getFullYear();
 /* ============ FICHIER LOGO ============ */
 const drop = el("drop"), fileInput = el("f-file"), chip = el("chip"), fileErr = el("fileErr");
 const MAX = 10*1024*1024;
+let logoLoadPromise=Promise.resolve();
 function showErr(m){ fileErr.textContent=m; fileErr.classList.add("on"); }
 function clearErr(){ fileErr.classList.remove("on"); }
-function handleFile(file){
+function readAsDataUrl(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})}
+async function pdfLogoPreview(file){
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  const pdf=await window.pdfjsLib.getDocument({data:bytes}).promise;
+  const page=await pdf.getPage(1),viewport=page.getViewport({scale:2});
+  const canvas=document.createElement("canvas");canvas.width=viewport.width;canvas.height=viewport.height;
+  await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;
+  return canvas.toDataURL("image/png");
+}
+async function handleFile(file){
   clearErr(); if(!file) return;
   const name = file.name.toLowerCase();
-  if(!(name.endsWith(".pdf") || name.endsWith(".svg"))){ reset(); showErr("Format refusé. Déposez un PDF vectoriel ou un SVG."); return; }
+  if(!(/\.(pdf|svg|png|jpe?g)$/i.test(name))){ reset(); showErr("Format refusé. Déposez un PDF, SVG, PNG ou JPEG."); return; }
   if(file.size > MAX){ reset(); showErr("Fichier trop lourd : 10 Mo maximum. Envoyez-le par e-mail si besoin."); return; }
   el("chipName").textContent = `${file.name} — ${(file.size/1024/1024).toFixed(2)} Mo`;
   chip.classList.add("on");
-  if(name.endsWith(".svg")){
-    const r = new FileReader();
-    r.onload = ()=>{ state.logo = r.result; update(); };
-    r.readAsDataURL(file);
-  } else {
-    state.logo = null; update();
-    fileErr.textContent = "PDF reçu. L'aperçu ne peut pas afficher un PDF, mais votre fichier sera bien joint au devis.";
-    fileErr.style.color = "var(--gris)"; fileErr.classList.add("on");
-  }
+  try{
+    fileErr.textContent="Préparation de l’aperçu du logo…";fileErr.style.color="var(--gris)";fileErr.classList.add("on");
+    state.logo=name.endsWith(".pdf")?await pdfLogoPreview(file):await readAsDataUrl(file);
+    update();clearErr();fileErr.style.color="";
+  }catch(error){state.logo=null;update();showErr("Le logo ne peut pas être affiché : "+(error.message||error))}
 }
 function reset(){ fileInput.value=""; chip.classList.remove("on"); state.logo=null; fileErr.style.color=""; update(); }
-fileInput.addEventListener("change", e=>handleFile(e.target.files[0]));
+fileInput.addEventListener("change", e=>{logoLoadPromise=handleFile(e.target.files[0])});
 el("chipX").onclick = ()=>{ reset(); clearErr(); };
 ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
 ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
 drop.addEventListener("drop", e=>{
   const f = e.dataTransfer.files[0];
-  if(f){ const dt = new DataTransfer(); dt.items.add(f); fileInput.files = dt.files; handleFile(f); }
+  if(f){ const dt = new DataTransfer(); dt.items.add(f); fileInput.files = dt.files; logoLoadPromise=handleFile(f); }
 });
 
 /* ============ ENREGISTREMENT SUPABASE ============ */
+const batDialog=el("batDialog"),batPreviewGrid=el("batPreviewGrid"),batApprovalName=el("batApprovalName"),batConsent=el("batConsent"),batMessage=el("batMessage"),batApprove=el("batApprove");
+let pendingApproval=null;
+function waitForPaint(){return new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))}
+function safeFilePart(value){return String(value||"BAT").replace(/[^a-zA-Z0-9._-]+/g,"-")}
+function fileContentType(file){const name=file.name.toLowerCase();if(file.type)return file.type;if(name.endsWith(".svg"))return "image/svg+xml";if(name.endsWith(".png"))return "image/png";if(/\.jpe?g$/.test(name))return "image/jpeg";return "application/pdf"}
+async function captureBatViews(){
+  const originalView=state.vue;
+  const wanted=["face"];
+  if([...state.pos].some(position=>POS_DEF[position].view==="dos"))wanted.push("dos");
+  const captures=[];
+  try{
+    for(const view of wanted){
+      state.vue=view;update();await waitForPaint();
+      const canvas=await window.html2canvas(el("canvas"),{backgroundColor:"#ffffff",scale:2,useCORS:true,logging:false});
+      captures.push({view,label:view==="dos"?"Vue de dos":"Vue de face",data:canvas.toDataURL("image/png")});
+    }
+  }finally{state.vue=originalView;update()}
+  return captures;
+}
+function loadImageElement(src){return new Promise((resolve,reject)=>{const image=new Image();if(/^https?:/i.test(src))image.crossOrigin="anonymous";image.onload=()=>resolve(image);image.onerror=()=>reject(new Error("Image de marque inaccessible"));image.src=src})}
+async function imageUrlAsPng(src){const image=await loadImageElement(src),canvas=document.createElement("canvas");canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;canvas.getContext("2d").drawImage(image,0,0);return canvas.toDataURL("image/png")}
+function formatApprovalDate(value){return new Intl.DateTimeFormat("fr-FR",{dateStyle:"long",timeStyle:"short"}).format(value)}
+async function buildAutomaticBatPdf(orderId,approvalName,approvalAt,views){
+  const {jsPDF}=window.jspdf,pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4",compress:true});
+  const W=297,H=210,sideX=228,brand=await imageUrlAsPng("jebrodepourvous.png");
+  pdf.setFillColor(255,255,255);pdf.rect(0,0,W,H,"F");pdf.setFillColor(7,22,51);pdf.rect(sideX,0,W-sideX,H,"F");
+  pdf.setFillColor(215,8,18);pdf.rect(8,8,78,13,"F");pdf.setTextColor(255,255,255);pdf.setFont("helvetica","bold");pdf.setFontSize(12);pdf.text("BON A TIRER AVANT REALISATION",12,16.8);
+  pdf.setTextColor(23,32,51);pdf.setFont("helvetica","normal");pdf.setFontSize(8.2);pdf.text("Document cree automatiquement depuis le panier client.",91,13.5);pdf.text("Verifier le produit, le logo, les emplacements, le coloris et les quantites.",91,18.2);
+  pdf.setFontSize(8);pdf.text(`Date : ${new Intl.DateTimeFormat("fr-FR").format(approvalAt)}`,12,29);pdf.text(`Reference : ${orderId.slice(0,8).toUpperCase()}`,53,29);
+  const visualX=10,visualY=35,visualW=210,visualH=119,cellW=visualW/views.length;
+  views.forEach((view,index)=>{const maxW=cellW-8,maxH=visualH-12;let w=maxW,h=w;if(h>maxH){h=maxH;w=h}const x=visualX+index*cellW+(cellW-w)/2,y=visualY+(maxH-h)/2;pdf.addImage(view.data,"PNG",x,y,w,h,undefined,"FAST");pdf.setTextColor(7,22,51);pdf.setFont("helvetica","bold");pdf.setFontSize(8.5);pdf.text(view.label,visualX+index*cellW+cellW/2,visualY+visualH-2,{align:"center"})});
+  pdf.setFillColor(7,22,51);pdf.roundedRect(8,160,212,42,1.5,1.5,"F");pdf.setDrawColor(215,8,18);pdf.setLineWidth(.7);pdf.line(76,164,76,198);pdf.line(150,164,150,198);pdf.setTextColor(255,255,255);pdf.setFont("helvetica","bold");pdf.setFontSize(7.7);pdf.text("CLIENT",13,168);pdf.text("MARQUAGE",81,168);pdf.text("COMMANDE",155,168);pdf.setFont("helvetica","normal");pdf.setFontSize(8);pdf.text(pdf.splitTextToSize(`${el("f-nom").value.trim()}\n${el("f-soc").value.trim()||"Particulier"}\n${el("f-mail").value.trim()}`,57),13,175);pdf.text(pdf.splitTextToSize(`${MARQ[state.tech].label}\n${[...state.pos].map(posLabel).join(" + ")}\nDimensions : ${[...state.pos].map(p=>posCm(p)+" cm").join(" / ")}`,63),81,175);pdf.text(pdf.splitTextToSize(`${prod().nom} (${prod().ref})\n${couleur().label} - ${state.qty} piece(s)\n${el("h-price").value}`,57),155,175);
+  pdf.setFillColor(255,255,255);pdf.roundedRect(sideX+6,7,57,24,3,3,"F");pdf.addImage(brand,"PNG",sideX+9,9,51,20,undefined,"FAST");pdf.setTextColor(255,255,255);pdf.setFont("helvetica","bold");pdf.setFontSize(11);pdf.text("BON POUR ACCORD",sideX+34.5,45,{align:"center"});pdf.setDrawColor(255,255,255);pdf.line(sideX+10,50,sideX+59,50);
+  pdf.setFont("helvetica","normal");pdf.setFontSize(8);pdf.text(pdf.splitTextToSize(`Client : ${approvalName}\nAccord donne le :\n${formatApprovalDate(approvalAt)}\n\nCommande :\n${orderId.slice(0,8).toUpperCase()}`,52),sideX+9,61);
+  pdf.setFillColor(22,132,95);pdf.roundedRect(sideX+8,116,53,18,2,2,"F");pdf.setTextColor(255,255,255);pdf.setFont("helvetica","bold");pdf.setFontSize(9);pdf.text("BAT VALIDE",sideX+34.5,127,{align:"center"});pdf.setFont("helvetica","normal");pdf.setFontSize(7.4);pdf.text(pdf.splitTextToSize("Le client a verifie le visuel et donne son bon pour accord depuis son compte.",52),sideX+9,144);pdf.setFillColor(238,241,247);pdf.roundedRect(sideX+8,169,53,17,2,2,"F");pdf.setTextColor(7,22,51);pdf.setFont("helvetica","bold");pdf.setFontSize(7.5);pdf.text("PAIEMENT A VENIR",sideX+34.5,179.5,{align:"center"});pdf.setTextColor(255,255,255);pdf.setFont("helvetica","normal");pdf.setFontSize(6.7);pdf.text("Je Brode Pour Vous - Document confidentiel",sideX+34.5,199,{align:"center"});
+  return pdf.output("blob");
+}
+async function openBatApproval(accountUser){
+  batMessage.textContent="Création de l’aperçu…";
+  const views=await captureBatViews();
+  pendingApproval={user:accountUser,views};
+  batPreviewGrid.replaceChildren(...views.map(view=>{const figure=document.createElement("figure");figure.className="bat-preview";const image=document.createElement("img");image.src=view.data;image.alt=view.label;const caption=document.createElement("figcaption");caption.textContent=view.label;figure.append(image,caption);return figure}));
+  el("batRef").textContent=prod().ref;el("batSummary").innerHTML=`<strong>${prod().nom}</strong><br>${couleur().label} · ${state.qty} pièce(s)<br>${MARQ[state.tech].label} · ${[...state.pos].map(posLabel).join(" + ")}<br>${el("h-price").value}`;
+  batApprovalName.value=el("f-nom").value.trim();batConsent.checked=false;batMessage.textContent="";batDialog.showModal();
+}
+async function finalizeApprovedOrder(){
+  if(!pendingApproval)return;
+  const approvalName=batApprovalName.value.trim();
+  if(!approvalName){batMessage.textContent="Indiquez le nom de la personne donnant son accord.";batApprovalName.focus();return}
+  if(!batConsent.checked){batMessage.textContent="Cochez la confirmation après avoir vérifié le BAT.";return}
+  batApprove.disabled=true;el("batClose").disabled=true;batApprove.textContent="Enregistrement…";batMessage.textContent="Création du PDF et enregistrement de la commande…";
+  let logoPath=null,batPath=null;
+  try{
+    const user=pendingApproval.user,logo=fileInput.files[0],orderId=crypto.randomUUID(),approvalAt=new Date(),approvalIso=approvalAt.toISOString();
+    const extension=(logo.name.toLowerCase().match(/\.(pdf|svg|png|jpe?g)$/)||[])[1]||"pdf";
+    logoPath=`${user.id}/${crypto.randomUUID()}.${extension}`;
+    const {error:logoError}=await supabaseClient.storage.from("devis-logos").upload(logoPath,logo,{contentType:fileContentType(logo),upsert:false});if(logoError)throw logoError;
+    const batName=`BAT-VALIDE-${orderId.slice(0,8).toUpperCase()}.pdf`;batPath=`${user.id}/${orderId}/${batName}`;
+    const batBlob=await buildAutomaticBatPdf(orderId,approvalName,approvalAt,pendingApproval.views);
+    const {error:batError}=await supabaseClient.storage.from("bat-documents").upload(batPath,batBlob,{contentType:"application/pdf",upsert:false});if(batError)throw batError;
+    const values=new FormData(el("quoteForm")),pricing=price();
+    const record={id:orderId,user_id:user.id,nom:String(values.get("Nom")||"").trim(),societe:String(values.get("Societe")||"").trim(),email:String(values.get("email")||"").trim(),telephone:String(values.get("Telephone")||"").trim()||null,indications:String(values.get("Indications")||"").trim(),configuration:String(values.get("Configuration")||"").trim(),estimation:String(values.get("Estimation")||"").trim(),logo_path:logoPath,logo_name:logo.name,logo_type:fileContentType(logo),logo_size:logo.size,source_url:location.href.split("#")[0],bat_path:batPath,bat_name:batName,bat_sent_at:approvalIso,bat_approved_at:approvalIso,bat_status:"valide",bat_validated_at:approvalIso,bat_approval_name:approvalName,bat_approval_text:"Bon pour accord donne en ligne apres verification du produit, du logo, des emplacements, du coloris et des quantites.",bat_design:{product:state.produit,color:state.color,technique:state.tech,positions:[...state.pos],quantity:state.qty,delivery:state.delai},payment_status:"bat_valide",bat_amount_cents:pricing.devis?null:Math.round(pricing.ttc*100)};
+    const {error:insertError}=await supabaseClient.from("demandes_devis").insert(record);if(insertError)throw insertError;
+    batDialog.close();pendingApproval=null;const form=el("quoteForm"),err=el("formErr");form.reset();reset();err.textContent="Votre bon pour accord et votre commande ont bien été enregistrés. Le paiement en ligne sera proposé ici lorsqu’il sera activé.";err.classList.add("on","ok");err.scrollIntoView({behavior:"smooth",block:"center"});
+  }catch(error){console.error("Commande et BAT automatiques impossibles",error);if(batPath)await supabaseClient.storage.from("bat-documents").remove([batPath]);if(logoPath)await supabaseClient.storage.from("devis-logos").remove([logoPath]);const detail=String(error?.message||error||"");batMessage.textContent=/row-level security|policy|permission denied/i.test(detail)?"Les autorisations Supabase du BAT automatique ne sont pas encore installées. Réexécutez supabase-configuration.sql.":"Enregistrement impossible : "+detail}
+  finally{batApprove.disabled=false;el("batClose").disabled=false;batApprove.textContent="Donner mon bon pour accord"}
+}
 el("quoteForm").addEventListener("submit", async e=>{
   e.preventDefault();
   const err = el("formErr"), send = el("send");
@@ -1546,6 +1652,11 @@ el("quoteForm").addEventListener("submit", async e=>{
     err.innerHTML='Vous devez d’abord <a href="mon-compte.html?retour=devis">créer votre compte ou vous connecter</a> avant d’envoyer une demande de devis.';
     err.classList.add("on"); return;
   }
+  const {data:accountProfile}=await supabaseClient.from("profiles").select("onboarding_completed").eq("id",accountUser.id).maybeSingle();
+  if(!accountProfile || !accountProfile.onboarding_completed){
+    err.innerHTML='Votre compte doit être complété avant l’envoi. <a href="mon-compte.html?retour=devis">Compléter mon profil</a>.';
+    err.classList.add("on"); return;
+  }
   if(!f.checkValidity()){
     err.textContent = "Il manque des informations. Vérifiez les champs marqués d'une étoile et le fichier logo.";
     err.classList.add("on");
@@ -1557,67 +1668,14 @@ el("quoteForm").addEventListener("submit", async e=>{
     err.classList.add("on");
     return;
   }
-  const initialLabel=send.textContent;
-  send.disabled=true;
-  send.textContent="Envoi en cours…";
+  const initialLabel=send.textContent;send.disabled=true;send.textContent="Création du BAT…";
   try{
-    const logo=fileInput.files[0];
-    const user=accountUser;
-
-    const extension=logo.name.toLowerCase().endsWith(".svg") ? "svg" : "pdf";
-    const logoPath=`${user.id}/${crypto.randomUUID()}.${extension}`;
-    const {error:uploadError}=await supabaseClient.storage
-      .from("devis-logos")
-      .upload(logoPath,logo,{contentType:logo.type || (extension==="svg" ? "image/svg+xml" : "application/pdf"),upsert:false});
-    if(uploadError) throw uploadError;
-
-    const values=new FormData(f);
-    const record={
-      user_id:user.id,
-      nom:String(values.get("Nom") || "").trim(),
-      societe:String(values.get("Societe") || "").trim(),
-      email:String(values.get("email") || "").trim(),
-      telephone:String(values.get("Telephone") || "").trim() || null,
-      indications:String(values.get("Indications") || "").trim(),
-      configuration:String(values.get("Configuration") || "").trim(),
-      estimation:String(values.get("Estimation") || "").trim(),
-      logo_path:logoPath,
-      logo_name:logo.name,
-      logo_type:logo.type || null,
-      logo_size:logo.size,
-      source_url:location.href.split("#")[0]
-    };
-    const {error:insertError}=await supabaseClient.from("demandes_devis").insert(record);
-    if(insertError){
-      await supabaseClient.storage.from("devis-logos").remove([logoPath]);
-      throw insertError;
-    }
-    err.textContent="Votre demande et votre logo ont bien été enregistrés. Nous vous répondrons sous 48 h ouvrées.";
-    err.classList.add("ok");
-    f.reset();
-    reset();
+    await logoLoadPromise;if(!state.logo)throw new Error("Le logo doit pouvoir être affiché pour générer le BAT.");await openBatApproval(accountUser);
   }catch(error){
-    console.error("Enregistrement du devis impossible",error);
-    const detail=String(error && (error.message || error.error_description || error) || "");
-    if(/anonymous sign-ins? (are )?disabled/i.test(detail)){
-      err.textContent="Les connexions anonymes ne sont pas activées dans Supabase. Activez Authentication > Providers > Anonymous Sign-Ins.";
-    }else if(/bucket.*not found|devis-logos/i.test(detail)){
-      err.textContent="Le stockage Supabase n'est pas encore configuré. Exécutez le fichier supabase-configuration.sql.";
-    }else if(/relation.*demandes_devis|could not find.*demandes_devis/i.test(detail)){
-      err.textContent="La table des devis n'existe pas encore. Exécutez le fichier supabase-configuration.sql.";
-    }else if(/row-level security|violates.*policy|permission denied/i.test(detail)){
-      err.textContent="Les règles de sécurité Supabase sont incomplètes. Réexécutez le fichier supabase-configuration.sql.";
-    }else if(/failed to fetch|networkerror|load failed/i.test(detail)){
-      err.textContent="Supabase est momentanément inaccessible. Vérifiez la connexion puis réessayez.";
-    }else{
-      err.textContent="Supabase a refusé l'enregistrement. Vérifiez que le script SQL est installé et les connexions anonymes activées.";
-    }
-    err.classList.add("on");
-  }finally{
-    send.disabled=false;
-    send.textContent=initialLabel;
-  }
+    console.error("Préparation du BAT impossible",error);err.textContent="Impossible de créer le BAT : "+(error.message||error);err.classList.add("on");
+  }finally{send.disabled=false;send.textContent=initialLabel}
 });
+el("batClose").addEventListener("click",()=>{batDialog.close();pendingApproval=null});batApprove.addEventListener("click",finalizeApprovedOrder);batDialog.addEventListener("cancel",()=>{pendingApproval=null});
 el("toDevis").addEventListener("click", ()=>setTimeout(()=>el("f-nom").focus(),450));
 
 /* ============ MODE CALAGE (?calage=1) ============ */
